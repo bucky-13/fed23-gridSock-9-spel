@@ -4,8 +4,8 @@
 
 - Anna:
 
-  - **Innanför komfortzon:**
-  - **Utanför komfortzon:**
+  - **Innanför komfortzon:** design, struktur, viss felsökning och leta rätt på olika alternativ för kod
+  - **Utanför komfortzon:** Större funktioner i kod där många funktioner ska kopplas samman. 
 
 - Simon:
 
@@ -72,4 +72,9 @@
 ### Underskrivet av:
 
 @JohannaPri
+
 @bucky-13
+
+@annkar73
+
+
