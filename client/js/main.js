@@ -1,3 +1,4 @@
+import '../css/style.css';
 import { io } from 'socket.io-client';
 const socket = io('http://localhost:3000');
 
@@ -6,7 +7,7 @@ let sendBtn = document.querySelector('#sendBtn');
 let chatList = document.querySelector('#chatList');
 
 socket.on('chat', (argh) => {
-  console.log('SOCKET!', argh);
+  console.log('ARGH! SOCKET!', argh);
   updateChat(argh);
 });
 
