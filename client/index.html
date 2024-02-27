@@ -1,33 +1,38 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div class="loginContainer">
-      <h3>Logga in</h3>
-      <input type="text" id="usernameInput" placeholder="Användarnamn">
-      <button id="loginBtn">Logga in</button>
-      <button id="logoutBtn">Logga ut</button>
-    </div>
-<div><h4>Inloggade användare:</h4>
-  <ul id="userList">
 
-  </ul>
-</h3></div>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
 
-
-<div>
-    <input type="text" id="sendMessage">
-    <button id="sendBtn">Skicka</button>
-</div>
-    <ul id="chatList">
+<body>
+  <div class="loginContainer">
+    <h3>Logga in</h3>
+    <input type="text" id="usernameInput" placeholder="Användarnamn">
+    <button id="loginBtn">Logga in</button>
+    <button id="logoutBtn">Logga ut</button>
+  </div>
+  <div>
+    <h4>Inloggade användare:</h4>
+    <ul id="userList">
 
     </ul>
+    </h3>
+  </div>
 
-    <script type="module" src="/main.js"></script>
-  </body>
+
+  <div>
+    <input type="text" id="sendMessage">
+    <button id="sendBtn">Skicka</button>
+  </div>
+  <ul id="chatList">
+
+  </ul>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+
 </html>
