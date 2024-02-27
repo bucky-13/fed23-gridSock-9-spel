@@ -1,4 +1,4 @@
-import '../css/style.css';
+import '../css/style.scss';
 import { io } from 'socket.io-client';
 
 const socket = io('http://localhost:3001'); // change to ip adress when deployad
