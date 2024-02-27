@@ -4,8 +4,8 @@
 
 - Anna:
 
-  - **Innanför komfortzon:**
-  - **Utanför komfortzon:**
+  - **Innanför komfortzon:** Design, struktur, planering av layout. Översikt av projektet. Viss felsökning och leta rätt på olika sätt att skriva kod för att hitta nya lösningar. 
+  - **Utanför komfortzon:** Större kodning på egen hand, syntax för koppling till databaser
 
 - Simon:
 
@@ -75,5 +75,6 @@
 
 @bucky-13
 
+@annkar73
 
 @MustafaaMehdi
