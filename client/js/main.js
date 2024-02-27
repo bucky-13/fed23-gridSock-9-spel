@@ -1,4 +1,6 @@
 import '../css/style.css';
+import { io } from 'socket.io-client';
+
 const socket = io('http://localhost:3001'); // change to ip adress when deployad
 
 let sendMessage = document.getElementById('sendMessage');
