@@ -4,8 +4,8 @@
 
 - Anna:
 
-  - **Innanför komfortzon:** design, struktur, viss felsökning och leta rätt på olika alternativ för kod
-  - **Utanför komfortzon:** Större funktioner i kod där många funktioner ska kopplas samman. 
+  - **Innanför komfortzon:**
+  - **Utanför komfortzon:**
 
 - Simon:
 
@@ -14,8 +14,8 @@
 
 - Mustafa:
 
-  - **Innanför komfortzon:**
-  - **Utanför komfortzon:**
+  - **Innanför komfortzon:** Koda, ta reda på vissa krav jag inte är så familiär med, design, styla, mockup och dokumentation & planering
+  - **Utanför komfortzon:** Dyka in i nya områden, deadlines, svårt att påbörja men lättare komma igång efteråt.
 
 - Johanna:
 
@@ -75,6 +75,5 @@
 
 @bucky-13
 
-@annkar73
 
-
+@MustafaaMehdi
