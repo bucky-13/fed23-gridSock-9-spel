@@ -12,8 +12,8 @@ const io = require('socket.io')(server, {
 const users = {}; // ett objekt för att lagra användare
 
 
-app.get('/test', (req,res) => {
-    res.send("<h1>Socket at server</h1>")
+app.get('/', (req,res) => {
+    res.send("<h1>Socket at server at DigitalOcean</h1>")
 })
 
 io.on('connection', (socket) => {
