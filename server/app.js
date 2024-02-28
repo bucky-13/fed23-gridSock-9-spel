@@ -39,4 +39,4 @@ io.on('connection', (socket) => {
 })
 
 
-server.listen(3001); // make sure it's the same as called in socket.io-client in main.js
+server.listen(process.env.PORT || '3001'); // make sure it's the same as called in socket.io-client in main.js
