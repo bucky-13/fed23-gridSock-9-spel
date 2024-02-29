@@ -3,6 +3,7 @@ import socket from "../lib/socket.mjs";
 import checkLoginState from "./checkLoginState.mjs";
 
 export default function loginUser(userNameInput) {
+    socket.connect();
     const inputUsername = userNameInput.value.trim();
     if (inputUsername) {
         localStorage.setItem('username', inputUsername);
