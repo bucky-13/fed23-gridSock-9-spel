@@ -1,5 +1,5 @@
-import createElement from "../lib/createElement.mjs";
-import loginUser from "./loginUser.mjs";
+import createElement from '../lib/createElement.mjs';
+import loginUser from './loginUser.mjs';
 
 let mainContainer = document.getElementById('mainContainer')
 

@@ -1,7 +1,7 @@
-import socket from "../lib/socket.mjs"
-import createElement from "../lib/createElement.mjs"
-import updateChat from "./updateChat.mjs"
-import errorMsg from "../lib/validationMessage.mjs"
+import socket from '../lib/socket.mjs'
+import createElement from '../lib/createElement.mjs'
+import updateChat from './updateChat.mjs'
+import errorMsg from '../lib/validationMessage.mjs'
 
 export default function chatRender(mainContainer) {
     let existingChat = document.getElementById('chatbox')

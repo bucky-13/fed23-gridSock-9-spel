@@ -1,5 +1,5 @@
 
-import socket from "../lib/socket.mjs"
+import socket from '../lib/socket.mjs'
 import errorMsg from '../lib/validationMessage.mjs';
 
 const loginContainer = document.getElementById('loginContainer')
