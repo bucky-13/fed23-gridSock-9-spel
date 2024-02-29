@@ -13,6 +13,7 @@ export default function chatRender(mainContainer) {
     mainContainer.appendChild(chatContainer);
 
     const chatBox = createElement('ul', 'chatBox', 'chatBox');
+    const userList = createElement('ul', 'userList', 'userList');
     const sendMessageLabel = createElement('label', 'sendMessageLabel', 'sendMessageLabel', 'Message: ');
     const sendMessageInput = createElement('input', 'sendMessageInput', 'sendMessageInput');
     sendMessageInput.placeholder = 'Write something';
@@ -31,5 +32,5 @@ export default function chatRender(mainContainer) {
         updateChat(arg, chatBox);
     });
 
-    chatContainer.append(chatBox, sendMessageLabel, sendMessageBtn);
+    chatContainer.append(userList, sendMessageLabel, sendMessageBtn, chatBox);
 }

@@ -1,4 +1,5 @@
-import { io } from 'socket.io-client';
+
+import socket from "../lib/socket.mjs"
 import errorMsg from '../lib/validationMessage.mjs';
 
 const loginContainer = document.getElementById('loginContainer')
@@ -7,20 +8,24 @@ let usernameInput = document.getElementById('usernameInput');
 let loginBtn = document.getElementById('loginBtn');
 let logoutBtn = document.getElementById('logoutBtn');
 
-let userList = document.getElementById('userList');
+
 let loggedInUsers = [];
 
 let username = localStorage.getItem('username');
 
 
-const socket = io('https://game-99blu.ondigitalocean.app'); 
-
-export default function updateUserList(users) {
-
+ function updateUserList(users) {
+    console.log('updateUserList in function');
+    console.log(users);
+    let userList = document.getElementById('userList');
 
         // Update list of logged in users
-            userList.innerHTML = '';
-            loggedInUsers = users;
+    userList.innerHTML = '';
+     loggedInUsers = users;
+     const liHeader = document.createElement('li');
+     liHeader.textContent = 'Logged in users:';
+     userList.appendChild(liHeader);
+
 
 
             loggedInUsers.forEach((user) => {
@@ -31,10 +36,14 @@ export default function updateUserList(users) {
 
 }
 
-socket.on('updateUserList', (users) => {
+export default function listenForSocketUpdate() {
+    socket.on('updateUserList', (users) => {
+    console.log('updateUserList');
+    console.log(users);
     loggedInUsers = users;
     updateUserList(users);
 });
+} 
   
     // // log in and log out user
     // loginBtn.addEventListener('click', () => {
@@ -49,10 +58,10 @@ socket.on('updateUserList', (users) => {
     //     }
     // });
 
-    logoutBtn.addEventListener('click', () => {
-        localStorage.removeItem('username');
-        socket.emit('logout');
-        socket.disconnect();
-        updateUserList([]);
-    });
+    // logoutBtn.addEventListener('click', () => {
+    //     localStorage.removeItem('username');
+    //     socket.emit('logout');
+    //     socket.disconnect();
+    //     updateUserList([]);
+    // });
     
