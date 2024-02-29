@@ -19,17 +19,29 @@ app.get('/', (req,res) => {
 io.on('connection', (socket) => {
     socket.on('login', (username) => {
         users[socket.id] = username;
-
         io.emit('chat', { message: `${username } har anslutit`, user: 'Server' });
         io.emit('updateUserList', Object.values(users));
+        console.log('user list onlogin ', users);
     })
     socket.on('logout', () => {
+        // io.emit('disconnect')
         const username = users[socket.id];
 
-        io.emit('chat', { message: `${username} har loggat ut`, user: "Server"});
+        io.emit('chat', { message: `${username} har loggat ut logout`, user: "Server"});
         io.emit('updateUserList', Object.values(users));
         delete users[socket.id];
+        console.log('user list logout', users);
     })
+
+    socket.on('disconnect', function () {
+        const username = users[socket.id];
+        
+      console.log('user disconnected ' + username );
+      io.emit('chat', { message: `${username} har loggat ut disconnect`, user: "Server"});
+      delete users[socket.id];
+        io.emit('updateUserList', Object.values(users));
+        console.log('user list disconnect', users);
+  });
 
 
     socket.on('chat', (arg) => {

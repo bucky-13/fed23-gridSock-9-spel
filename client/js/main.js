@@ -33,23 +33,44 @@ socket.on('updateUserList', (users) => {
 	updateUserList(users);
 });
 
-// log in and log out user
-loginBtn.addEventListener('click', () => {
-	const inputUsername = usernameInput.value.trim();
+function triggerLoginOnPageLoad() {
+if (localStorage.getItem('username')) { 
+	usernameInput.value = localStorage.getItem('username');
+	loginUser();
+} else {
+	usernameInput.value = ''
+}
+}
+
+triggerLoginOnPageLoad();
+
+function loginUser() {
+	socket.connect();
+		const inputUsername = usernameInput.value.trim();
 	if (inputUsername) {
-		localStorage.setItem('username', inputUsername);
+		if (!localStorage.getItem('username')) {
+			localStorage.setItem('username', inputUsername);
+		}
+		
 		username = inputUsername;
 		socket.emit('login', username);
-		usernameInput.value = '';
+		updateUserList([]);
+		// usernameInput.value = '';
 	} else {
 		alert('Användarnamn får inte vara tomt');
 	}
+}
+
+// log in and log out user
+loginBtn.addEventListener('click', () => {
+	loginUser();
 });
+
 logoutBtn.addEventListener('click', () => {
 	localStorage.removeItem('username');
 	socket.emit('logout');
-	socket.disconnect();
 	updateUserList([]);
+	triggerLoginOnPageLoad();
 });
 
 // the chat
