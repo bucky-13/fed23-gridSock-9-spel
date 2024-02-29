@@ -38,8 +38,6 @@ let username = localStorage.getItem('username');
 
 export default function listenForSocketUpdate() {
     socket.on('updateUserList', (users) => {
-    console.log('updateUserList');
-    console.log(users);
     loggedInUsers = users;
     updateUserList(users);
 });
