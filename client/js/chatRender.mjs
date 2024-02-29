@@ -1,6 +1,7 @@
 import socket from "../lib/socket.mjs"
 import createElement from "../lib/createElement.mjs"
 import updateChat from "./updateChat.mjs"
+import errorMsg from "../lib/validationMessage.mjs"
 
 export default function chatRender(mainContainer) {
     let existingChat = document.getElementById('chatbox')
@@ -23,7 +24,13 @@ export default function chatRender(mainContainer) {
 
     sendMessageBtn.addEventListener('click', () => {
         console.log('1');
-        socket.emit('chat', { user: user, message: sendMessageInput.value });
+        if (sendMessageInput.value.trim() !== '') {
+            socket.emit('chat', { user: user, message: sendMessageInput.value });
+
+        } else {
+            errorMsg(chatContainer, 'The message cannot be empty!');
+            console.log('The input field cannot be empty!');
+        }      
     });
 
     socket.on('chat', (arg) => {
