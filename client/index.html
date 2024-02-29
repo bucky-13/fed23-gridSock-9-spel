@@ -9,28 +9,39 @@
 </head>
 
 <body>
-  <div class="loginContainer">
-    <h3>Logga in</h3>
-    <input type="text" id="usernameInput" placeholder="Användarnamn">
-    <button id="loginBtn">Logga in</button>
-    <button id="logoutBtn">Logga ut</button>
-  </div>
-  <div>
-    <h4>Inloggade användare:</h4>
-    <ul id="userList">
 
+  <nav id="navContainer">
+    <h1>OUR GAME</h1>
+  </nav>
+
+  <main id="mainContainer">
+
+    <!-- <div class="loginContainer" id="loginContainer">
+      <h3>Logga in</h3>
+      <input type="text" id="usernameInput" placeholder="Användarnamn">
+      <button id="loginBtn">Logga in</button>
+      <button id="logoutBtn">Logga ut</button>
+    </div> -->
+  
+    <div>
+      <h4>Inloggade användare:</h4>
+      <ul id="userList">
+  
+      </ul>
+      </h3>
+    </div>
+  
+  
+    <div>
+      <input type="text" id="sendMessage">
+      <button id="sendBtn">Skicka</button>
+    </div>
+    <ul id="chatList">
+  
     </ul>
-    </h3>
-  </div>
 
+  </main>
 
-  <div>
-    <input type="text" id="sendMessage">
-    <button id="sendBtn">Skicka</button>
-  </div>
-  <ul id="chatList">
-
-  </ul>
 
   <script type="module" src="js/main.js"></script>
 </body>
