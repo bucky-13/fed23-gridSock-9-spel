@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
     })
     socket.on('logout', () => {
         const username = users[socket.id];
-        io.emit('chat', { message: `${username} har loggat ut logout`, user: "Server"});
+        io.emit('chat', { message: `${username} har loggat ut`, user: "Server"});
         io.emit('updateUserList', Object.values(users));
         delete users[socket.id];
     })
@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
         const username = users[socket.id];
         
       console.log('user disconnected ' + username );
-      io.emit('chat', { message: `${username} har loggat ut disconnect`, user: "Server"});
+      io.emit('chat', { message: `${username} har loggat ut`, user: "Server"});
       delete users[socket.id];
         io.emit('updateUserList', Object.values(users));
         console.log('user list disconnect', users);
