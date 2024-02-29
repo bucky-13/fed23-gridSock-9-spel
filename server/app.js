@@ -24,7 +24,6 @@ io.on('connection', (socket) => {
         console.log('user list onlogin ', users);
     })
     socket.on('logout', () => {
-        // io.emit('disconnect')
         const username = users[socket.id];
 
         io.emit('chat', { message: `${username} har loggat ut logout`, user: "Server"});
