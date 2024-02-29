@@ -1,17 +1,16 @@
-import errorMsg from "../lib/validationMessage.mjs";
-import socket from "../lib/socket.mjs";
-import checkLoginState from "./checkLoginState.mjs";
+import errorMsg from '../lib/validationMessage.mjs';
+import socket from '../lib/socket.mjs';
+import renderLoggedIn from './renderLoggedIn.mjs';
 
 export default function loginUser(userNameInput) {
     socket.connect();
-    const inputUsername = userNameInput.value.trim();
-    if (inputUsername) {
+    const inputUsername = userNameInput;
+    if (inputUsername != '') {
         localStorage.setItem('username', inputUsername);
         let username = inputUsername;
         socket.emit('login', username);
-        userNameInput.value = '';
 
-        checkLoginState()
+        renderLoggedIn();
     } else {
         errorMsg(loginContainer, 'Please input a username to continue')
     }

@@ -1,5 +1,5 @@
-import { io } from 'socket.io-client';
 import updateUserList from './updateUserList.mjs';
+import socket from "../lib/socket.mjs"
 
 
 let sendMessage = document.getElementById('sendMessage');
@@ -8,8 +8,6 @@ let chatList = document.getElementById('chatList');
 
 
 export default function init() {
-
-    const socket = io('https://game-99blu.ondigitalocean.app');
     
 
     updateUserList(users)
