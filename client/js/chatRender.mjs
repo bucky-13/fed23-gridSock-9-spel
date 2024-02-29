@@ -14,9 +14,9 @@ export default function chatRender(mainContainer) {
     mainContainer.appendChild(chatContainer);
 
     const chatBox = createElement('ul', 'chatBox', 'chatBox');
-    const sendMessageLabel = createElement('label', 'sendMessageLabel', 'sendMessageLabel', 'Message: ');
+    const sendMessageLabel = createElement('label', 'sendMessageLabel', 'sendMessageLabel', '');
     const sendMessageInput = createElement('input', 'sendMessageInput', 'sendMessageInput');
-    sendMessageInput.placeholder = 'Write something';
+    sendMessageInput.placeholder = 'Your Message';
     sendMessageLabel.appendChild(sendMessageInput);
 
     const sendMessageBtn = createElement('button', 'sendMessageBtn', 'sendMessageBtn', 'Send');
