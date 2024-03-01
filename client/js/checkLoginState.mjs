@@ -1,11 +1,11 @@
 import createElement from '../lib/createElement.mjs';
 import loginUser from './loginUser.mjs';
 
-let mainContainer = document.getElementById('mainContainer')
+let chatSection = document.getElementById('chatSection')
 
 
 export default function checkLoginState() {
-    mainContainer.innerText = ''
+    chatSection.innerText = ''
     if (localStorage.getItem('username')) {
         let userName = localStorage.getItem('username')
         console.log('hello');
@@ -14,7 +14,7 @@ export default function checkLoginState() {
 
         const loginContainer = createElement('section', 'loginContainer', 'loginContainer')
 
-        mainContainer.appendChild(loginContainer)
+        chatSection.appendChild(loginContainer)
 
         const loginPageHeader = createElement('h2', 'loginPageHeader', 'loginPageHeader', 'Select a Nickname')
 

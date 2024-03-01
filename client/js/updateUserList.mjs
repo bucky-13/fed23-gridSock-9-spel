@@ -8,11 +8,7 @@ let usernameInput = document.getElementById('usernameInput');
 let loginBtn = document.getElementById('loginBtn');
 let logoutBtn = document.getElementById('logoutBtn');
 
-
 let loggedInUsers = [];
-
-
-
 
 function updateUserList(users) {
      let username = localStorage.getItem('username');
@@ -50,24 +46,4 @@ export default function listenForSocketUpdate() {
     updateUserList(users);
 });
 } 
-  
-    // // log in and log out user
-    // loginBtn.addEventListener('click', () => {
-    //     const inputUsername = usernameInput.value.trim();
-    //     if (inputUsername) {
-    //         localStorage.setItem('username', inputUsername);
-    //         let username = inputUsername;
-    //         socket.emit('login', username);
-    //         usernameInput.value = '';
-    //     } else {
-    //         errorMsg(loginContainer, 'Please input a nickname')
-    //     }
-    // });
-
-    // logoutBtn.addEventListener('click', () => {
-    //     localStorage.removeItem('username');
-    //     socket.emit('logout');
-    //     socket.disconnect();
-    //     updateUserList([]);
-    // });
     

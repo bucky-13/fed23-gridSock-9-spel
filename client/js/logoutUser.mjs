@@ -1,14 +1,10 @@
 import checkLoginState from './checkLoginState.mjs';
 import socket from '../lib/socket.mjs';
 
-// socket.on('logout', () => {
-//     let username = localStorage.getItem('username')
-// })
-
-export default function logoutUser(mainPageSection, chatContainer) {
+export default function logoutUser(userStatusSection, chatContainer) {
     let chatBox = document.querySelector('#chatBox')
     chatBox.innerHTML = '';
-    mainPageSection.remove();
+    userStatusSection.remove();
     chatContainer.remove();
     socket.off('chat');
 

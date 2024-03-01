@@ -3,7 +3,7 @@ import createElement from '../lib/createElement.mjs'
 import updateChat from './updateChat.mjs'
 import errorMsg from '../lib/validationMessage.mjs'
 
-export default function chatRender(mainContainer, chatContainer) {
+export default function chatRender(chatSection, chatContainer) {
     let existingChat = document.getElementById('chatbox')
     if (existingChat) {
         existingChat.remove()
@@ -11,17 +11,19 @@ export default function chatRender(mainContainer, chatContainer) {
     let user = localStorage.getItem('username');
     console.log(user);
     
-    mainContainer.appendChild(chatContainer);
+    chatSection.appendChild(chatContainer);
 
     const chatBox = createElement('ul', 'chatBox', 'chatBox');
-
     const userList = createElement('ul', 'userList', 'userList');
 
+    // Elements for the sendMessageInput container
     const sendMessageInput = createElement('textarea', 'sendMessageInput', 'sendMessageInput');
-    sendMessageInput.placeholder = 'Message';
-
+    sendMessageInput.placeholder = 'Message';    
     const sendMessageBtn = createElement('button', 'sendMessageBtn', 'sendMessageBtn', 'Send');
+    const chatInputContainer = createElement('div', 'chatInputContainer', 'chatInputContainer')
+    chatInputContainer.append(sendMessageInput, sendMessageBtn)
 
+    //Event listener for sending a new message
     sendMessageBtn.addEventListener('click', () => {
         console.log('1');
         if (sendMessageInput.value.trim() !== '') {
@@ -39,5 +41,5 @@ export default function chatRender(mainContainer, chatContainer) {
         updateChat(arg, chatBox);
     });
 
-    chatContainer.append(userList, sendMessageInput, sendMessageBtn, chatBox);
+    chatContainer.append(userList, chatInputContainer, chatBox);
 }
