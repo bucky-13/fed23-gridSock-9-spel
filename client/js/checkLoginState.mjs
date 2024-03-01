@@ -16,18 +16,16 @@ export default function checkLoginState() {
 
         mainContainer.appendChild(loginContainer)
 
-        const loginPageHeader = createElement('h2', 'loginPageHeader', 'loginPageHeader', 'Select a nickname')
+        const loginPageHeader = createElement('h2', 'loginPageHeader', 'loginPageHeader', 'Select a Nickname')
 
-        const userNameLabel = createElement('label', 'usernameLabel', 'usernameLabel', '')
         
         const userNameInput = createElement('input', 'userNameInput', 'userNameInput', '')
         userNameInput.placeholder = 'Nickname';
 
-        userNameLabel.appendChild(userNameInput)
 
         const loginBtn = createElement('button', 'loginBtn', 'loginBtn', 'Login')
 
-        loginContainer.append(loginPageHeader, userNameLabel, loginBtn)
+        loginContainer.append(loginPageHeader, userNameInput, loginBtn)
 
         loginBtn.addEventListener('click', () => {
             console.log(userNameInput.value.trim());
