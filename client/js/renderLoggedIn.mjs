@@ -1,6 +1,6 @@
-import createElement from "../lib/createElement.mjs"
-import logoutUser from "./logoutUser.mjs";
-import chatRender from "./chatRender.mjs";
+import createElement from '../lib/createElement.mjs'
+import logoutUser from './logoutUser.mjs';
+import chatRender from './chatRender.mjs';
 
 let mainContainer = document.getElementById('mainContainer')
 

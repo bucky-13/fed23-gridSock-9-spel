@@ -1,5 +1,5 @@
-import checkLoginState from "./checkLoginState.mjs";
-import socket from "../lib/socket.mjs";
+import checkLoginState from './checkLoginState.mjs';
+import socket from '../lib/socket.mjs';
 
 // socket.on('logout', () => {
 //     let username = localStorage.getItem('username')

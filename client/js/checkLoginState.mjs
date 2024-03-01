@@ -1,17 +1,15 @@
-import createElement from "../lib/createElement.mjs";
-import loginUser from "./loginUser.mjs";
-import renderLoggedIn from "./renderLoggedIn.mjs";
+import createElement from '../lib/createElement.mjs';
+import loginUser from './loginUser.mjs';
 
 let mainContainer = document.getElementById('mainContainer')
-// const loginContainer = document.getElementById('loginContainer')
 
 
 export default function checkLoginState() {
     mainContainer.innerText = ''
     if (localStorage.getItem('username')) {
+        let userName = localStorage.getItem('username')
         console.log('hello');
-
-        renderLoggedIn()
+        loginUser(userName)
     } else {
 
         const loginContainer = createElement('section', 'loginContainer', 'loginContainer')
@@ -31,6 +29,9 @@ export default function checkLoginState() {
 
         loginContainer.append(loginPageHeader, userNameLabel, loginBtn)
 
-        loginBtn.addEventListener('click', () => loginUser(userNameInput))
+        loginBtn.addEventListener('click', () => {
+            console.log(userNameInput.value.trim());
+            loginUser(userNameInput.value.trim())
+        })
     }
 }

@@ -1,7 +1,7 @@
-import socket from "../lib/socket.mjs"
-import createElement from "../lib/createElement.mjs"
-import updateChat from "./updateChat.mjs"
-import errorMsg from "../lib/validationMessage.mjs"
+import socket from '../lib/socket.mjs'
+import createElement from '../lib/createElement.mjs'
+import updateChat from './updateChat.mjs'
+import errorMsg from '../lib/validationMessage.mjs'
 
 export default function chatRender(mainContainer) {
     let existingChat = document.getElementById('chatbox')
@@ -14,7 +14,10 @@ export default function chatRender(mainContainer) {
     mainContainer.appendChild(chatContainer);
 
     const chatBox = createElement('ul', 'chatBox', 'chatBox');
-    const sendMessageLabel = createElement('label', 'sendMessageLabel', 'sendMessageLabel', '');
+
+    const userList = createElement('ul', 'userList', 'userList');
+    const sendMessageLabel = createElement('label', 'sendMessageLabel', 'sendMessageLabel', 'Message: ');
+
     const sendMessageInput = createElement('input', 'sendMessageInput', 'sendMessageInput');
     sendMessageInput.placeholder = 'Your Message';
     sendMessageLabel.appendChild(sendMessageInput);
@@ -38,5 +41,5 @@ export default function chatRender(mainContainer) {
         updateChat(arg, chatBox);
     });
 
-    chatContainer.append(chatBox, sendMessageLabel, sendMessageBtn);
+    chatContainer.append(userList, sendMessageLabel, sendMessageBtn, chatBox);
 }
