@@ -2,17 +2,17 @@ import createElement from '../lib/createElement.mjs'
 import logoutUser from './logoutUser.mjs';
 import chatRender from './chatRender.mjs';
 
-let mainContainer = document.getElementById('mainContainer')
+let chatSection = document.getElementById('chatSection')
 
 export default function renderLoggedIn() {
 
-    const mainPageSection = createElement('section', 'mainPageSection', 'mainPageSection');
+    const userStatusSection = createElement('section', 'userStatusSection', 'userStatusSection');
     const chatContainer = createElement('section', 'chatContainer', 'chatContainer');
-    mainContainer.appendChild(mainPageSection, chatContainer);
+    chatSection.appendChild(userStatusSection, chatContainer);
     const welcomeHeader = createElement('h4', 'welcomeHeader', 'welcomeHeader', `Logged in as ${localStorage.getItem('username')}`);
     const logOutBtn = createElement('button', 'logOutBtn', 'logOutBtn', 'Log out');
-    mainPageSection.append(welcomeHeader, logOutBtn);
-    logOutBtn.addEventListener('click', () => logoutUser(mainPageSection, chatContainer));
+    userStatusSection.append(welcomeHeader, logOutBtn);
+    logOutBtn.addEventListener('click', () => logoutUser(userStatusSection, chatContainer));
 
-    chatRender(mainContainer, chatContainer);
+    chatRender(chatSection, chatContainer);
 }
