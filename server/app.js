@@ -32,11 +32,9 @@ io.on('connection', (socket) => {
     socket.on('disconnect', function () {
         const username = users[socket.id];
         
-      console.log('user disconnected ' + username );
       io.emit('chat', { message: `${username} har loggat ut`, user: "Server"});
       delete users[socket.id];
         io.emit('updateUserList', Object.values(users));
-        console.log('user list disconnect', users);
     });
     
     socket.on('chat', (arg) => {

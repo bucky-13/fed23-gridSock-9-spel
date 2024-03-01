@@ -31,6 +31,7 @@ export default function checkLoginState() {
         loginBtn.addEventListener('click', () => {
             console.log(userNameInput.value.trim());
             loginUser(userNameInput.value.trim())
+            loginContainer.remove();
         })
     }
 }
