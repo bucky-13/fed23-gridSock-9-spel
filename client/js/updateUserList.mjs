@@ -11,10 +11,11 @@ let logoutBtn = document.getElementById('logoutBtn');
 
 let loggedInUsers = [];
 
-let username = localStorage.getItem('username');
 
 
- function updateUserList(users) {
+
+function updateUserList(users) {
+     let username = localStorage.getItem('username');
     console.log('updateUserList in function');
     console.log(users);
     let userList = document.getElementById('userList');
@@ -29,8 +30,15 @@ let username = localStorage.getItem('username');
 
 
             loggedInUsers.forEach((user) => {
-                const li = document.createElement('li');
+                let li = '';
+                if (user === username) {
+                    li = document.createElement('li');
+                    li.classList.add('activeUserLoggedIn')
                 li.textContent = user;
+                } else {
+                     li = document.createElement('li');
+                li.textContent = user;
+                }
                 userList.appendChild(li);
             });
 

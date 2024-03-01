@@ -3,14 +3,14 @@ import createElement from '../lib/createElement.mjs'
 import updateChat from './updateChat.mjs'
 import errorMsg from '../lib/validationMessage.mjs'
 
-export default function chatRender(mainContainer) {
+export default function chatRender(mainContainer, chatContainer) {
     let existingChat = document.getElementById('chatbox')
     if (existingChat) {
         existingChat.remove()
     }
     let user = localStorage.getItem('username');
     console.log(user);
-    const chatContainer = createElement('section', 'chatContainer', 'chatContainer');
+    
     mainContainer.appendChild(chatContainer);
 
     const chatBox = createElement('ul', 'chatBox', 'chatBox');
