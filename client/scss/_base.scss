@@ -53,6 +53,31 @@ li {
   color: #530053;
 }
 
+.chatBox {
+  display: flex;
+  flex-direction: column;
+}
+/* Meddelanden från användaren */
+.leftMessage {
+  align-self: flex-start;
+  background-color: paleturquoise; 
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Meddelanden från andra användare */
+.rightMessage {
+  align-self: flex-end;
+  background-color: palegreen;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.activeUserLoggedIn {
+  font-weight: 700;
+}
+
   /*@media (prefers-color-scheme: light) {
     :root {
       color: #213547;
