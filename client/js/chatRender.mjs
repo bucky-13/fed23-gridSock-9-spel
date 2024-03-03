@@ -19,6 +19,7 @@ export default function chatRender(chatSection, chatContainer) {
     // Elements for the sendMessageInput container
     const sendMessageInput = createElement('textarea', 'sendMessageInput', 'sendMessageInput');
     sendMessageInput.placeholder = 'Message';    
+
     const sendMessageBtn = createElement('button', 'sendMessageBtn', 'sendMessageBtn', 'Send');
     const chatInputContainer = createElement('div', 'chatInputContainer', 'chatInputContainer')
     chatInputContainer.append(sendMessageInput, sendMessageBtn)
@@ -28,7 +29,7 @@ export default function chatRender(chatSection, chatContainer) {
         console.log('1');
         if (sendMessageInput.value.trim() !== '') {
             socket.emit('chat', { user: user, message: sendMessageInput.value });
-
+            sendMessageInput.value = ''
         } else {
             errorMsg(chatContainer, 'The message cannot be empty!');
             console.log('The input field cannot be empty!');

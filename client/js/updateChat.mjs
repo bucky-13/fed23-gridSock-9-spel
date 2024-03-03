@@ -5,6 +5,9 @@ export default function updateChat(chat, chatBox) {
     let newMessage = createElement('li', 'newMessage', 'newMessage', `${chat.user}: ${chat.message}`)
     if (chat.user === localStorage.getItem('username')) {
         newMessage.classList.add('leftMessage');
+      } else if (chat.user === 'Server') {
+        newMessage.classList.add('serverMessage');
+        // newMessage.classList.remove('newMessage')
       } else {
         newMessage.classList.add('rightMessage');
       }

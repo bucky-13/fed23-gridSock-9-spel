@@ -11,6 +11,27 @@ li {
   padding: 10px;
   border: 3px solid #ffddff;
   margin-top: 15px;
+
+  .chatInputContainer {
+    display: flex;
+    align-items: center;
+    .sendMessageInput {
+      width: 100%
+    }
+
+    .sendMessageBtn {
+      height: 50px;
+      margin-left: 10px;
+    }
+    
+  }
+
+  .chatBox {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    max-height: 500px;
+  }
 }
 
 .newMessage {
@@ -53,10 +74,7 @@ li {
   color: #530053;
 }
 
-.chatBox {
-  display: flex;
-  flex-direction: column;
-}
+
 /* Meddelanden från användaren */
 .leftMessage {
   align-self: flex-start;
@@ -64,6 +82,15 @@ li {
   margin-bottom: 5px;
   padding: 5px 10px;
   border-radius: 5px;
+}
+
+.serverMessage {
+  width: 50%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.267);
+  border-radius: 5px;
+  align-self: center;
+  font-style: italic;
 }
 
 /* Meddelanden från andra användare */
