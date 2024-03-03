@@ -24,6 +24,15 @@ export default function chatRender(chatSection, chatContainer) {
     const chatInputContainer = createElement('div', 'chatInputContainer', 'chatInputContainer')
     chatInputContainer.append(sendMessageInput, sendMessageBtn)
 
+    sendMessageInput.addEventListener('keypress', () => {
+        socket.emit('activity', user)
+    })
+
+    // Denna socket lyssnar på användarens aktivitet
+    socket.on('activity', (username) => {
+        console.log(`${username} is typing...`);
+    })
+
     //Event listener for sending a new message
     sendMessageBtn.addEventListener('click', () => {
         console.log('1');
