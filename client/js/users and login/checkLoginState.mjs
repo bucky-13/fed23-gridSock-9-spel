@@ -1,4 +1,4 @@
-import createElement from '../lib/createElement.mjs';
+import createElement from '../../lib/createElement.mjs';
 import loginUser from './loginUser.mjs';
 
 let chatSection = document.getElementById('chatSection')

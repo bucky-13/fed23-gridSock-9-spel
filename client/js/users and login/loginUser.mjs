@@ -1,5 +1,5 @@
-import errorMsg from '../lib/validationMessage.mjs';
-import socket from '../lib/socket.mjs';
+import errorMsg from '../../lib/validationMessage.mjs';
+import socket from '../../lib/socket.mjs';
 import renderLoggedIn from './renderLoggedIn.mjs';
 
 export default function loginUser(userNameInput) {

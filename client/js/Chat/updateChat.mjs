@@ -1,4 +1,4 @@
-import createElement from '../lib/createElement.mjs';
+import createElement from '../../lib/createElement.mjs';
 
 export default function updateChat(chat, chatBox, userActivity) {
     let topChat = document.querySelector('.newMessage');

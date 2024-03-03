@@ -1,5 +1,5 @@
 import checkLoginState from './checkLoginState.mjs';
-import socket from '../lib/socket.mjs';
+import socket from '../../lib/socket.mjs';
 
 export default function logoutUser(userStatusSection, chatContainer) {
     let chatBox = document.querySelector('#chatBox')
