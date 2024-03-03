@@ -1,118 +1,127 @@
-nav { 
-  padding: 5px;
+body {
+	background-color: $primaryBgColor;
+
+	.navContainer {
+		background-color: $navBgColor;
+		padding: 5px;
+	}
+
+	.mainContainer {
+
+		.chatContainer {
+			width: 100%;
+			padding: 10px;
+			border: 3px solid $borderColor;
+			margin-top: 15px;
+			background-color: $chatBgColor;
+
+			.activeUserLoggedIn {
+				font-weight: 700;
+			}
+
+			.chatInputContainer {
+				display: flex;
+				align-items: center;
+
+				.sendMessageInput {
+					margin-top: 20px;
+					margin-left: 39px;
+					width: 65%;
+					margin-right: 15px;
+					margin-bottom: 15px;
+					border: 2px solid $borderColor;
+					border-radius: 5px;
+					padding: 5px;
+					width: 100%;
+				}
+
+				.sendMessageBtn {
+					padding-left: 10px;
+					padding-right: 10px;
+					padding-top: 2px;
+					padding-bottom: 2px;
+					font-family: 'Roboto', sans-serif;
+					letter-spacing: 0.05rem;
+					font-weight: bold;
+					background-color: $primaryBtn;
+					border: 2px solid $borderColor;
+					border-radius: 5px;
+					color: $primaryBtnText;
+					cursor: pointer;
+					height: 50px;
+					margin-left: 10px;
+				}
+			}
+
+			.chatBox {
+				display: flex;
+				flex-direction: column;
+				overflow: auto;
+				max-height: 500px;
+				background-color: $chatBoxBgColor;
+
+				.userActivity {
+					background-color: $userActivityBgColor;
+					border-radius: 5px;
+					text-align: center;
+					width: 50%;
+					align-self: center;
+				}
+
+				.newMessage {
+					border: 2px solid $borderColor;
+					border-radius: 5px;
+					color: $textColor;
+					margin-top: 5px;
+					padding: 8px;
+					width: fit-content;
+					background-color: #ffddff;
+				}
+
+				/* Meddelanden från användaren */
+				.leftMessage {
+					align-self: flex-start;
+					background-color: paleturquoise;
+					margin-bottom: 5px;
+					padding: 5px 10px;
+					border-radius: 5px;
+				}
+
+				.serverMessage {
+					width: 50%;
+					text-align: center;
+					background-color: rgba(0, 0, 0, 0.267);
+					border-radius: 5px;
+					align-self: center;
+					font-weight: 700;
+					font-style: italic;
+				}
+
+				/* Meddelanden från andra användare */
+				.rightMessage {
+					align-self: flex-end;
+					background-color: palegreen;
+					margin-bottom: 5px;
+					padding: 5px 10px;
+					border-radius: 5px;
+				}
+			}
+		}
+	}
 }
+
+// nav {
+// }
 
 li {
-  list-style: none;
-}
-
-.chatContainer {
-  width: 100%;
-  padding: 10px;
-  border: 3px solid #ffddff;
-  margin-top: 15px;
-
-  .chatInputContainer {
-    display: flex;
-    align-items: center;
-    .sendMessageInput {
-      width: 100%
-    }
-
-    .sendMessageBtn {
-      height: 50px;
-      margin-left: 10px;
-    }
-    
-  }
-
-  .chatBox {
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    max-height: 500px;
-  }
-}
-
-.newMessage {
-  border: 2px solid #530053;
-  border-radius: 5px;
-  color: #530053;
-  margin-top: 5px;
-  padding: 8px;
-  width: fit-content;
-  background-color: #ffddff;
-}
-
-.sendMessageInput {
-  margin-top: 20px;
-  margin-left: 39px;
-  width: 65%;
-  margin-right: 15px;
-  margin-bottom: 15px;  
-  border: 2px solid #530053;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.sendMessageBtn {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  font-family: 'Roboto', sans-serif;
-  letter-spacing: 0.05rem;
-  font-weight: bold;
-  background-color: #ffddff;
-  border: 2px solid #530053;
-  border-radius: 5px;
-  color: #530053;
-  cursor: pointer;
+	list-style: none;
 }
 
 ::placeholder {
-  color: #530053;
+	color: #530053;
 }
 
-
-/* Meddelanden från användaren */
-.leftMessage {
-  align-self: flex-start;
-  background-color: paleturquoise; 
-  margin-bottom: 5px;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.serverMessage {
-  width: 50%;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.267);
-  border-radius: 5px;
-  align-self: center;
-  font-weight: 700;
-  font-style: italic;
-}
-
-/* Meddelanden från andra användare */
-.rightMessage {
-  align-self: flex-end;
-  background-color: palegreen;
-  margin-bottom: 5px;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-.activeUserLoggedIn {
-  font-weight: 700;
-}
-
-.userActivity {
-  background-color: #ac91ac;
-  border-radius: 5px;
-  text-align: center;
-}
-
-  /*@media (prefers-color-scheme: light) {
+/*@media (prefers-color-scheme: light) {
     :root {
       color: #213547;
       background-color: #ffffff;
@@ -124,4 +133,3 @@ li {
       background-color: #f9f9f9;
     }
   }*/
-  
