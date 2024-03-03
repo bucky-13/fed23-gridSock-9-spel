@@ -1,6 +1,6 @@
 import createElement from '../lib/createElement.mjs';
 
-export default function updateChat(chat, chatBox) {
+export default function updateChat(chat, chatBox, userActivity) {
     let topChat = document.querySelector('.newMessage');
     let newMessage = createElement('li', 'newMessage', 'newMessage', `${chat.user}: ${chat.message}`)
     if (chat.user === localStorage.getItem('username')) {
@@ -11,6 +11,7 @@ export default function updateChat(chat, chatBox) {
       } else {
         newMessage.classList.add('rightMessage');
       }
+      userActivity.innerText = ''
 
     if (topChat) {
         topChat.parentNode.insertBefore(newMessage, topChat)

@@ -19,7 +19,7 @@ app.get('/', (req,res) => {
 io.on('connection', (socket) => {
     socket.on('login', (username) => {
         users[socket.id] = username;
-        socket.broadcast.emit('chat', { message: `${username} has joines the chat`, user: 'Server' }); //Meddelandet om inloggad användare kommer inte till en själv
+        socket.broadcast.emit('chat', { message: `${username} has joined the chat`, user: 'Server' }); //Meddelandet om inloggad användare kommer inte till en själv
         socket.emit('chat',{ message: `Welcome ${username} please be respectful and follow the guidelines`, user: 'Server' }); //Skriver ett meddelande enbart till användare som joinat
         io.emit('updateUserList', Object.values(users));
     })
@@ -40,8 +40,10 @@ io.on('connection', (socket) => {
 
     socket.on('activity', (username) => {
         users[socket.id] = username;
-        socket.broadcast.emit('activity', username)
-    })
+        if (username) {
+            socket.broadcast.emit('activity', { username });
+        } 
+    });
     
     socket.on('chat', (arg) => {
         io.emit('chat', arg);
