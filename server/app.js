@@ -32,8 +32,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', function () {
         const username = users[socket.id];
-    // Verkar ha orsakat undefined men osäker
-    //   io.emit('chat', { message: `${username} har loggat ut`, user: "Server"});
+      io.emit('chat', { message: `${username} har loggat ut`, user: "Server"});
       delete users[socket.id];
         io.emit('updateUserList', Object.values(users));
     });
