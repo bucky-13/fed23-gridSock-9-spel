@@ -1,6 +1,6 @@
 
-import socket from '../lib/socket.mjs'
-import errorMsg from '../lib/validationMessage.mjs';
+import socket from '../../lib/socket.mjs';
+import errorMsg from '../../lib/validationMessage.mjs';
 
 const loginContainer = document.getElementById('loginContainer')
 
@@ -17,7 +17,7 @@ function updateUserList(users) {
     let userList = document.getElementById('userList');
 
         // Update list of logged in users
-    userList.innerHTML = '';
+    userList.innerText = '';
      loggedInUsers = users;
      const liHeader = document.createElement('li');
      liHeader.textContent = 'Logged in users:';
