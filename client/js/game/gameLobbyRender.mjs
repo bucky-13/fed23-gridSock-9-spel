@@ -1,6 +1,7 @@
 let gameSection = document.getElementById('gameSection')
 import createElement from "../../lib/createElement.mjs"
-import playerReady from "./playerReady.mjs"
+import playersReadySocket from "./playersReadySocket.mjs"
+import socket from "../../lib/socket.mjs"
 
 export default function gameLobbyRender() {
 
@@ -14,5 +15,8 @@ export default function gameLobbyRender() {
     gameBoard.appendChild(gameLobby)
     gameSection.appendChild(gameBoard)
 
-    gameLobbyBtn.addEventListener('click', () => playerReady(readyPlayerList))
+    gameLobbyBtn.addEventListener('click', () => {
+        let username = localStorage.getItem('username');
+        socket.emit('playerReady', username)
+        playersReadySocket()})
 }
