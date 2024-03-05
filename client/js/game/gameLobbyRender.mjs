@@ -2,6 +2,7 @@ let gameSection = document.getElementById('gameSection')
 import createElement from "../../lib/createElement.mjs"
 import playersReadySocket from "./playersReadySocket.mjs"
 import socket from "../../lib/socket.mjs"
+import playersUnreadySocket from "./playersUnReadySocket.mjs"
 
 export default function gameLobbyRender() {
 
@@ -27,4 +28,11 @@ export default function gameLobbyRender() {
         let username = localStorage.getItem('username');
         socket.emit('playerReady', username)
         playersReadySocket(startGameBtn, gameLobby, joinLobbyBtn, leaveLobbyBtn)})
+
+        leaveLobbyBtn.addEventListener('click', () => {
+            let username = localStorage.getItem('username');
+            socket.emit('playerUnReady', username)
+            playersUnreadySocket(startGameBtn, gameLobby, joinLobbyBtn, leaveLobbyBtn)
+        
+        })
 }
