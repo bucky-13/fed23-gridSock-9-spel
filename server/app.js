@@ -16,10 +16,8 @@ const handleDisconnect = require('./userConnections/disconnect')
 const handleActivity = require('./userConnections/activity')
 const handleChat = require('./chat/chat')
 const handlePlayerReady = require('./game/playerReady')
+const { users, usersReady } = require('./lib/serverDatabase.js');
 
-// CONST/LET ARRAYS & OBJECTS STORED ON SERVER SIDE
-const users = {}; // ett objekt för att lagra användare
-const usersReady = {}
 
 // probably not needed
 app.get('/', (req,res) => {
