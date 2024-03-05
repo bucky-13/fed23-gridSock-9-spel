@@ -1,3 +1,5 @@
+const { read } = require('fs');
+
 const app = require('express')();
 const server = require('http').createServer(app);
 
@@ -10,7 +12,7 @@ const io = require('socket.io')(server, {
 });
 
 const users = {}; // ett objekt för att lagra användare
-
+const usersReady = {}
 
 app.get('/', (req,res) => {
     res.send("<h1>Socket at server at DigitalOcean</h1>")
@@ -46,6 +48,13 @@ io.on('connection', (socket) => {
     
     socket.on('chat', (arg) => {
         io.emit('chat', arg);
+    })
+
+    socket.on('playerReady', (username) => {
+        // delete usersReady[socket.id]
+        console.log(usersReady);
+        usersReady[socket.id] = username;
+        io.emit('updatePlayerReady', Object.values(usersReady));
     })
 
 })

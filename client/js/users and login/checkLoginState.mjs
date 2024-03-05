@@ -20,7 +20,7 @@ export default function checkLoginState() {
 
         
         const userNameInput = createElement('input', 'userNameInput', 'userNameInput', '')
-        userNameInput.placeholder = 'Nickname';
+        userNameInput.placeholder = 'Select a nickname';
 
 
         const loginBtn = createElement('button', 'loginBtn', 'loginBtn', 'Login')
