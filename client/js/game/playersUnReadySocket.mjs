@@ -39,14 +39,15 @@ export default function playersUnreadySocket(startGameBtn, gameLobby, joinLobbyB
 	socket.on('playerReady', (usersReady) => {
             console.log(usersReady);
             leaveLobbyBtn.remove()
-            gameLobby.appendChild(joinLobbyBtn)
+            gameLobby.insertBefore(joinLobbyBtn, startGameBtn)
 
 
         if (usersReady.length === 2) {
             // joinLobbyBtn.remove()
-            gameLobby.appendChild(startGameBtn);
+            
+            startGameBtn.removeAttribute('disabled')
         } else {
-            startGameBtn.remove();
+            startGameBtn.setAttribute('disabled', '')
         }
         feedbackMsg(gameLobby, '')
 		playerUnReady(usersReady);

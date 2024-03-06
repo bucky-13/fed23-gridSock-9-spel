@@ -35,22 +35,17 @@ async function playerReady(usersReady) {
 
 export default function playersReadySocket(startGameBtn, gameLobby, joinLobbyBtn, leaveLobbyBtn) {
 	socket.on('updatePlayerReady', (usersReady) => {
-        // if (usersReady.includes(localStorage.getItem('username'))) {
             console.log(usersReady);
             joinLobbyBtn.remove()
-            gameLobby.appendChild(leaveLobbyBtn)
-        // } else {
-        //     leaveLobbyBtn.remove()
-        //     gameLobby.appendChild(joinLobbyBtn)
-        // }
+            gameLobby.insertBefore(leaveLobbyBtn, startGameBtn)
 
-        if (usersReady.length >= 2) {
-            // joinLobbyBtn.remove()
+
+        if (usersReady.length === 2) {
             
-            gameLobby.appendChild(startGameBtn);
+            startGameBtn.removeAttribute('disabled')
             feedbackMsg(gameLobby, 'Lobby is already full')
         } else {
-            startGameBtn.remove();
+            startGameBtn.setAttribute('disabled', '')
         }
 		playerReady(usersReady);
 	});

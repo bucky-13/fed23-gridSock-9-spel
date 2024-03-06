@@ -19,8 +19,8 @@ export default function gameLobbyRender() {
         'startGameBtn',
         'Start game'
     );
-    
-    gameLobby.append(gameLobbyHeader, readyPlayerList, joinLobbyBtn)
+    startGameBtn.setAttribute('disabled', '')
+    gameLobby.append(gameLobbyHeader, readyPlayerList, joinLobbyBtn, startGameBtn)
     gameBoard.appendChild(gameLobby)
     gameSection.appendChild(gameBoard)
 
