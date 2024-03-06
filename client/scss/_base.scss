@@ -42,11 +42,14 @@ body {
 				
 
 				.gameLobby {
+					display: flex;
+					flex-direction: column;
 					height: 70%;
 					width: 50%;
 					background-color: $gameLobby;
 					border-radius: 10px;
 					margin-left: 170px;
+
 				}
 			}
 		}
