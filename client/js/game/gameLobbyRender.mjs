@@ -3,11 +3,11 @@ import createElement from '../../lib/createElement.mjs';
 import playersReadySocket from './playersReadySocket.mjs';
 import socket from '../../lib/socket.mjs';
 import playersUnreadySocket from './playersUnReadySocket.mjs';
+import { feedbackMsg } from '../../lib/validationMessage.mjs';
+
 
 export default function gameLobbyRender() {
-
-
-
+    
 	gameSection.innerText = '';
 	let gameBoard = createElement('section', 'gameBoard', 'gameBoard');
 	let gameLobby = createElement('div', 'gameLobby', 'gameLobby');
@@ -48,12 +48,17 @@ export default function gameLobbyRender() {
 	gameSection.appendChild(gameBoard);
 
     socket.on('updatePlayerReady', (usersReady) => { 
-        if (usersReady.includes(localStorage.getItem('username'))) {
+        
+        let username = localStorage.getItem('username');
+        if (usersReady.includes(username)) {
             joinLobbyBtn.remove();
             gameLobby.appendChild(leaveLobbyBtn);
         }
 
     if (usersReady.length === 2) {
+        console.log('This is', usersReady);
+        startGameBtn.setAttribute('disabled', '')
+
         if (usersReady.includes(localStorage.getItem('username'))) {
             startGameBtn.removeAttribute('disabled')
         } else {
@@ -62,12 +67,12 @@ export default function gameLobbyRender() {
         
         joinLobbyBtn.setAttribute('disabled', '')
     } else {
+        feedbackMsg(gameLobby, '')
         startGameBtn.setAttribute('disabled', '')
         joinLobbyBtn.removeAttribute('disabled')
 
     }
     
-    let username = localStorage.getItem('username');
 
 	let readyPlayerList = document.getElementById('readyPlayerList');
 	readyPlayerList.innerText = '';
