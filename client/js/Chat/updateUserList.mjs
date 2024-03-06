@@ -1,6 +1,7 @@
 
 import socket from '../../lib/socket.mjs';
 import errorMsg from '../../lib/validationMessage.mjs';
+import gameLobbyRender from '../game/gameLobbyRender.mjs';
 
 const loginContainer = document.getElementById('loginContainer')
 
@@ -41,6 +42,7 @@ function updateUserList(users) {
 }
 
 export default function listenForSocketUpdate() {
+
     socket.on('updateUserList', (users) => {
     loggedInUsers = users;
     updateUserList(users);
