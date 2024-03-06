@@ -48,18 +48,20 @@ app.get('/', (req,res) => {
      req.app.locals.con.connect(function (err) {
     if (err) {
       console.log(err);
-    }
+       }
+       
+       // Which board to get, 1-5 exists
+       let id = 3;
 
     // GET all in test collection
-    let sql = `SELECT * FROM test3`;
+    let sql = `SELECT * FROM gameboards WHERE boardId="${id}"`;
 
     req.app.locals.con.query(sql, function (err, result) {
       if (err) {
         console.log(err);
       }
-
+      
       // Converts to normal arrays, use on colors and players
-        let players = result[0].players.split(',')
         let colors = result[0].colors.split(',')
 
         // First conversion of 2 dimensional array into one long array with strings
@@ -87,9 +89,10 @@ app.get('/', (req,res) => {
       }
 
       let currentGameboard = {
-        id: result[0].testId,
+        boardId: result[0].boardId,
         gridColumns: result[0].gridColumns,
-        players: players,
+        name: result[0].name,
+        description: result[0].description,
         colors: colors,
         grid: grid
       };
@@ -102,48 +105,25 @@ app.get('/', (req,res) => {
   });
 })
 
-app.post('/', function (req, res, next) {
-  req.app.locals.con.connect(function (err) {
-    if (err) {
-      console.log(err);
-    }
-      // let sqlQuery = `INSERT INTO test2 (array) VALUES ("${gameboard1.colors}")`;
+// app.post('/', function (req, res, next) {
+//   req.app.locals.con.connect(function (err) {
+//     if (err) {
+//       console.log(err);
+//     }
+//       // let sqlQuery = `INSERT INTO test2 (array) VALUES ("${gameboard1.colors}")`;
 
-      let sqlQuery = `INSERT INTO test3 (gridColumns, players, colors, grid) VALUES ("${gameboard1.gridColumns}", "${gameboard1.players}", "${gameboard1.colors}", "${gameboard1.grid}")`;
+//       let sqlQuery = `INSERT INTO gameboards (gridColumns, name, description, colors, grid) VALUES (${gameboard1.gridColumns}, "${gameboard1.name}", "${gameboard1.description}", "${gameboard1.colors}", "${gameboard1.grid}")`;
 
-    req.app.locals.con.query(sqlQuery, function (err, result) {
-      if (err) {
-        console.log(err);
-        }
-         res.json(result);
-    });
-  });
-});
+//     req.app.locals.con.query(sqlQuery, function (err, result) {
+//       if (err) {
+//         console.log(err);
+//         }
+//          res.json(result);
+//     });
+//   });
+// });
 
-let gameboard1 = {
-    id: 1,
-    gridColumns: 15,
-    players: [1,2,3,4],
-    colors: ['green', 'blue', 'white', 'red'],
-    grid: [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
-        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,],
-        [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
-        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,],
-        [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
-        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,],
-        [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
-        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,],
-        [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-    ]
-}
+// let gameboard1 = {}
 
 // CONNECTION FUNCTION, CALL IMPORTED FUNCTIONS HERE. PASS IN ANY ARRAYS OR OBJECTS THEY NEED TO HANDLE
 const onConnection = (socket) => {
