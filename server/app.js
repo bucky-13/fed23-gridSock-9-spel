@@ -32,6 +32,7 @@ const handleLogin = require('./userConnections/login')
 const handleLogout = require('./userConnections/logout')
 const handleDisconnect = require('./userConnections/disconnect')
 const handleActivity = require('./userConnections/activity')
+const handleActiveUsers = require('./userConnections/activeUsers.js')
 const handleChat = require('./chat/chat')
 const handlePlayerReady = require('./game/playerReady')
 const handlePlayerUnReady = require('./game/playersUnReady.js')
@@ -152,7 +153,8 @@ handleChat(io, socket, users, usersReady);
 handleActivity(io, socket, users, usersReady);
 handleDisconnect(io, socket, users, usersReady);
 handlePlayerReady(io, socket, users, usersReady);
-handlePlayerUnReady(io, socket, users, usersReady);
+  handlePlayerUnReady(io, socket, users, usersReady);
+  handleActiveUsers(io, socket, users, usersReady);
 
 }
 

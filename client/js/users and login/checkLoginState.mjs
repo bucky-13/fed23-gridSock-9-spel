@@ -1,4 +1,5 @@
-import createElement from '../../lib/createElement.mjs';
+import socket from '../../lib/socket.mjs';
+import renderLoginSection from './renderLoginSection';
 import loginUser from './loginUser.mjs';
 
 let chatSection = document.getElementById('chatSection')
@@ -7,30 +8,30 @@ let chatSection = document.getElementById('chatSection')
 export default function checkLoginState() {
     chatSection.innerText = ''
     if (localStorage.getItem('username')) {
-        let userName = localStorage.getItem('username')
-        console.log('hello');
-        loginUser(userName)
+
+            if (localStorage.getItem('username')) {
+        socket.connect();
+        socket.emit('activeUsers', '');
+        socket.on('sendActiveUsers', (activeUsers) => {
+            console.log(activeUsers);
+            let userName = localStorage.getItem('username')
+
+            if (Object.values(activeUsers).includes(userName)) {
+                console.log('user duplicate');
+                localStorage.clear();
+                renderLoginSection();
+                
+            } else {
+                console.log('user available');
+                // let userName = localStorage.getItem('username')
+             console.log('hello');
+            loginUser(userName)
+            }
+        })
+    }
+        
     } else {
 
-        const loginContainer = createElement('section', 'loginContainer', 'loginContainer')
-
-        chatSection.appendChild(loginContainer)
-
-        const loginPageHeader = createElement('h2', 'loginPageHeader', 'loginPageHeader', 'Select a Nickname')
-
-        
-        const userNameInput = createElement('input', 'userNameInput', 'userNameInput', '')
-        userNameInput.placeholder = 'Select a nickname';
-
-
-        const loginBtn = createElement('button', 'loginBtn', 'loginBtn', 'Login')
-
-        loginContainer.append(loginPageHeader, userNameInput, loginBtn)
-
-        loginBtn.addEventListener('click', () => {
-            console.log(userNameInput.value.trim());
-            loginUser(userNameInput.value.trim())
-            loginContainer.remove();
-        })
+        renderLoginSection();
     }
 }

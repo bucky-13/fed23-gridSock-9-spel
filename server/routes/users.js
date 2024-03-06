@@ -26,6 +26,7 @@ router.post('/', (req, res, next) => {
         }
         let userName = req.body.userName;
         let firstSql = `SELECT * FROM users WHERE userName="${userName}"`
+        // THIS CHECK IF USER ALREADY EXISTS, IF YES, SENDS BACK INFORMATION ABOU TUSER
         req.app.locals.con.query(firstSql, function (err, user) {
             if (err) {
                 console.log(err);
@@ -33,6 +34,7 @@ router.post('/', (req, res, next) => {
             if (user[0]) {
                 res.json(user[0])
             } else {
+                // IF USER DOESN'T EXIST, CREATES USER AND SENDS BACK CREATED USER INFORMATION
                 let secondSql = `INSERT INTO users (userName) VALUES ("${userName}")`;
                 req.app.locals.con.query(secondSql, function (err, result) {
                     if (err) {
