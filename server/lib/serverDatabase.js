@@ -2,6 +2,10 @@
 const users = {}; // ett objekt för att lagra användare
 const usersReady = {}
 
+const rooms = {
+    'animals': [],
+    'fruits': [],
+    'random': []
+}
 
-
-module.exports =  {users, usersReady}
+module.exports =  {users, usersReady, rooms}

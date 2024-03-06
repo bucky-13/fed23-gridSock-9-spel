@@ -2,6 +2,7 @@ import createElement from '../../lib/createElement.mjs'
 import logoutUser from './logoutUser.mjs';
 import chatRender from '../Chat/chatRender.mjs';
 import gameLobbyRender from '../game/gameLobbyRender.mjs';
+import renderGameLobbies from '../game/renderGameLobbies.mjs';
 
 let navContainer = document.getElementById('navContainer')
 let chatSection = document.getElementById('chatSection')
@@ -19,4 +20,6 @@ export default function renderLoggedIn() {
 
     gameLobbyRender()
     chatRender(chatSection, chatContainer);
+    renderGameLobbies()
+
 }

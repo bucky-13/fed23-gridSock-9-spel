@@ -34,9 +34,12 @@ const handleDisconnect = require('./userConnections/disconnect')
 const handleActivity = require('./userConnections/activity')
 const handleActiveUsers = require('./userConnections/activeUsers.js')
 const handleChat = require('./chat/chat')
-const handlePlayerReady = require('./game/playerReady')
-const handlePlayerUnReady = require('./game/playersUnReady.js')
-const { users, usersReady } = require('./lib/serverDatabase.js');
+const handlePlayerReady = require('./gameLobby/playerReady.js')
+const handlePlayerUnReady = require('./gameLobby/playersUnReady.js')
+const handleJoinRoom = require('./gameLobby/joinRoom.js')
+const handleLeaveRoom = require('./gameLobby/leaveRoom.js')
+
+const { users, usersReady, rooms } = require('./lib/serverDatabase.js');
 
 app.use(cors());
 app.use(express.json());
@@ -138,6 +141,8 @@ handleActivity(io, socket, users, usersReady);
 handleDisconnect(io, socket, users, usersReady);
 handlePlayerReady(io, socket, users, usersReady);
   handlePlayerUnReady(io, socket, users, usersReady);
+  handleJoinRoom(io, socket, rooms);
+  handleLeaveRoom(io, socket, rooms);
   handleActiveUsers(io, socket, users, usersReady);
 
 }
