@@ -1,11 +1,15 @@
-import createElement from '../../lib/createElement.mjs';
-import socket from '../../lib/socket.mjs';
-import { feedbackMsg } from '../../lib/validationMessage.mjs';
-async function playerReady(usersReady) {
+import socket from "../../lib/socket.mjs";
+import createElement from "../../lib/createElement.mjs";
+import { feedbackMsg } from "../../lib/validationMessage.mjs";
+
+async function playerUnReady(usersReady) {
 	let username = localStorage.getItem('username');
 
-	let readyPlayerList = document.getElementById('readyPlayerList');
+
+
+    let readyPlayerList = document.getElementById('readyPlayerList');
 	readyPlayerList.innerText = '';
+
 
 	usersReady.forEach((userReady) => {
 		console.log(usersReady.length);
@@ -29,25 +33,23 @@ async function playerReady(usersReady) {
 	});
 
 
-
-
 }
 
-export default function playersReadySocket(startGameBtn, gameLobby, joinLobbyBtn, leaveLobbyBtn) {
-	socket.on('updatePlayerReady', (usersReady) => {
+export default function playersUnreadySocket(startGameBtn, gameLobby, joinLobbyBtn, leaveLobbyBtn) {
+	socket.on('playerReady', (usersReady) => {
             console.log(usersReady);
-            joinLobbyBtn.remove()
-            gameLobby.insertBefore(leaveLobbyBtn, startGameBtn)
+            leaveLobbyBtn.remove()
+            gameLobby.insertBefore(joinLobbyBtn, startGameBtn)
 
 
         if (usersReady.length === 2) {
+            // joinLobbyBtn.remove()
             
             startGameBtn.removeAttribute('disabled')
-            feedbackMsg(gameLobby, 'Lobby is already full')
         } else {
             startGameBtn.setAttribute('disabled', '')
         }
-		playerReady(usersReady);
+        feedbackMsg(gameLobby, '')
+		playerUnReady(usersReady);
 	});
 }
-
