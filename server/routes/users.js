@@ -24,9 +24,7 @@ router.post('/', (req, res, next) => {
         if (err) {
             console.log(err);
         }
-
         let userName = req.body.userName;
-
         let firstSql = `SELECT * FROM users WHERE userName="${userName}"`
         req.app.locals.con.query(firstSql, function (err, user) {
             if (err) {
