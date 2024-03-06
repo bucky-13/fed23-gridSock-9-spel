@@ -38,16 +38,17 @@ async function playerUnReady(usersReady) {
 export default function playersUnreadySocket(startGameBtn, gameLobby, joinLobbyBtn, leaveLobbyBtn) {
 	socket.on('playerReady', (usersReady) => {
             console.log(usersReady);
-            leaveLobbyBtn.remove()
-            gameLobby.insertBefore(joinLobbyBtn, startGameBtn)
 
+            if (!usersReady.includes(localStorage.getItem('username'))) {
+                leaveLobbyBtn.remove()
+                gameLobby.appendChild(joinLobbyBtn)
+            }
 
-        if (usersReady.length === 2) {
-            // joinLobbyBtn.remove()
-            
+        if (usersReady.length === 2 && !usersReady.includes(localStorage.getItem('username'))) {
             startGameBtn.removeAttribute('disabled')
         } else {
             startGameBtn.setAttribute('disabled', '')
+            joinLobbyBtn.removeAttribute('disabled')
         }
         feedbackMsg(gameLobby, '')
 		playerUnReady(usersReady);

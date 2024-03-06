@@ -1,6 +1,7 @@
 import createElement from '../../lib/createElement.mjs';
 import socket from '../../lib/socket.mjs';
 import { feedbackMsg } from '../../lib/validationMessage.mjs';
+
 async function playerReady(usersReady) {
 	let username = localStorage.getItem('username');
 
@@ -36,16 +37,22 @@ async function playerReady(usersReady) {
 export default function playersReadySocket(startGameBtn, gameLobby, joinLobbyBtn, leaveLobbyBtn) {
 	socket.on('updatePlayerReady', (usersReady) => {
             console.log(usersReady);
-            joinLobbyBtn.remove()
-            gameLobby.insertBefore(leaveLobbyBtn, startGameBtn)
-
+            if (usersReady.includes(localStorage.getItem('username'))) {
+                joinLobbyBtn.remove();
+                gameLobby.appendChild(leaveLobbyBtn);
+            }
 
         if (usersReady.length === 2) {
+            if (usersReady.includes(localStorage.getItem('username'))) {
+                startGameBtn.removeAttribute('disabled')
+            }
             
-            startGameBtn.removeAttribute('disabled')
-            feedbackMsg(gameLobby, 'Lobby is already full')
+            joinLobbyBtn.setAttribute('disabled', '')
+            feedbackMsg(gameLobby, 'Lobby is full')
         } else {
             startGameBtn.setAttribute('disabled', '')
+            joinLobbyBtn.removeAttribute('disabled')
+
         }
 		playerReady(usersReady);
 	});

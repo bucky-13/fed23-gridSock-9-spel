@@ -13,5 +13,8 @@ module.exports = (io, socket, users, usersReady) => {
         //     console.log('Player not in lobby');
         // }
         io.emit('playerReady', Object.values(usersReady));
+
+        io.emit('updatePlayerList', Object.values(usersReady));
+
     });
 };
