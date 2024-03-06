@@ -1,7 +1,9 @@
 const { read } = require('fs');
 
-const app = require('express')();
+let app = require('express')();
+let express = require('express')
 const server = require('http').createServer(app);
+var cookieParser = require('cookie-parser');
 const cors = require('cors');
 const io = require('socket.io')(server, {
     cors: {
@@ -9,6 +11,9 @@ const io = require('socket.io')(server, {
         methods: ['GET', 'POST']
     }
 });
+
+// IMPORT OF ROUTERS
+let usersRouter = require('./routes/users.js')
 
 // SETUP FOR DATABASE CONFIGS
 require('dotenv').config();
@@ -33,6 +38,9 @@ const handlePlayerUnReady = require('./game/playersUnReady.js')
 const { users, usersReady } = require('./lib/serverDatabase.js');
 
 app.use(cors());
+app.use(express.json());
+app.use(cookieParser());
+app.use('/users', usersRouter)
 
 // gets a response from digital ocean with a test database
 app.get('/', (req,res) => {
