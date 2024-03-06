@@ -35,7 +35,6 @@ app.use(cors());
 
 // gets a response from digital ocean with a test database
 app.get('/', (req,res) => {
-    // res.send("<h1>Socket at server at DigitalOcean</h1>")
      req.app.locals.con.connect(function (err) {
     if (err) {
       console.log(err);
