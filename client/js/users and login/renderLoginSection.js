@@ -19,8 +19,8 @@ export default function renderLoginSection() {
 
         loginBtn.addEventListener('click', () => {
             console.log(userNameInput.value.trim());
-            loginUser(userNameInput.value.trim())
-            loginContainer.remove();
+            loginUser(userNameInput.value.trim(), loginContainer)
+            
         })
 
     

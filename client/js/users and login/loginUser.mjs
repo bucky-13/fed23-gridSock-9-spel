@@ -2,7 +2,7 @@ import errorMsg from '../../lib/validationMessage.mjs';
 import socket from '../../lib/socket.mjs';
 import renderLoggedIn from './renderLoggedIn.mjs';
 
-export default function loginUser(userNameInput) {
+export default function loginUser(userNameInput, loginContainer) {
 
     const inputUsername = userNameInput;
     if (inputUsername != '') {
@@ -22,11 +22,13 @@ export default function loginUser(userNameInput) {
             localStorage.setItem('username', inputUsername);
             let username = inputUsername;
             socket.emit('login', username);
-          
+            if (loginContainer) {
+                loginContainer.remove();
+            }
             renderLoggedIn();
         }
           })
     } else {
-        errorMsg(loginContainer, 'Please input a username to continue')
+        errorMsg(loginContainer, 'Please input a nickname to continue')
     }
 }
