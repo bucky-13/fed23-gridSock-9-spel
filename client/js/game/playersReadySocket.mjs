@@ -7,7 +7,8 @@ async function playerReady(usersReady) {
 
 	let readyPlayerList = document.getElementById('readyPlayerList');
 	readyPlayerList.innerText = '';
-
+    let playersInLobby = createElement('p', 'playersInLobby', 'playersInLobby', `Players in lobby - ${usersReady.length}/4`)
+    readyPlayerList.appendChild(playersInLobby)
 	usersReady.forEach((userReady) => {
 		console.log(usersReady.length);
 		let readyPlayerLi = '';
@@ -36,7 +37,6 @@ async function playerReady(usersReady) {
 
 export default function playersReadySocket(startGameBtn, gameLobby, joinLobbyBtn, leaveLobbyBtn) {
 	socket.on('updatePlayerReady', (usersReady) => {
-            console.log(usersReady);
             if (usersReady.includes(localStorage.getItem('username'))) {
                 joinLobbyBtn.remove();
                 gameLobby.appendChild(leaveLobbyBtn);
@@ -45,15 +45,17 @@ export default function playersReadySocket(startGameBtn, gameLobby, joinLobbyBtn
         if (usersReady.length === 2) {
             if (usersReady.includes(localStorage.getItem('username'))) {
                 startGameBtn.removeAttribute('disabled')
+            } else {
+                feedbackMsg(gameLobby, 'Lobby is full')
             }
             
             joinLobbyBtn.setAttribute('disabled', '')
-            feedbackMsg(gameLobby, 'Lobby is full')
         } else {
             startGameBtn.setAttribute('disabled', '')
             joinLobbyBtn.removeAttribute('disabled')
 
         }
+        
 		playerReady(usersReady);
 	});
 }

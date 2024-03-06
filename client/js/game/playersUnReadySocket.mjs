@@ -9,7 +9,8 @@ async function playerUnReady(usersReady) {
 
     let readyPlayerList = document.getElementById('readyPlayerList');
 	readyPlayerList.innerText = '';
-
+    let playersInLobby = createElement('p', 'playersInLobby', 'playersInLobby', `Players in lobby - ${usersReady.length}/4`)
+    readyPlayerList.appendChild(playersInLobby)
 
 	usersReady.forEach((userReady) => {
 		console.log(usersReady.length);

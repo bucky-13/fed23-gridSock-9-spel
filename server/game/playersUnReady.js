@@ -14,7 +14,5 @@ module.exports = (io, socket, users, usersReady) => {
         // }
         io.emit('playerReady', Object.values(usersReady));
 
-        io.emit('updatePlayerList', Object.values(usersReady));
-
     });
 };

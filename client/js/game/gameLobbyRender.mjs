@@ -4,7 +4,7 @@ import playersReadySocket from "./playersReadySocket.mjs"
 import socket from "../../lib/socket.mjs"
 import playersUnreadySocket from "./playersUnReadySocket.mjs"
 
-export default function gameLobbyRender(usersReady) {
+export default function gameLobbyRender() {
     gameSection.innerText = ''
     let gameBoard = createElement('section', 'gameBoard', 'gameBoard')
     let gameLobby = createElement('div', 'gameLobby', 'gameLobby')
@@ -20,7 +20,8 @@ export default function gameLobbyRender(usersReady) {
         'Start game'
     );
     startGameBtn.setAttribute('disabled', '')
-    gameLobby.append(gameLobbyHeader, readyPlayerList, startGameBtn, joinLobbyBtn)
+    gameBoard.appendChild(gameLobbyHeader)
+    gameLobby.append(readyPlayerList, startGameBtn, joinLobbyBtn)
     gameBoard.appendChild(gameLobby)
     gameSection.appendChild(gameBoard)
 
@@ -36,6 +37,5 @@ export default function gameLobbyRender(usersReady) {
         
         })
 
-    socket.emit('updatePlayerList', Object.values(usersReady));
-
+        
 }
