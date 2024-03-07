@@ -13,8 +13,10 @@ export default function logoutUser(userStatusSection, chatContainer) {
     userStatusSection.remove();
     // chatContainer.remove();
 
+    console.log(localStorage.getItem('username'));
     socket.emit('logout', localStorage.getItem('username'));
     socket.off('chat');
+    socket.off('login')
 
     localStorage.clear();
     socket.disconnect();

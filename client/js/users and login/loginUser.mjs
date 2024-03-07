@@ -5,7 +5,6 @@ import renderLoggedIn from './renderLoggedIn.mjs';
 export default function loginUser(userNameInput, loginContainer) {
 
     const inputUsername = userNameInput;
-    if (inputUsername != '') {
 
     let user = {userName: userNameInput}
         // console.log('fetching...');
@@ -28,7 +27,5 @@ export default function loginUser(userNameInput, loginContainer) {
             renderLoggedIn();
         }
           })
-    } else {
-        errorMsg(loginContainer, 'Please input a nickname to continue')
-    }
+    
 }

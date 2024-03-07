@@ -10,10 +10,10 @@ export default function checkLoginState() {
     chatSection.innerText = ''
     if (localStorage.getItem('username')) {
 
-            if (localStorage.getItem('username')) {
+        if (localStorage.getItem('username')) {
         socket.connect();
         socket.emit('activeUsers', 'checkLoginState');
-        socket.on('checkLoginState', (activeUsers) => {
+        socket.once('checkLoginState', (activeUsers) => {
             console.log(activeUsers);
             let userName = localStorage.getItem('username')
 
@@ -21,7 +21,7 @@ export default function checkLoginState() {
                 console.log('user duplicate');
                 localStorage.clear();
                 renderLoginSection();
-                
+                // socket.disconnect();
             } else {
                 console.log('user available');
                 // let userName = localStorage.getItem('username')
@@ -29,6 +29,7 @@ export default function checkLoginState() {
             loginUser(userName)
             }
         })
+            
         // socket.off('sendActiveUsers')
     }
         
