@@ -8,7 +8,7 @@ export default function loginUser(userNameInput, loginContainer) {
     if (inputUsername != '') {
 
     let user = {userName: userNameInput}
-        console.log('fetching...');
+        // console.log('fetching...');
     fetch('http://localhost:3001/users', {
     method: 'POST',
     headers: {
@@ -16,7 +16,7 @@ export default function loginUser(userNameInput, loginContainer) {
     },
     body: JSON.stringify(user),})
         .then((res) => res.json()).then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.userName) {
             socket.connect();
             localStorage.setItem('username', inputUsername);

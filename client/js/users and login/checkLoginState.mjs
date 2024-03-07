@@ -12,7 +12,7 @@ export default function checkLoginState() {
             if (localStorage.getItem('username')) {
         socket.connect();
         socket.emit('activeUsers', '');
-        socket.on('sendActiveUsers', (activeUsers) => {
+        socket.once('sendActiveUsers', (activeUsers) => {
             console.log(activeUsers);
             let userName = localStorage.getItem('username')
 
@@ -28,6 +28,7 @@ export default function checkLoginState() {
             loginUser(userName)
             }
         })
+        // socket.off('sendActiveUsers')
     }
         
     } else {
