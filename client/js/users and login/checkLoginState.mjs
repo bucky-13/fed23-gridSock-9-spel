@@ -4,9 +4,7 @@ import loginUser from './loginUser.mjs';
 
 let chatSection = document.getElementById('chatSection')
 
-
 export default function checkLoginState() {
-    console.log('checkLoginState');
     chatSection.innerText = ''
     if (localStorage.getItem('username')) {
 
@@ -14,27 +12,18 @@ export default function checkLoginState() {
         socket.connect();
         socket.emit('activeUsers', 'checkLoginState');
         socket.once('checkLoginState', (activeUsers) => {
-            console.log(activeUsers);
             let userName = localStorage.getItem('username')
 
             if (Object.values(activeUsers).includes(userName)) {
-                console.log('user duplicate');
                 localStorage.clear();
                 renderLoginSection();
                 // socket.disconnect();
             } else {
-                console.log('user available');
-                // let userName = localStorage.getItem('username')
-             console.log('hello');
-            loginUser(userName)
-            }
-        })
-            
-        // socket.off('sendActiveUsers')
-    }
-        
+                loginUser(userName)
+                }
+             })
+        } 
     } else {
-
         renderLoginSection();
     }
 }
