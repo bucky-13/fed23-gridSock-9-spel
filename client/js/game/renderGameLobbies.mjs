@@ -3,64 +3,41 @@ import createElement from "../../lib/createElement.mjs";
 import socket from "../../lib/socket.mjs";
 import joinRoom from "./joinRoom.mjs";
 
-const rooms = ['animals', 'fruits', 'random'];
-
 let gameSection = document.getElementById('gameSection');
 
 export default function renderGameLobbies() {
-    let gameLobbyContainer = createElement('section', 'gameLobbyContainer', 'gameLobbyContainer', '')
-    gameSection.appendChild(gameLobbyContainer)
-    rooms.forEach(room => {
-        const roomArticleHeader = createElement('h3', `${room}`, 'roomArticleHeader', `${room}`)
-        const roomArticle = createElement('article', `${room}`, 'roomArticle')
+    gameSection.innerText= ''
 
-        const joinRoomBtn = createElement('button', `${room}`, 'joinRoomBtn', `Join ${room}`)
-        const leaveRoomBtn = createElement('button', `${room}`, 'leaveRoomBtn', `Leave ${room}`)
+    let gameLobbyContainer = createElement('section', 'gameLobbyContainer', 'gameLobbyContainer', '');
+    gameSection.appendChild(gameLobbyContainer);
 
-        roomArticle.append(roomArticleHeader, joinRoomBtn)
+    socket.emit('getRooms');
 
-        gameLobbyContainer.appendChild(roomArticle);
+    socket.on('printRooms', (rooms) => {
+        console.log(rooms);
 
-        joinRoomBtn.addEventListener('click', () => joinRoom(room, leaveRoomBtn));
+        gameLobbyContainer.innerText = '';
 
-        leaveRoomBtn.addEventListener('click', () => userLeavesRoom(room, gameLobbyContainer
-        ));
+        Object.keys(rooms).forEach(room => {
+            const roomArticleHeader = createElement('h3', `${room}`, 'roomArticleHeader', `${room} - (${rooms[room].length}/4 in lobby)`);
+            const roomArticle = createElement('article', `${room}`, 'roomArticle');
 
-        socket.on('updateRooms', (updatedRooms) => {
-            let username = localStorage.getItem('username')
+            const joinRoomBtn = createElement('button', `${room}`, 'joinRoomBtn', `Join ${room}`);
+            const leaveRoomBtn = createElement('button', `${room}`, 'leaveRoomBtn', `Leave ${room}`);
 
-            console.log(updatedRooms);
-            const currentRoom = updatedRooms[room];  
+            roomArticle.append(roomArticleHeader, joinRoomBtn);
+            gameLobbyContainer.appendChild(roomArticle);
 
-            // if (currentRoom.includes(username)) {
-            //     joinRoomBtn.remove();
-            //     roomArticle.appendChild(leaveRoomBtn);
-            // } else {
-            //     leaveRoomBtn.remove();
-            //     roomArticle.appendChild(joinRoomBtn);
-            // }
-
-            if (Object.keys(room) === 2) {
-                if (currentRoom.includes(localStorage.getItem('username'))) {
-                    console.log('Users in room: ', currentRoom);
-                    console.log('Users room full');
-                } else {
-                    feedbackMsg(gameLobbyContainer, 'Lobby is full');
-                }
-
-                joinRoomBtn.setAttribute('disabled', '');
-            } else {
-                // startGameBtn.setAttribute('disabled', '')
-                joinRoomBtn.removeAttribute('disabled');
-            }
+            joinRoomBtn.addEventListener('click', () => joinRoom(room, leaveRoomBtn));
+            leaveRoomBtn.addEventListener('click', () => userLeavesRoom(room));
         });
     });
 }
 
-function userLeavesRoom(room, gameLobbyContainer) {
-    gameLobbyContainer.innerText = ''
+function userLeavesRoom(room) {
     let username = localStorage.getItem('username')
     let roomId = room; 
     socket.emit('leaveRoom', { username, roomId });
+
     renderGameLobbies()
 }

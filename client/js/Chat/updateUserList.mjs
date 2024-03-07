@@ -1,7 +1,7 @@
 
 import socket from '../../lib/socket.mjs';
 import errorMsg from '../../lib/validationMessage.mjs';
-import gameLobbyRender from '../game/gameLobbyRender.mjs';
+// import gameLobbyRender from '../game/gameLobbyRender.mjs';
 
 const loginContainer = document.getElementById('loginContainer')
 

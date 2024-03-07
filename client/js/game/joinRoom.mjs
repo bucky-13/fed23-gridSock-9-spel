@@ -4,6 +4,11 @@ import socket from "../../lib/socket.mjs";
 export default function joinRoom(room, leaveRoomBtn) {
     let username = localStorage.getItem('username');
     let roomId = room;  
+
+    const updateRooms = (room) => {
+        console.log('Updating rooms:', room);
+    };
+
     socket.emit('joinRoom', { username, roomId });
 
     gameSection.innerText = '';
@@ -20,43 +25,43 @@ export default function joinRoom(room, leaveRoomBtn) {
     gameBoard.appendChild(gameLobby);
     gameSection.appendChild(gameBoard);
 
-    socket.on('updateRooms', (room) => { 
-    console.log('rummet', room);
-    console.log('längd', Object.keys(room).length);
-    // let username = localStorage.getItem('username');
-    // if (Object.keys(room).includes(username)) {
+    socket.on('updateRooms', (updatedRoom) => {
+        updateRooms(updatedRoom);
+
+        console.log('rummet', updatedRoom);
+        console.log('längd', Object.keys(updatedRoom).length);
+
         gameLobby.appendChild(leaveRoomBtn);
-    // }
 
-    if (Object.keys(room).length === 2) {
-        console.log('This is', room);
-        startGameBtn.setAttribute('disabled', '');
+        if (updatedRoom.length === 2) {
+            console.log('This is', updatedRoom);
+            startGameBtn.setAttribute('disabled', '');
 
-        // if (room.includes(localStorage.getItem('username'))) {
-        startGameBtn.removeAttribute('disabled');
-        // } else {
-        //     feedbackMsg(gameLobby, 'Lobby is full')
-        // }
-
-    } else {
-        // feedbackMsg(gameLobby, '')
-        startGameBtn.setAttribute('disabled', '');
-    }
-
-    // let playersList = document.getElementById('playersList');
-    playersList.innerText = '';
-    let playersInLobby = createElement('p', 'playersInLobby', 'playersInLobby', `Players in lobby - ${Object.keys(room).length}/4`);
-    playersList.appendChild(playersInLobby);
-
-      room.forEach((user) => { 
-        console.log(room.length);
-        let readyPlayerLi = '';
-        if (user === username) {
-            readyPlayerLi = createElement('li', `playerReady${username}`, 'readyPlayerLi', `${username} (you)`);
+            if (updatedRoom.includes(localStorage.getItem('username'))) {
+                startGameBtn.removeAttribute('disabled');
+            } else {
+                feedbackMsg(gameLobby, 'Lobby is full');
+            }
         } else {
-            readyPlayerLi = createElement('li', 'readyPlayerLi', 'readyPlayerLi', `${user}`);
+            startGameBtn.setAttribute('disabled', '');
         }
-        playersList.appendChild(readyPlayerLi);
+
+        playersList.innerText = '';
+        let playersInLobby = createElement('p', 'playersInLobby', 'playersInLobby', `Players in lobby - ${Object.keys(updatedRoom).length}/4`);
+        playersList.appendChild(playersInLobby);
+
+        let readyPlayerLi = '';
+        Object.keys(updatedRoom).forEach((user) => {
+            console.log(user);
+            console.log(updatedRoom);
+            console.log(updatedRoom[user]);
+            if (updatedRoom[user] === username) {
+                console.log('det här är rum test', updatedRoom);
+                readyPlayerLi = createElement('li', `playerReady${username}`, 'readyPlayerLi', `${updatedRoom[user]} (you)`);
+            } else {
+                readyPlayerLi = createElement('li', 'readyPlayerLi', 'readyPlayerLi', `${updatedRoom[user]}`);
+            }
+            playersList.appendChild(readyPlayerLi);
+        });
     });
-    })
 }

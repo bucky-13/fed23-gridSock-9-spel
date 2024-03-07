@@ -1,7 +1,7 @@
 import createElement from '../../lib/createElement.mjs'
 import logoutUser from './logoutUser.mjs';
 import chatRender from '../Chat/chatRender.mjs';
-import gameLobbyRender from '../game/gameLobbyRender.mjs';
+// import gameLobbyRender from '../game/gameLobbyRender.mjs';
 import renderGameLobbies from '../game/renderGameLobbies.mjs';
 
 let navContainer = document.getElementById('navContainer')
@@ -18,7 +18,7 @@ export default function renderLoggedIn() {
     userStatusSection.append(welcomeHeader, logOutBtn);
     logOutBtn.addEventListener('click', () => logoutUser(userStatusSection, chatContainer));
 
-    gameLobbyRender()
+    // gameLobbyRender()
     chatRender(chatSection, chatContainer);
     renderGameLobbies()
 

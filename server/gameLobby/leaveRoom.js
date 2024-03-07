@@ -1,8 +1,9 @@
-module.exports = (io, socket, rooms) => { 
+module.exports = (io, socket, users, rooms) => { 
 
     socket.on('leaveRoom', ({username, roomId}) => {
 
         if (rooms[roomId].includes(username)) { 
+            users[socket.id] = username;
             rooms[roomId] = rooms[roomId].filter(user => user !== username); 
             socket.leave(roomId);
             console.log(`${username} has left room ${roomId}`);
@@ -16,4 +17,5 @@ module.exports = (io, socket, rooms) => {
         console.log(rooms[roomId]);
     
     });
+
 };

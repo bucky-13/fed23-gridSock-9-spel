@@ -26,12 +26,24 @@ body {
 	.mainContainer {
 
 		.gameSection {
-			// margin-top: 30px;
-			// width: 100vw;
-			// height: 50vh;
-			// // background-color: $gameSection;
-			// border: 2px solid $borderColor;
 
+			.gameLobbyContainer {
+				display: flex;
+				justify-content: space-around;
+				width: 100%;
+				background-color: $gameLobby;
+
+				.roomArticle {
+					display: flex;
+					flex-direction: column;
+						.joinRoomBtn {
+							border-radius: 10px;
+							border: none;
+							margin: 10px;
+						}
+					
+				}
+			}
 
 			.gameBoard {
 				margin-top: 30px;

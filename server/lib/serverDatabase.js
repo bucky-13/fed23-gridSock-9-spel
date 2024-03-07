@@ -8,4 +8,4 @@ const rooms = {
     'random': []
 }
 
-module.exports =  {users, usersReady, rooms}
+module.exports =  {users, rooms}
