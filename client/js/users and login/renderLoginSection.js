@@ -1,5 +1,6 @@
 import createElement from '../../lib/createElement.mjs';
 import loginUser from './loginUser.mjs';
+import validateLogin from './validateLogin.mjs';
 
 export default function renderLoginSection() {
         const loginContainer = createElement('section', 'loginContainer', 'loginContainer')
@@ -18,7 +19,8 @@ export default function renderLoginSection() {
         loginContainer.append(loginPageHeader, userNameInput, loginBtn)
 
         loginBtn.addEventListener('click', () => {
-            console.log(userNameInput.value.trim());
+            // console.log(userNameInput.value.trim());
+            validateLogin(userNameInput.value.trim())
             loginUser(userNameInput.value.trim(), loginContainer)
             
         })

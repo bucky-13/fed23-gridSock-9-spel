@@ -12,8 +12,8 @@ let loggedInUsers = [];
 
 function updateUserList(users) {
      let username = localStorage.getItem('username');
-    console.log('updateUserList in function');
-    console.log(users);
+    // console.log('updateUserList in function');
+    // console.log(users);
     let userList = document.getElementById('userList');
 
         // Update list of logged in users
