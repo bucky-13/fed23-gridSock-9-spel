@@ -1,15 +1,19 @@
 import createElement from "../../lib/createElement.mjs";
 import socket from "../../lib/socket.mjs";
 
-export default function joinRoom(room, leaveRoomBtn) {
+export default function joinRoom(room, leaveRoomBtn, roomArticleHeader) {
     let username = localStorage.getItem('username');
-    let roomId = room;  
 
     const updateRooms = (room) => {
-        console.log('Updating rooms:', room);
+        Object.keys(room).forEach(room => {
+            const roomArticleHeader = document.getElementById(`${room}`);
+            if (roomArticleHeader) {
+                roomArticleHeader.innerText = `${room} - (${room.length}/4 in lobby)`;
+            }
+        });
     };
 
-    socket.emit('joinRoom', { username, roomId });
+    socket.emit('joinRoom', { username, roomId: room });
 
     gameSection.innerText = '';
     let gameBoard = createElement('section', 'gameBoard', 'gameBoard');
@@ -28,10 +32,14 @@ export default function joinRoom(room, leaveRoomBtn) {
     socket.on('updateRooms', (updatedRoom) => {
         updateRooms(updatedRoom);
 
+
+    
+
         console.log('rummet', updatedRoom);
         console.log('längd', Object.keys(updatedRoom).length);
 
         gameLobby.appendChild(leaveRoomBtn);
+        roomArticleHeader.innerText =  `stan - (${room.length}/4 in lobby)`
 
         if (updatedRoom.length === 2) {
             console.log('This is', updatedRoom);

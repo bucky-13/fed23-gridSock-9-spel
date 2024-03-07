@@ -28,8 +28,23 @@ export default function renderGameLobbies() {
             roomArticle.append(roomArticleHeader, joinRoomBtn);
             gameLobbyContainer.appendChild(roomArticle);
 
-            joinRoomBtn.addEventListener('click', () => joinRoom(room, leaveRoomBtn));
+            joinRoomBtn.addEventListener('click', () => {
+                joinRoom(room, leaveRoomBtn, roomArticleHeader);
+             
+            });
             leaveRoomBtn.addEventListener('click', () => userLeavesRoom(room));
+
+            
+        });
+    });
+
+    socket.on('updateRooms', (updatedRooms) => {
+        // Loop through updatedRooms and update the header for each room
+        Object.keys(updatedRooms).forEach(room => {
+            const roomArticleHeader = document.getElementById(`${room}`);
+            if (roomArticleHeader) {
+                roomArticleHeader.innerText = `${room} - (${updatedRooms[room].length}/4 in lobby)`;
+            }
         });
     });
 }
