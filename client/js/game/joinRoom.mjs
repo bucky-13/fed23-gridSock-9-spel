@@ -30,16 +30,16 @@ export default function joinRoom(room, leaveRoomBtn, roomArticleHeader) {
     gameSection.appendChild(gameBoard);
 
     socket.on('updateRooms', (updatedRoom) => {
-        updateRooms(updatedRoom);
-
-
-    
+        const roomArticleHeader = document.getElementById(`${room}roomArticleHeader`);
+        if (roomArticleHeader) {
+            roomArticleHeader.innerText = `${room} - (${updatedRoom[room].length}/4 in lobby)`;
+        }
 
         console.log('rummet', updatedRoom);
         console.log('längd', Object.keys(updatedRoom).length);
 
         gameLobby.appendChild(leaveRoomBtn);
-        roomArticleHeader.innerText =  `stan - (${room.length}/4 in lobby)`
+        // roomArticleHeader.innerText =  `stan - (${room.length}/4 in lobby)`
 
         if (updatedRoom.length === 2) {
             console.log('This is', updatedRoom);
@@ -72,4 +72,7 @@ export default function joinRoom(room, leaveRoomBtn, roomArticleHeader) {
             playersList.appendChild(readyPlayerLi);
         });
     });
+
+    socket.emit('getRooms');
+
 }

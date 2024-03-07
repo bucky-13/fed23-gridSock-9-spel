@@ -19,18 +19,19 @@ export default function renderGameLobbies() {
         gameLobbyContainer.innerText = '';
 
         Object.keys(rooms).forEach(room => {
-            const roomArticleHeader = createElement('h3', `${room}`, 'roomArticleHeader', `${room} - (${rooms[room].length}/4 in lobby)`);
+            const roomArticleHeader = createElement('h3', `${room}roomArticleHeader`, 'roomArticleHeader', `${room} - (${rooms[room].length}/4 in lobby)`);
             const roomArticle = createElement('article', `${room}`, 'roomArticle');
 
             const joinRoomBtn = createElement('button', `${room}`, 'joinRoomBtn', `Join ${room}`);
-            const leaveRoomBtn = createElement('button', `${room}`, 'leaveRoomBtn', `Leave ${room}`);
+            const leaveRoomBtn = createElement('button', `leaveRoomBtn${room}`, 'leaveRoomBtn', `Leave ${room}`);
 
             roomArticle.append(roomArticleHeader, joinRoomBtn);
             gameLobbyContainer.appendChild(roomArticle);
 
             joinRoomBtn.addEventListener('click', () => {
+                roomArticleHeader.innerText =  `stan - (${room.length}/4 in lobby)`
                 joinRoom(room, leaveRoomBtn, roomArticleHeader);
-             
+
             });
             leaveRoomBtn.addEventListener('click', () => userLeavesRoom(room));
 
@@ -38,21 +39,21 @@ export default function renderGameLobbies() {
         });
     });
 
-    socket.on('updateRooms', (updatedRooms) => {
-        // Loop through updatedRooms and update the header for each room
-        Object.keys(updatedRooms).forEach(room => {
-            const roomArticleHeader = document.getElementById(`${room}`);
-            if (roomArticleHeader) {
-                roomArticleHeader.innerText = `${room} - (${updatedRooms[room].length}/4 in lobby)`;
-            }
-        });
-    });
+    // socket.on('updateRooms', (updatedRooms) => {
+    //     Object.keys(updatedRooms).forEach(room => {
+    //         const roomArticleHeader = document.getElementById(`${room}roomArticleHeader`);
+    //         if (roomArticleHeader) {
+    //             roomArticleHeader.innerText = `${room} - (${updatedRooms[room].length}/4 in lobby)`;
+    //         }
+    //     });
+    // });
 }
 
 function userLeavesRoom(room) {
     let username = localStorage.getItem('username')
     let roomId = room; 
     socket.emit('leaveRoom', { username, roomId });
+    socket.emit('getRooms');
 
     renderGameLobbies()
 }
