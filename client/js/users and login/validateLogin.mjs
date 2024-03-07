@@ -11,8 +11,9 @@ export default function validateLogin(userName, loginContainer) {
     } else {
         console.log('else');
         socket.connect();
+        console.log('socket connected1');
         socket.emit('activeUsers', 'validateLogin');
-        socket.on('validateLogin', (activeUsers) => {
+        socket.once('validateLogin', (activeUsers) => {
             console.log('socket');
             console.log(activeUsers);
 
