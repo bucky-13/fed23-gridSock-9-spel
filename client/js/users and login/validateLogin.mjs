@@ -3,26 +3,19 @@ import socket from '../../lib/socket.mjs';
 import loginUser from './loginUser.mjs';
 
 export default function validateLogin(userName, loginContainer) {
-
-    console.log(userName);
-
+    // VALIDATION FOR TEXT FIELD, IF EMPTY ERROR MSG IS SHOWN
     if (userName == '') {
         errorMsg(loginContainer, 'Please input a nickname to continue')
     } else {
-        console.log('else');
         socket.connect();
-        console.log('socket connected1');
         socket.emit('activeUsers', 'validateLogin');
         socket.once('validateLogin', (activeUsers) => {
-            console.log('socket');
-            console.log(activeUsers);
-
+            
+            // SECOND VALIDATION CHECK, IF USERNAME IS ALREADY LOGGED IN FROM SOMEWHERE ELSE, ERROR MSG IS SHOWN
             if (Object.values(activeUsers).includes(userName)) {
-                console.log('wrong user name');
                 errorMsg(loginContainer, 'Nickname already in use, please enter a different nickname to continue')
                 return
             } else {
-                console.log('login');
                 loginUser(userName, loginContainer)
                 return
              }

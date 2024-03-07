@@ -1,5 +1,4 @@
 import createElement from '../../lib/createElement.mjs';
-
 import validateLogin from './validateLogin.mjs';
 
 export default function renderLoginSection() {
