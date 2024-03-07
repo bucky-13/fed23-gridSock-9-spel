@@ -17,7 +17,6 @@ export default function checkLoginState() {
             if (Object.values(activeUsers).includes(userName)) {
                 localStorage.clear();
                 renderLoginSection();
-                // socket.disconnect();
             } else {
                 loginUser(userName)
                 }
