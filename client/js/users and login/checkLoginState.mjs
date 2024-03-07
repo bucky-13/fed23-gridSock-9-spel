@@ -6,13 +6,14 @@ let chatSection = document.getElementById('chatSection')
 
 
 export default function checkLoginState() {
+    console.log('checkLoginState');
     chatSection.innerText = ''
     if (localStorage.getItem('username')) {
 
             if (localStorage.getItem('username')) {
         socket.connect();
-        socket.emit('activeUsers', '');
-        socket.once('sendActiveUsers', (activeUsers) => {
+        socket.emit('activeUsers', 'checkLoginState');
+        socket.on('checkLoginState', (activeUsers) => {
             console.log(activeUsers);
             let userName = localStorage.getItem('username')
 

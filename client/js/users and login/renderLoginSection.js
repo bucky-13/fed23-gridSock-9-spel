@@ -1,5 +1,5 @@
 import createElement from '../../lib/createElement.mjs';
-import loginUser from './loginUser.mjs';
+
 import validateLogin from './validateLogin.mjs';
 
 export default function renderLoginSection() {
@@ -20,8 +20,8 @@ export default function renderLoginSection() {
 
         loginBtn.addEventListener('click', () => {
             // console.log(userNameInput.value.trim());
-            validateLogin(userNameInput.value.trim())
-            loginUser(userNameInput.value.trim(), loginContainer)
+            validateLogin(userNameInput.value.trim(), loginContainer)
+            
             
         })
 
