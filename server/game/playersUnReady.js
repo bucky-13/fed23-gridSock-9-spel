@@ -12,7 +12,7 @@ module.exports = (io, socket, users, usersReady) => {
         // } else {
         //     console.log('Player not in lobby');
         // }
-        io.emit('playerReady', Object.values(usersReady));
+        io.emit('updatePlayerReady', Object.values(usersReady));
 
     });
 };
