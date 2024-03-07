@@ -14,6 +14,7 @@ const io = require('socket.io')(server, {
 
 // IMPORT OF ROUTERS
 let usersRouter = require('./routes/users.js')
+let gameRouter = require('./routes/game.js')
 
 // SETUP FOR DATABASE CONFIGS
 require('dotenv').config();
@@ -41,20 +42,22 @@ const { users, usersReady } = require('./lib/serverDatabase.js');
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.use('/users', usersRouter)
+app.use('/users', usersRouter);
+app.use('/randomGame', gameRouter);
 
 // gets a response from digital ocean with a test database
-app.get('/', (req,res) => {
+/*
+app.get('/randomGame', (req,res) => {
      req.app.locals.con.connect(function (err) {
     if (err) {
       console.log(err);
        }
        
        // Which board to get, 1-5 exists
-       let id = 3;
+        let id = 3;
 
     // GET all in test collection
-    let sql = `SELECT * FROM gameboards WHERE boardId="${id}"`;
+      let sql = `SELECT * FROM gameboards WHERE boardId = ${id}`;
 
     req.app.locals.con.query(sql, function (err, result) {
       if (err) {
@@ -105,7 +108,7 @@ app.get('/', (req,res) => {
   });
 })
 
-
+*/
 // SOCKET ROOMS
 
 
