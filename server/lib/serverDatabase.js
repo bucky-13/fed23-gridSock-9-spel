@@ -2,4 +2,6 @@
 const users = {}; // ett objekt för att lagra användare
 const usersReady = {}
 
+
+
 module.exports =  {users, usersReady}

@@ -37,7 +37,7 @@ async function playerUnReady(usersReady) {
 }
 
 export default function playersUnreadySocket(startGameBtn, gameLobby, joinLobbyBtn, leaveLobbyBtn) {
-	socket.on('playerReady', (usersReady) => {
+	socket.on('updatePlayerReady', (usersReady) => {
             console.log(usersReady);
 
             if (!usersReady.includes(localStorage.getItem('username'))) {

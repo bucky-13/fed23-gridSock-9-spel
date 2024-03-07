@@ -105,6 +105,10 @@ app.get('/', (req,res) => {
   });
 })
 
+
+// SOCKET ROOMS
+
+
 // app.post('/', function (req, res, next) {
 //   req.app.locals.con.connect(function (err) {
 //     if (err) {
