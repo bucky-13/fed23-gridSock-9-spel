@@ -14,7 +14,6 @@ export default function renderGameLobbies() {
     socket.emit('getRooms');
 
     socket.on('printRooms', (rooms) => {
-        console.log(rooms);
 
         gameLobbyContainer.innerText = '';
 
@@ -25,12 +24,25 @@ export default function renderGameLobbies() {
             const joinRoomBtn = createElement('button', `${room}`, 'joinRoomBtn', `Join ${room}`);
             const leaveRoomBtn = createElement('button', `leaveRoomBtn${room}`, 'leaveRoomBtn', `Leave ${room}`);
 
+            if (rooms[room].length >= 2) {
+                joinRoomBtn.setAttribute('disabled', '')
+                joinRoomBtn.innerText = 'Lobby is full'
+            }
+
+
             roomArticle.append(roomArticleHeader, joinRoomBtn);
             gameLobbyContainer.appendChild(roomArticle);
 
             joinRoomBtn.addEventListener('click', () => {
                 roomArticleHeader.innerText =  `stan - (${room.length}/4 in lobby)`
                 joinRoom(room, leaveRoomBtn, roomArticleHeader);
+                // joinRoomBtn.disabled = rooms[room].length >= 2;
+
+                if (rooms[room].length >= 2) {
+                    joinRoomBtn.setAttribute('disabled', '')
+                    joinRoomBtn.innerText = 'Lobby is full'
+                }
+
 
             });
             leaveRoomBtn.addEventListener('click', () => userLeavesRoom(room));
@@ -50,10 +62,11 @@ export default function renderGameLobbies() {
 }
 
 function userLeavesRoom(room) {
+    console.log(room.length);
     let username = localStorage.getItem('username')
     let roomId = room; 
     socket.emit('leaveRoom', { username, roomId });
-    socket.emit('getRooms');
+    // socket.emit('getRooms');
 
     renderGameLobbies()
 }

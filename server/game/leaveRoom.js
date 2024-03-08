@@ -9,7 +9,6 @@ module.exports = (io, socket, users, rooms) => {
             console.log(`${username} has left room ${roomId}`);
             io.emit('updateRooms', rooms);
             io.emit('updateRoom', rooms[roomId]);
-
         } else {
             console.log(`${username} is not in room ${roomId}`);
 
