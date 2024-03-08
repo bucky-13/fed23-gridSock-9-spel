@@ -13,7 +13,8 @@ const io = require('socket.io')(server, {
 });
 
 // IMPORT OF ROUTERS
-let usersRouter = require('./routes/users.js');
+let usersRouter = require('./routes/users.js')
+let gameRouter = require('./routes/game.js')
 
 // SETUP FOR DATABASE CONFIGS
 require('dotenv').config();
@@ -34,11 +35,11 @@ const handleDisconnect = require('./userConnections/disconnect');
 const handleActivity = require('./userConnections/activity');
 const handleActiveUsers = require('./userConnections/activeUsers.js');
 const handleChat = require('./chat/chat');
-const handlePlayerReady = require('./gameLobby/playerReady.js');
-const handlePlayerUnReady = require('./gameLobby/playersUnReady.js');
-const handleJoinRoom = require('./gameLobby/joinRoom.js');
-const handleLeaveRoom = require('./gameLobby/leaveRoom.js');
-const handleGetRooms = require('./gameLobby/getRooms.js');
+const handlePlayerReady = require('./game/playerReady.js');
+const handlePlayerUnReady = require('./game/playersUnReady.js');
+const handleJoinRoom = require('./game/joinRoom.js');
+const handleLeaveRoom = require('./game/leaveRoom.js');
+const handleGetRooms = require('./game/getRooms.js');
 
 const { users, rooms } = require('./lib/serverDatabase.js');
 
@@ -46,16 +47,21 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use('/users', usersRouter);
+app.use('/randomGame', gameRouter);
 
 // gets a response from digital ocean with a test database
-app.get('/', (req, res) => {
-	req.app.locals.con.connect(function (err) {
-		if (err) {
-			console.log(err);
-		}
+/*
+app.get('/randomGame', (req,res) => {
+     req.app.locals.con.connect(function (err) {
+    if (err) {
+      console.log(err);
+       }
+       
+       // Which board to get, 1-5 exists
+        let id = 3;
 
-		// Which board to get, 1-5 exists
-		let id = 3;
+    // GET all in test collection
+      let sql = `SELECT * FROM gameboards WHERE boardId = ${id}`;
 
 		// GET all in test collection
 		let sql = `SELECT * FROM gameboards WHERE boardId="${id}"`;
@@ -100,11 +106,7 @@ app.get('/', (req, res) => {
 				grid: grid,
 			};
 
-			res.json(currentGameboard);
-		});
-	});
-});
-
+*/
 // SOCKET ROOMS
 
 // app.post('/', function (req, res, next) {

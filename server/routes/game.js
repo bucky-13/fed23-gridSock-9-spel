@@ -7,18 +7,40 @@ router.get('/', (req, res, next) => {
             console.log(err);
         }
 
-        let sql = `SELECT * FROM users`
+        let sqlCount = `SELECT COUNT(*) as count FROM gameboards`;
 
-        req.app.locals.con.query(sql, function (err, result) {
+        req.app.locals.con.query(sqlCount, function (err, result) {
             if (err) {
                 console.log(err);
             }
-            res.json(result)
-        })
-    })
-    // res.send('users!')
-})
 
+            const count = result[0].count;
+            console.log(typeof result[0].count);
+
+            // Generera ett slumpmässigt id
+            let randomId = Math.floor(Math.random() * count) + 1;
+
+            // Hämta den rad med det slumpmässiga idt från tabellen
+            let sqlRandomRow = `SELECT * FROM gameboards WHERE boardId = ${randomId}`;
+
+            req.app.locals.con.query(sqlRandomRow, function (err, result) {
+                if (err) {
+                    console.log(err);
+                }
+                res.json(result[0]);
+
+            });
+
+           
+            
+        });
+    });
+
+});
+
+// POST request for leter use (SAVE GAME)!
+
+/*
 router.post('/', (req, res, next) => {
     req.app.locals.con.connect(function (err) {
         if (err) {
@@ -52,5 +74,6 @@ router.post('/', (req, res, next) => {
         })
     })
 })
+*/
 
 module.exports = router;

@@ -10,7 +10,7 @@ export default function chatRender(chatSection, chatContainer) {
         existingChat.remove()
     }
     let user = localStorage.getItem('username');
-    console.log(user);
+    // console.log(user);
     
     chatSection.appendChild(chatContainer);
 
@@ -50,7 +50,7 @@ export default function chatRender(chatSection, chatContainer) {
 
     //Event listener for sending a new message
     sendMessageBtn.addEventListener('click', () => {
-        console.log('1');
+        // console.log('1');
         if (sendMessageInput.value.trim() !== '') {
             socket.emit('chat', { user: user, message: sendMessageInput.value });
             sendMessageInput.value = ''
@@ -61,8 +61,8 @@ export default function chatRender(chatSection, chatContainer) {
     });
 
     socket.on('chat', (arg) => {
-        console.log('2');
-        console.log('socket', arg);
+        // console.log('2');
+        // console.log('socket', arg);
         updateChat(arg, chatBox, userActivity);
     });
 

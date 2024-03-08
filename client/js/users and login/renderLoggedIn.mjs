@@ -16,7 +16,7 @@ export default function renderLoggedIn() {
     const welcomeHeader = createElement('h4', 'welcomeHeader', 'welcomeHeader', `Logged in as ${localStorage.getItem('username')}`);
     const logOutBtn = createElement('button', 'logOutBtn', 'logOutBtn', 'Log out');
     userStatusSection.append(welcomeHeader, logOutBtn);
-    logOutBtn.addEventListener('click', () => logoutUser(userStatusSection, chatContainer));
+    logOutBtn.addEventListener('click', () => logoutUser(userStatusSection));
 
     // gameLobbyRender()
     chatRender(chatSection, chatContainer);
