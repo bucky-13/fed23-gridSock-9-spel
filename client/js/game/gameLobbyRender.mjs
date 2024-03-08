@@ -4,6 +4,8 @@ import playersReadySocket from './playersReadySocket.mjs';
 import socket from '../../lib/socket.mjs';
 import playersUnreadySocket from './playersUnReadySocket.mjs';
 import { feedbackMsg } from '../../lib/validationMessage.mjs';
+import createNewGameFetch from './createNewGameFetch.mjs';
+import createNewGameSocket from './createNewGameSocket.mjs';
 
 
 export default function gameLobbyRender() {
@@ -47,6 +49,14 @@ export default function gameLobbyRender() {
 	gameBoard.appendChild(gameLobby);
 	gameSection.appendChild(gameBoard);
 
+	startGameBtn.addEventListener('click', () => {
+		console.log(startGameBtn.disabled);
+		createNewGameFetch();
+		createNewGameSocket()
+		
+	}
+	)
+	
     socket.on('updatePlayerReady', (usersReady) => { 
         
         let username = localStorage.getItem('username');
