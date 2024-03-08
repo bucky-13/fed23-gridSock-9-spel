@@ -7,6 +7,6 @@ export default function createNewGameFetch() {
     })
         .then((res) => res.json()).then((data) => {
             console.log(data);
-            socket.emit('startNewGame')
+            socket.emit('createNewGame', data)
           })
 }

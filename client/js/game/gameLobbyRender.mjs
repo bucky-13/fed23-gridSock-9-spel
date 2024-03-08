@@ -49,14 +49,15 @@ export default function gameLobbyRender() {
 	gameBoard.appendChild(gameLobby);
 	gameSection.appendChild(gameBoard);
 
+	// We're definately gonna have to turn this one off after a completed game, and adjust it to individual rooms, somehow :)
+	createNewGameSocket();
 	startGameBtn.addEventListener('click', () => {
 		console.log(startGameBtn.disabled);
 		createNewGameFetch();
-		createNewGameSocket()
 		
 	}
 	)
-	
+
     socket.on('updatePlayerReady', (usersReady) => { 
         
         let username = localStorage.getItem('username');
