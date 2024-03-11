@@ -1,6 +1,9 @@
 import createElement from "../../lib/createElement.mjs";
 import socket from "../../lib/socket.mjs";
 import feedbackMsg from "../../lib/validationMessage.mjs"
+import createNewGameFetch from "./createNewGameFetch.mjs";
+import createNewGameSocket from "./createNewGameSocket.mjs";
+
 export default function joinRoom(room, leaveRoomBtn) {
     let username = localStorage.getItem('username');
     socket.emit('joinRoom', { username, roomId: room });
@@ -52,9 +55,10 @@ export default function joinRoom(room, leaveRoomBtn) {
             playersList.appendChild(readyPlayerLi);
         });
     });
-
+    createNewGameSocket();
     startGameBtn.addEventListener('click', () => {
-        console.log('Stan');
+        console.log(startGameBtn.disabled);
+        createNewGameFetch();
     })
 
     socket.emit('getRooms');
