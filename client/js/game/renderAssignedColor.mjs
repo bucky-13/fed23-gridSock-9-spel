@@ -16,4 +16,10 @@ export default function renderAssignedColor() {
     gameSection.append(containerDiv)
 
     console.log(`Your color is ${chosenColor} `);
+
+    setTimeout(function () {
+        let test = createElement('p')
+        test.textContent = 'I appear after 5 seconds'
+        gameSection.append(test)
+    }, 5000);
 }
