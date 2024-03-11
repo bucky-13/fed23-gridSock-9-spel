@@ -8,9 +8,15 @@ const rooms = {
 }
 
 const currentGameboardsUsed = {
-      'animals': {},
+    'animals': {},
     'fruits': {},
     'random': {}
 }
 
-module.exports =  {users, rooms, currentGameboardsUsed}
+const activeGames = {
+    'animals': {},
+    'fruits': {},
+    'random': {}
+}
+
+module.exports =  {users, rooms, currentGameboardsUsed, activeGames}

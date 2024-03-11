@@ -3,7 +3,6 @@ let router = express.Router();
 
 const { users, rooms, currentGameboardsUsed } = require('../lib/serverDatabase');
 
-
 router.get('/', (req, res, next) => {
     req.app.locals.con.connect(function (err) {
         if (err) {
