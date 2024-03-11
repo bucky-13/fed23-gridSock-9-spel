@@ -36,7 +36,6 @@ export default function renderGameLobbies() {
             joinRoomBtn.addEventListener('click', () => {
                 roomArticleHeader.innerText =  `stan - (${room.length}/4 in lobby)`
                 joinRoom(room, leaveRoomBtn, roomArticleHeader);
-                // joinRoomBtn.disabled = rooms[room].length >= 2;
 
                 if (rooms[room].length >= 2) {
                     joinRoomBtn.setAttribute('disabled', '')
@@ -51,14 +50,6 @@ export default function renderGameLobbies() {
         });
     });
 
-    // socket.on('updateRooms', (updatedRooms) => {
-    //     Object.keys(updatedRooms).forEach(room => {
-    //         const roomArticleHeader = document.getElementById(`${room}roomArticleHeader`);
-    //         if (roomArticleHeader) {
-    //             roomArticleHeader.innerText = `${room} - (${updatedRooms[room].length}/4 in lobby)`;
-    //         }
-    //     });
-    // });
 }
 
 function userLeavesRoom(room) {
@@ -66,7 +57,5 @@ function userLeavesRoom(room) {
     let username = localStorage.getItem('username')
     let roomId = room; 
     socket.emit('leaveRoom', { username, roomId });
-    // socket.emit('getRooms');
-
     renderGameLobbies()
 }

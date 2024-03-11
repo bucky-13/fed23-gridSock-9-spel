@@ -1,18 +1,8 @@
 import createElement from "../../lib/createElement.mjs";
 import socket from "../../lib/socket.mjs";
 import feedbackMsg from "../../lib/validationMessage.mjs"
-export default function joinRoom(room, leaveRoomBtn, roomArticleHeader) {
+export default function joinRoom(room, leaveRoomBtn) {
     let username = localStorage.getItem('username');
-
-    // const updateRooms = (room) => {
-    //     Object.keys(room).forEach(room => {
-    //         const roomArticleHeader = document.getElementById(`${room}`);
-    //         if (roomArticleHeader) {
-    //             roomArticleHeader.innerText = `${room} - (${room.length}/4 in lobby)`;
-    //         }
-    //     });
-    // };
-
     socket.emit('joinRoom', { username, roomId: room });
 
     gameSection.innerText = '';
@@ -62,6 +52,10 @@ export default function joinRoom(room, leaveRoomBtn, roomArticleHeader) {
             playersList.appendChild(readyPlayerLi);
         });
     });
+
+    startGameBtn.addEventListener('click', () => {
+        console.log('Stan');
+    })
 
     socket.emit('getRooms');
 
