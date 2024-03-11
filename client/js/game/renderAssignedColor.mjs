@@ -1,9 +1,13 @@
 import createElement from '../../lib/createElement.mjs';
+import socket from '../../lib/socket.mjs';
+import renderCurrentGameboardUsed from './renderCurrentGameboardUsed.mjs';
+
 let gameSection = document.getElementById('gameSection');
 
 export default function renderAssignedColor() { 
     let chosenColor = localStorage.getItem('gameboardColor')
     let username = localStorage.getItem('username')
+    let roomId = localStorage.getItem('roomId')
 
     gameSection.innerHTML = '';
     let colorDiv = createElement('div', 'chosenColorSquare', 'chosenColorSquare')
@@ -18,8 +22,9 @@ export default function renderAssignedColor() {
     console.log(`Your color is ${chosenColor} `);
 
     setTimeout(function () {
-        let test = createElement('p')
-        test.textContent = 'I appear after 5 seconds'
-        gameSection.append(test)
+        socket.emit('sendCurrentGameboardUsed', roomId)
+        socket.on('recieveCurrentGameboardUsed', (arg) => { 
+            renderCurrentGameboardUsed(arg)
+        })
     }, 5000);
 }

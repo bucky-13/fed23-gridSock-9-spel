@@ -21,7 +21,7 @@ router.get('/:roomId', (req, res, next) => {
             }
 
             const count = result[0].count;
-            console.log(typeof result[0].count);
+            // console.log(typeof result[0].count);
 
             // Generera ett slumpmässigt id
             let randomId = Math.floor(Math.random() * count) + 1;
