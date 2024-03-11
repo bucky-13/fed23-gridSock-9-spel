@@ -41,7 +41,7 @@ const handleJoinRoom = require('./game/joinRoom.js');
 const handleLeaveRoom = require('./game/leaveRoom.js');
 const handleGetRooms = require('./game/getRooms.js');
 
-const { users, rooms } = require('./lib/serverDatabase.js');
+const { users, rooms, currentGameboards, activeGames } = require('./lib/serverDatabase.js');
 
 app.use(cors());
 app.use(express.json());

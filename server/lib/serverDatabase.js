@@ -7,4 +7,16 @@ const rooms = {
     'random': []
 }
 
-module.exports =  {users, rooms}
+const currentGameboardsUsed = {
+    'animals': {},
+    'fruits': {},
+    'random': {}
+}
+
+const activeGames = {
+    'animals': {},
+    'fruits': {},
+    'random': {}
+}
+
+module.exports =  {users, rooms, currentGameboardsUsed, activeGames}
