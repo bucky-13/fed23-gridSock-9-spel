@@ -42,7 +42,7 @@ const handleLeaveRoom = require('./game/leaveRoom.js');
 const handleGetRooms = require('./game/getRooms.js');
 const assignColors = require('./game/assignColors.js')
 
-const { users, rooms, currentGameBoards } = require('./lib/serverDatabase.js');
+const { users, rooms, currentGameboardsUsed } = require('./lib/serverDatabase.js');
 
 app.use(cors());
 app.use(express.json());
@@ -143,7 +143,7 @@ const onConnection = (socket) => {
 	handleJoinRoom(io, socket, users, rooms);
 	handleLeaveRoom(io, socket, users, rooms);
 	handleActiveUsers(io, socket, users, rooms);
-	assignColors(io, socket, users, rooms);
+	assignColors(io, socket, users, rooms, currentGameboardsUsed);
 };
 
 // INITIATING THE CONNECTION FUNCTION

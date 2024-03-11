@@ -3,7 +3,11 @@ let router = express.Router();
 
 const { users, rooms, currentGameboardsUsed } = require('../lib/serverDatabase');
 
-router.get('/', (req, res, next) => {
+router.get('/:roomId', (req, res, next) => {
+
+    let roomId = req.params.roomId;
+
+    console.log(roomId);
     req.app.locals.con.connect(function (err) {
         if (err) {
             console.log(err);
@@ -67,7 +71,7 @@ router.get('/', (req, res, next) => {
         
         // Add logic here to make game room be the same as the game room the user sends the request from
       
-        currentGameboardsUsed.animals = currentGameboard
+        currentGameboardsUsed[roomId] = currentGameboard
 
             res.json(currentGameboard);
             });  
