@@ -40,6 +40,7 @@ const handlePlayerUnReady = require('./game/playersUnReady.js');
 const handleJoinRoom = require('./game/joinRoom.js');
 const handleLeaveRoom = require('./game/leaveRoom.js');
 const handleGetRooms = require('./game/getRooms.js');
+const assignColors = require('./game/assignColors.js')
 
 const { users, rooms, currentGameBoards } = require('./lib/serverDatabase.js');
 
@@ -142,6 +143,7 @@ const onConnection = (socket) => {
 	handleJoinRoom(io, socket, users, rooms);
 	handleLeaveRoom(io, socket, users, rooms);
 	handleActiveUsers(io, socket, users, rooms);
+	assignColors(io, socket, users, rooms);
 };
 
 // INITIATING THE CONNECTION FUNCTION

@@ -36,6 +36,8 @@ export default function renderGameLobbies() {
             joinRoomBtn.addEventListener('click', () => {
                 roomArticleHeader.innerText =  `stan - (${room.length}/4 in lobby)`
                 joinRoom(room, leaveRoomBtn, roomArticleHeader);
+                localStorage.setItem('roomId', room)
+                console.log(room);
 
                 if (rooms[room].length >= 2) {
                     joinRoomBtn.setAttribute('disabled', '')
@@ -56,6 +58,7 @@ function userLeavesRoom(room) {
     console.log(room.length);
     let username = localStorage.getItem('username')
     let roomId = room; 
+    localStorage.removeItem('roomId')
     socket.emit('leaveRoom', { username, roomId });
     renderGameLobbies()
 }

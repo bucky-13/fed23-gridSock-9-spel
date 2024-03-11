@@ -1,4 +1,4 @@
-module.exports = (io, socket, users, usersReady) => { 
+module.exports = (io, socket, users, rooms) => { 
 
     socket.on('activeUsers', (arg) => {
         
