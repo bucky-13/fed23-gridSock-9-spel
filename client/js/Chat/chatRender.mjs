@@ -2,16 +2,17 @@ import socket from '../../lib/socket.mjs'
 import createElement from '../../lib/createElement.mjs'
 import updateChat from './updateChat.mjs'
 import errorMsg from '../../lib/validationMessage.mjs'
-import { feedbackMsg } from '../../lib/validationMessage.mjs'
 
-export default function chatRender(chatSection, chatContainer) {
+export default function chatRender(currentRoom) {
+    // currentRoom = null
+    const chatContainer = createElement('section', 'chatContainer', 'chatContainer');
     let existingChat = document.getElementById('chatbox')
     if (existingChat) {
         existingChat.remove()
     }
     let user = localStorage.getItem('username');
-    // console.log(user);
-    
+    // let currentRoom;
+    chatSection.innerText = ''
     chatSection.appendChild(chatContainer);
 
     // Element för att lägga som tom placeholder tills användare skriver
@@ -50,21 +51,33 @@ export default function chatRender(chatSection, chatContainer) {
 
     //Event listener for sending a new message
     sendMessageBtn.addEventListener('click', () => {
-        // console.log('1');
         if (sendMessageInput.value.trim() !== '') {
-            socket.emit('chat', { user: user, message: sendMessageInput.value });
-            sendMessageInput.value = ''
+            if (currentRoom) {
+                console.log('det här är current', currentRoom);
+                socket.emit('chat', { user, message: sendMessageInput.value, room: currentRoom });
+            } else {
+                console.log('det här är INTE current');
+
+                socket.emit('chat', { user, message: sendMessageInput.value });
+            }
+            sendMessageInput.value = '';
         } else {
             errorMsg(chatContainer, 'The message cannot be empty!');
             console.log('The input field cannot be empty!');
         }      
     });
-
-    socket.on('chat', (arg) => {
-        // console.log('2');
-        // console.log('socket', arg);
-        updateChat(arg, chatBox, userActivity);
+    if (currentRoom != 'general') {
+    socket.on('chatRoom', (arg) => {
+        if (arg.room === currentRoom) {
+            updateChat(arg, chatBox, userActivity);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
     });
-
-    chatContainer.append(userList, chatInputContainer, chatBox);
+} else if (currentRoom === 'general'){
+    socket.on('chatGeneral', (arg) => {
+        updateChat(arg, chatBox, userActivity);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+}
+    chatContainer.append(userList, chatBox, chatInputContainer);
 }

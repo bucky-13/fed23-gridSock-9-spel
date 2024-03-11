@@ -3,6 +3,7 @@ import socket from "../../lib/socket.mjs";
 import feedbackMsg from "../../lib/validationMessage.mjs"
 export default function joinRoom(room, leaveRoomBtn) {
     let username = localStorage.getItem('username');
+    
     socket.emit('joinRoom', { username, roomId: room });
 
     gameSection.innerText = '';

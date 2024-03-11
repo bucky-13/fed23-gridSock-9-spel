@@ -1,4 +1,9 @@
-module.exports = (io, socket, users, usersReady) => {
-    socket.on('chat', (arg) => {
-        io.emit('chat', arg);
-    })}
+module.exports = (io, socket, users, rooms) => {
+    socket.on('chat', ({ user, message, room }) => {
+        if (rooms[room]) {
+            io.to(room).emit('chatRoom', { user, message, room });
+        } else {
+            io.emit('chatGeneral', { user, message });
+        }
+    });
+};

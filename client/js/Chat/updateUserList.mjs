@@ -3,12 +3,6 @@ import socket from '../../lib/socket.mjs';
 import errorMsg from '../../lib/validationMessage.mjs';
 // import gameLobbyRender from '../game/gameLobbyRender.mjs';
 
-const loginContainer = document.getElementById('loginContainer')
-
-let usernameInput = document.getElementById('usernameInput');
-let loginBtn = document.getElementById('loginBtn');
-let logoutBtn = document.getElementById('logoutBtn');
-
 let loggedInUsers = [];
 
 function updateUserList(users) {

@@ -2,11 +2,14 @@
 import createElement from "../../lib/createElement.mjs";
 import socket from "../../lib/socket.mjs";
 import joinRoom from "./joinRoom.mjs";
+import chatRender from "../Chat/chatRender.mjs";
 
 let gameSection = document.getElementById('gameSection');
 
 export default function renderGameLobbies() {
     gameSection.innerText= ''
+    let currentRoom = 'general';
+    chatRender(currentRoom)
 
     let gameLobbyContainer = createElement('section', 'gameLobbyContainer', 'gameLobbyContainer', '');
     gameSection.appendChild(gameLobbyContainer);
@@ -34,17 +37,20 @@ export default function renderGameLobbies() {
             gameLobbyContainer.appendChild(roomArticle);
 
             joinRoomBtn.addEventListener('click', () => {
-                roomArticleHeader.innerText =  `stan - (${room.length}/4 in lobby)`
+              currentRoom = room;
                 joinRoom(room, leaveRoomBtn, roomArticleHeader);
 
                 if (rooms[room].length >= 2) {
                     joinRoomBtn.setAttribute('disabled', '')
                     joinRoomBtn.innerText = 'Lobby is full'
                 }
-
+                chatRender(currentRoom)
+            });
+            leaveRoomBtn.addEventListener('click', () => {
+                userLeavesRoom(room)
+                // chatRender(currentRoom)
 
             });
-            leaveRoomBtn.addEventListener('click', () => userLeavesRoom(room));
 
             
         });

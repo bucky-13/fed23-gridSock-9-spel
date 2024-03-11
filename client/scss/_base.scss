@@ -13,7 +13,7 @@ body {
 
 			.logOutBtn {
 				border-radius: 10px;
-				border: 2px solid $borderColor;
+				border: none;
 				cursor: pointer;
 				background-color: $logOutBtn;
 			}
@@ -50,7 +50,7 @@ body {
 				width: 100vw;
 				height: 30vh;
 				background-color: $gameBoard;
-				border: 2px solid $borderColor;
+				border: none;
 				
 
 				.gameLobby {
@@ -67,10 +67,13 @@ body {
 		}
 
 		.chatContainer {
-			width: 100%;
+			display: flex;
+			flex-direction: column;
+			width: 90%;
 			padding: 10px;
-			border: 3px solid $borderColor;
-			margin-top: 15px;
+			border: none;
+			border-radius: 10px;
+			margin: auto;
 			background-color: $chatBgColor;
 
 			.activeUserLoggedIn {
@@ -87,7 +90,7 @@ body {
 					width: 65%;
 					margin-right: 15px;
 					margin-bottom: 15px;
-					border: 2px solid $borderColor;
+					border: 1px solid $borderColor;
 					border-radius: 5px;
 					padding: 5px;
 					width: 100%;
@@ -102,9 +105,9 @@ body {
 					letter-spacing: 0.05rem;
 					font-weight: bold;
 					background-color: $primaryBtn;
-					border: 2px solid $borderColor;
-					border-radius: 5px;
-					color: $primaryBtnText;
+					border: none;
+					border-radius: 10px;
+					color: $chatBgColor;
 					cursor: pointer;
 					height: 50px;
 					margin-left: 10px;
@@ -115,7 +118,7 @@ body {
 				display: flex;
 				flex-direction: column;
 				overflow: auto;
-				max-height: 500px;
+				height: 300px;
 				background-color: $chatBoxBgColor;
 
 				.userActivity {
@@ -127,7 +130,7 @@ body {
 				}
 
 				.newMessage {
-					border: 2px solid $borderColor;
+					border: none;
 					border-radius: 5px;
 					color: $textColor;
 					margin-top: 5px;
