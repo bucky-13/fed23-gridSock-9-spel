@@ -43,7 +43,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
             
             console.log(arg);
         
-            // Render empty gameboard (sets new background color)
+            // Render empty gameboard - ready to play (sets new background color)
             renderEmptyGameboardColorClick(socket, color, roomId, currentGame);
 
             // Retrieving the data from server: updating players color to all clients.

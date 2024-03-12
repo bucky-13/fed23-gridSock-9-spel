@@ -4,7 +4,7 @@ export default function renderEmptyGameboardColorClick(socket, color, roomId, cu
     cells.forEach(cell => {
         cell.style.backgroundColor = '#E1D9D1';
 
-        // Click to color, with assigned color
+        // Click to color, with assigned color 
         cell.addEventListener('click', () => {
             const i = parseInt(cell.dataset.x);
             const j = parseInt(cell.dataset.y);
@@ -17,7 +17,3 @@ export default function renderEmptyGameboardColorClick(socket, color, roomId, cu
         });
     });
 }
-
-
-
-
