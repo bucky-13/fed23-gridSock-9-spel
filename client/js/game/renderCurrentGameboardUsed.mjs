@@ -30,12 +30,17 @@ export default function renderCurrentGameboardUsed(currentGame) {
         }
     }
 
-        setTimeout(function () {
+    setTimeout(function () {
+            
+
         socket.emit('generateActiveGame', roomId)
         socket.on('recieveActiveGame', (arg) => { 
+
+            // LÄGG IN FUNKTIONEN NI VILL KALLA PÅ HÄR
             console.log(arg);
         })
             
+        // DETTA ÄR TESTKOD FÖR EVENTLISTENER, TA BORT DET HÄRIFRÅN ELLER KOMMENTERA UT, ANVÄND SAMMA NAMN I SOCKET FÖR ATT KALLA PÅ BACKEND
         test.addEventListener('click', () => {
         socket.emit('updateActiveGameboardServer', roomId, 4, 6, color)
         })
@@ -44,10 +49,11 @@ export default function renderCurrentGameboardUsed(currentGame) {
         console.log('updateActiveGameboardClient');
             console.log(arg);
             test.style.color = arg[2]
+        // LÅT ALLT UNDER DENNA KOMMENTAREN LIGGA KVAR SÅLÄNGE :)
     })
     }, 1000);
 
-    
+    // DETTA SKA BORT SÅ SMÅNINGOM, JAG ANVÄNDER DET BARA FÖR ATT TESTA SAKER JUST NU :)
     let test = createElement('p')
     test.textContent = `I appear after 5 seconds because I am 5 seconds big :D My name is ${currentGame.description}`
     gameSection.append(test, gameboardContainer);
