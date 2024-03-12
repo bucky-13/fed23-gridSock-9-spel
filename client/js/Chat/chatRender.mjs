@@ -38,7 +38,7 @@ export default function chatRender(currentRoom) {
     let clearActivity;
 
     sendMessageInput.addEventListener('keypress', () => {
-        socket.emit('activity', user, currentRoom); // Emit activity with current room
+        socket.emit('activity', user, currentRoom); 
     });
 
     socket.on('activityRoom', (typing) => {
