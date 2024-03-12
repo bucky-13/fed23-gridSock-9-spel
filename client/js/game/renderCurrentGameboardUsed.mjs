@@ -41,10 +41,10 @@ export default function renderCurrentGameboardUsed(currentGame) {
 
             
             console.log(arg);
-            // Empty gameboard (sets new background color)
+            // Render empty gameboard (sets new background color)
             renderEmptyGameboardColorClick(socket, color, roomId, currentGame);
 
-            // Retrieving the data from server, updating player colors to all clients
+            // Retrieving the data from server: updating player, colors to all clients
             socket.on('updateActiveGameboardClient', (arg) => {
                 const cell = document.querySelector(`.cell[data-x="${arg[0]}"][data-y="${arg[1]}"]`);
                 if (cell) {

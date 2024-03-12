@@ -1,4 +1,4 @@
-// Makes the Gameboard white
+// Makes the Gameboard empty with only the grid left, ready to start color.
 export default function renderEmptyGameboardColorClick(socket, color, roomId, currentGame) {
     const cells = document.querySelectorAll('.cell');
     cells.forEach(cell => {
@@ -10,7 +10,7 @@ export default function renderEmptyGameboardColorClick(socket, color, roomId, cu
             let cellNumber = currentGame.grid[i][j];
             let cellColor = currentGame.colors[cellNumber];
             cell.style.backgroundColor = color;
-            // send colored cell-data to server
+            // Send colored cell-data to server
             socket.emit('updateActiveGameboardServer', roomId, i, j, color);
         });
     });
