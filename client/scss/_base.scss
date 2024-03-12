@@ -1,3 +1,4 @@
+
 body {
 	background-color: $primaryBgColor;
 
@@ -201,6 +202,28 @@ li {
 ::placeholder {
 	color: #530053;
 }
+
+.gameboardContainer {
+
+	margin: 10px;
+	padding: 15px;
+	background-color: #ffffff;
+	display: grid;
+	grid-template-columns: repeat(var(--grid-columns), 15px);
+	grid-template-rows: repeat(var(--grid-rows), 15px);
+	justify-content: center;
+	align-items: center;
+
+	gap: 0 0;
+}
+
+.cell {
+
+	width: 15px;
+	height: 15px;
+	border: 1px solid black;
+}
+
 
 /*@media (prefers-color-scheme: light) {
     :root {
