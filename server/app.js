@@ -70,8 +70,8 @@ const onConnection = (socket) => {
 	handleActiveUsers(io, socket, users, rooms);
 	assignColors(io, socket, users, rooms, currentGameboardsUsed);
 	sendCurrentGameboardUsed(io, socket, users, rooms, currentGameboardsUsed);
-	generateActiveGame(io, socket);
-	updateActiveGameboardServer(io, socket);
+	generateActiveGame(io, socket, users, rooms, currentGameboardsUsed, activeGames);
+	updateActiveGameboardServer(io, socket, users, rooms, currentGameboardsUsed, activeGames);
 };
 
 // INITIATING THE CONNECTION FUNCTION
