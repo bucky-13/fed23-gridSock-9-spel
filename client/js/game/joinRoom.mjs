@@ -1,12 +1,8 @@
 import createElement from "../../lib/createElement.mjs";
 import socket from "../../lib/socket.mjs";
 import feedbackMsg from "../../lib/validationMessage.mjs"
-import createNewGameFetch from "./createNewGameFetch.mjs";
-import createNewGameSocket from "./createNewGameSocket.mjs";
-
 export default function joinRoom(room, leaveRoomBtn) {
     let username = localStorage.getItem('username');
-    
     socket.emit('joinRoom', { username, roomId: room });
 
     gameSection.innerText = '';
@@ -31,7 +27,7 @@ export default function joinRoom(room, leaveRoomBtn) {
     
         gameLobby.appendChild(leaveRoomBtn);
     
-        if (updatedRoom[room].length >= 2) {
+        if (updatedRoom[room].length >= 2) { // CHANGE TO 4 @@@
             startGameBtn.setAttribute('disabled', '');
             if (updatedRoom[room].includes(localStorage.getItem('username'))) {
                 startGameBtn.removeAttribute('disabled');
@@ -56,10 +52,9 @@ export default function joinRoom(room, leaveRoomBtn) {
             playersList.appendChild(readyPlayerLi);
         });
     });
-    createNewGameSocket();
+
     startGameBtn.addEventListener('click', () => {
-        console.log(startGameBtn.disabled);
-        createNewGameFetch();
+        console.log('Stan');
     })
 
     socket.emit('getRooms');

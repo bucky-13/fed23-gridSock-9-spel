@@ -27,7 +27,7 @@ export default function renderGameLobbies() {
             const joinRoomBtn = createElement('button', `${room}`, 'joinRoomBtn', `Join ${room}`);
             const leaveRoomBtn = createElement('button', `leaveRoomBtn${room}`, 'leaveRoomBtn', `Leave ${room}`);
 
-            if (rooms[room].length >= 2) {
+            if (rooms[room].length >= 2) { //CHANGE TO 4 @@@
                 joinRoomBtn.setAttribute('disabled', '')
                 joinRoomBtn.innerText = 'Lobby is full'
             }
@@ -39,10 +39,8 @@ export default function renderGameLobbies() {
             joinRoomBtn.addEventListener('click', () => {
               currentRoom = room;
                 joinRoom(room, leaveRoomBtn, roomArticleHeader);
-                localStorage.setItem('roomId', room)
-                console.log(room);
 
-                if (rooms[room].length >= 2) {
+                if (rooms[room].length >= 2) { //CHANGE TO 4 @@@
                     joinRoomBtn.setAttribute('disabled', '')
                     joinRoomBtn.innerText = 'Lobby is full'
                 }
@@ -50,8 +48,6 @@ export default function renderGameLobbies() {
             });
             leaveRoomBtn.addEventListener('click', () => {
                 userLeavesRoom(room)
-                // chatRender(currentRoom)
-
             });
 
             
@@ -61,10 +57,8 @@ export default function renderGameLobbies() {
 }
 
 function userLeavesRoom(room) {
-    console.log(room.length);
     let username = localStorage.getItem('username')
     let roomId = room; 
-    localStorage.removeItem('roomId')
     socket.emit('leaveRoom', { username, roomId });
     renderGameLobbies()
 }
