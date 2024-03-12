@@ -5,6 +5,7 @@ let gameSection = document.getElementById('gameSection');
 
 
 export default function renderCurrentGameboardUsed(currentGame) { 
+    let roomId = localStorage.getItem('roomId')
     let gameboardContainer = document.createElement('div');
     gameboardContainer.id = 'gameboardContainer';
     gameboardContainer.classList.add('gameboardContainer');
@@ -27,6 +28,13 @@ export default function renderCurrentGameboardUsed(currentGame) {
             gameboardContainer.appendChild(cell);
         }
     }
+
+        setTimeout(function () {
+        socket.emit('generateActiveGame', roomId)
+        socket.on('recieveActiveGame', (arg) => { 
+            console.log(arg);
+        })
+    }, 5000);
 
     
     let test = createElement('p')
