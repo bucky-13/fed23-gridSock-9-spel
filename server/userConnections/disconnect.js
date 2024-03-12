@@ -9,11 +9,11 @@ module.exports = (io, socket, users, rooms) => {
 				}
 			});
 
-			io.emit('chat', { message: `${username} har loggat ut`, user: 'Server' });
+			io.emit('chatGeneral', { message: `${username} har loggat ut`, user: 'Server' });
 			delete users[socket.id];
 		}
 		io.emit('updateRooms', rooms);
-    io.emit('chat', { message: `${username} har loggat ut`, user: 'Server' });
+    io.emit('chatGeneral', { message: `${username} har loggat ut`, user: 'Server' });
 		io.emit('updateUserList', Object.values(users));
 	});
 };

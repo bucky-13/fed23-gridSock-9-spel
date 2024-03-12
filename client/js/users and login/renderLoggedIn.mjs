@@ -17,7 +17,7 @@ export default function renderLoggedIn() {
     logOutBtn.addEventListener('click', () => logoutUser(userStatusSection));
 
     // gameLobbyRender()
-    chatRender();
+    // chatRender();
     renderGameLobbies()
 
 }

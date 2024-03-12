@@ -30,25 +30,37 @@ export default function chatRender(currentRoom) {
     chatInputContainer.append(sendMessageInput, sendMessageBtn)
 
     sendMessageInput.addEventListener('keypress', () => {
-        socket.emit('activity', user)
+        socket.emit('activity', user, currentRoom);
     })
 
     // Denna socket lyssnar på användarens aktivitet
     // TO-DO OM TID FINNS: Göra så att det står "users" om flera skriver
     let clearActivity;
 
-    socket.on('activity', (typing) => {
+    sendMessageInput.addEventListener('keypress', () => {
+        socket.emit('activity', user, currentRoom); // Emit activity with current room
+    });
+
+    socket.on('activityRoom', (typing) => {
         if (typing.username) {
             userActivity.innerText = `${typing.username} is typing...`;
             clearTimeout(clearActivity);
             clearActivity = setTimeout(() => {
                 userActivity.innerText = '';
             }, 3000);
-        } else if (typing.username.length > 1) {
-            userActivity.innerText = 'Users are typing...';
         }
     });
 
+    socket.on('activityGeneral', (typing) => {
+        if (typing.username) {
+            userActivity.innerText = `${typing.username} is typing...`;
+            clearTimeout(clearActivity);
+            clearActivity = setTimeout(() => {
+                userActivity.innerText = '';
+            }, 3000);
+        }
+    });
+    
     //Event listener for sending a new message
     sendMessageBtn.addEventListener('click', () => {
         if (sendMessageInput.value.trim() !== '') {
