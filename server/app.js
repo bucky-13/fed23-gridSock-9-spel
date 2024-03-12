@@ -43,6 +43,7 @@ const handleGetRooms = require('./game/getRooms.js');
 const assignColors = require('./game/assignColors.js')
 const sendCurrentGameboardUsed = require('./game/sendCurrentGameboardUsed.js')
 const generateActiveGame = require('./game/generateActiveGame.js')
+const updateActiveGameboardServer = require('./game/updateActiveGameboardServer.js')
 
 const { users, rooms, currentGameboardsUsed, activeGames } = require('./lib/serverDatabase.js');
 
@@ -69,7 +70,8 @@ const onConnection = (socket) => {
 	handleActiveUsers(io, socket, users, rooms);
 	assignColors(io, socket, users, rooms, currentGameboardsUsed);
 	sendCurrentGameboardUsed(io, socket, users, rooms, currentGameboardsUsed);
-	generateActiveGame(io, socket, users, rooms, currentGameboardsUsed, activeGames);
+	generateActiveGame(io, socket);
+	updateActiveGameboardServer(io, socket);
 };
 
 // INITIATING THE CONNECTION FUNCTION

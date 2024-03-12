@@ -1,3 +1,5 @@
+const { users, rooms, currentGameboardsUsed, activeGames } = require('../lib/serverDatabase');
+
 let playersReady = {
     animals: 0,
     fruits: 0,
@@ -15,7 +17,7 @@ let activeGamesSchema = {
     // grid: []
 
 
-module.exports = (io, socket, users, rooms, currentGameboardsUsed, activeGames) => {
+module.exports = (io, socket) => {
         socket.on('generateActiveGame', (roomId) => { 
         playersReady[roomId]++;
         let gridCols = currentGameboardsUsed[roomId].gridColumns
@@ -39,6 +41,8 @@ module.exports = (io, socket, users, rooms, currentGameboardsUsed, activeGames) 
                 activeGamesSchema[roomId].gridColumns = currentGameboardsUsed[roomId].gridColumns
             
                 activeGames[roomId] = activeGamesSchema[roomId]
+                console.log(activeGamesSchema[roomId]);
+                console.log(activeGames, 'activeGames');
 
                 io.emit('recieveActiveGame', activeGames[roomId])
 
@@ -48,7 +52,6 @@ module.exports = (io, socket, users, rooms, currentGameboardsUsed, activeGames) 
                 delete activeGamesSchema[roomId].description
                 delete activeGamesSchema[roomId].colors
                 delete activeGamesSchema[roomId].gridColumns
-                console.log(activeGamesSchema);
         }
         
 
