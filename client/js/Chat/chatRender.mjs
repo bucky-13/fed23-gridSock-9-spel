@@ -20,6 +20,7 @@ export default function chatRender(currentRoom) {
 	chatSection.appendChild(chatContainer);
 
 	// Element för att lägga som tom placeholder tills användare skriver
+    const chatRoomHeader = createElement('p', 'chatRoomHeader', 'chatRoomHeader', `${currentRoom} chat`)
 	const userActivity = createElement('span', 'userActivity', 'userActivity');
 	const chatBox = createElement('ul', 'chatBox', 'chatBox');
 	chatBox.appendChild(userActivity);
@@ -114,5 +115,5 @@ export default function chatRender(currentRoom) {
 			chatBox.scrollTop = chatBox.scrollHeight;
 		});
 	}
-	chatContainer.append(userList, chatBox, chatInputContainer);
+	chatContainer.append(chatRoomHeader, userList, chatBox, chatInputContainer);
 }

@@ -25,15 +25,18 @@ body {
 	}
 
 	.mainContainer {
-
+		display: flex;
+		// width: 100vw;
 		.gameSection {
-
+			width: 80vw;
 			.gameLobbyContainer {
 				display: flex;
 				justify-content: space-around;
+				height: 70%;
 				width: 100%;
 				background-color: $gameLobby;
-
+				border-radius: 10px;
+				margin: 30px;
 				.roomArticle {
 					display: flex;
 					flex-direction: column;
@@ -48,20 +51,20 @@ body {
 
 			.gameBoard {
 				margin-top: 30px;
-				width: 100vw;
-				height: 30vh;
+				// width: 100vw;
+				height: 80vh;
 				background-color: $gameBoard;
 				border: none;
-				
+				border-radius: 10px;
+
 
 				.gameLobby {
 					display: flex;
 					flex-direction: column;
 					height: 70%;
-					width: 50%;
+					width: 100%;
 					background-color: $gameLobby;
 					border-radius: 10px;
-					margin-left: 170px;
 
 				}
 			}
@@ -74,8 +77,9 @@ body {
 			padding: 10px;
 			border: none;
 			border-radius: 10px;
-			margin: auto;
+			margin: 30px;
 			background-color: $chatBgColor;
+
 
 			.activeUserLoggedIn {
 				font-weight: 700;
@@ -119,7 +123,7 @@ body {
 				display: flex;
 				flex-direction: column;
 				overflow: auto;
-				height: 300px;
+				height: 70vh;
 				background-color: $chatBoxBgColor;
 
 				.userActivity {
