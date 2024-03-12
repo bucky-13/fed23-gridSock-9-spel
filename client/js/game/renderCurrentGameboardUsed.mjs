@@ -8,16 +8,20 @@ export default function renderCurrentGameboardUsed(currentGame) {
     let gameboardContainer = document.createElement('div');
     gameboardContainer.id = 'gameboardContainer';
     gameboardContainer.classList.add('gameboardContainer');
-    gameboardContainer.style.backgroundColor = '#ffffff';
 
-    gameSection.appendChild(gameboardContainer);
-    for (let i = 0; i < currentGame.length; i++) {
-        for (let j = 0; j < currentGame[i].length; j++) {
+    document.documentElement.style.setProperty('--grid-columns', currentGame.gridColumns);
+    document.documentElement.style.setProperty('--grid-rows', currentGame.gridRows);
+
+
+    for (let i = 0; i < currentGame.grid.length; i++) {
+        for (let j = 0; j < currentGame.gridColumns; j++) {
+            console.log('Number of columns:', currentGame.gridColumns);
             let cell = document.createElement('div');
             cell.classList.add('cell'); 
             cell.id = `cell-(${i},${j})`;
-            cell.style.backgroundColor = "#f5f5dc";
-            cell.textContent = currentGame[i][j];
+            let cellNumber = currentGame.grid[i][j];
+            let cellColor = currentGame.colors[cellNumber];
+            cell.style.backgroundColor = cellColor;
 
         
             gameboardContainer.appendChild(cell);
