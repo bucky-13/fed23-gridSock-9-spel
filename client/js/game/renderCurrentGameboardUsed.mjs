@@ -41,6 +41,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
 
             
             console.log(arg);
+        
             // Render empty gameboard (sets new background color)
             renderEmptyGameboardColorClick(socket, color, roomId, currentGame);
 
