@@ -4,7 +4,7 @@ export default function createNewGameFetch() {
     let roomId = localStorage.getItem('roomId');
     console.log(roomId);
     console.log('I AM NEW GAME');
-    fetch(`http://localhost:3001/randomGame/${roomId}`, {
+    fetch(`https://game-99blu.ondigitalocean.app/${roomId}`, {
         method: 'GET'
     })
         .then((res) => res.json()).then((data) => {

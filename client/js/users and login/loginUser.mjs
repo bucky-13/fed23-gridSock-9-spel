@@ -6,7 +6,7 @@ export default function loginUser(userNameInput, loginContainer) {
     const inputUsername = userNameInput;
 
     let user = {userName: userNameInput}
-    fetch('http://localhost:3001/users', {
+    fetch('https://game-99blu.ondigitalocean.app/users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
