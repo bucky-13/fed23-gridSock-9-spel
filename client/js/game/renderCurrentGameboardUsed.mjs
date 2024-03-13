@@ -1,6 +1,7 @@
 import createElement from '../../lib/createElement.mjs';
 import socket from "../../lib/socket.mjs";
 import renderEmptyGameboardColorClick from './renderEmptyGameboardColorClick.mjs';
+import resetToMain from './resetToMain.mjs';
 
 let gameSection = document.getElementById('gameSection');
 
@@ -18,6 +19,12 @@ export default function renderCurrentGameboardUsed(currentGame) {
 
     // TEST FOR PEAK/HINT
     let hintContainer = createElement('div', 'hintContainer', 'hintContainer')
+    // results page elements
+    let resultContainer = createElement('div', 'resultContainer', 'resultContainer')
+    let resultScore = createElement('p', 'resultScore', 'resultScore')
+    let backToMainBtn = createElement('button', 'backToMainBtn', 'backToMainBtn', 'Back to menu')
+
+    backToMainBtn.addEventListener('click', resetToMain)
     for (let i = 0; i < currentGame.grid.length; i++) {
         for (let j = 0; j < currentGame.gridColumns; j++) {
             // console.log('Number of columns:', currentGame.gridColumns);
@@ -73,13 +80,14 @@ export default function renderCurrentGameboardUsed(currentGame) {
                     }
                 }
             
-                gameSection.appendChild(hintContainer)
+                gameboardContainer.appendChild(hintContainer)
 
                 setTimeout( function() {
                     hintContainer.remove()
                 }, 5000);
 
             })
+
             finishGameBtn.addEventListener('click', () => {
 
                 const gameData = {
@@ -116,15 +124,14 @@ export default function renderCurrentGameboardUsed(currentGame) {
                     console.error('There was a problem with the fetch operation:', error);
                 });
                 socket.emit('gameFinished', roomId)
+                socket.emit('gameResult')
+
+
+
+
             })
 
-            socket.on('gameResult', (result, activeGame, currentGame) => {
-                // Do a call to a function in another module here and pass in result, activeGame, currentGame
-                // You can remove console logs, they are just there for reference
-                console.log(result);
-                console.log(activeGame);
-                console.log(currentGame);
-            })
+
 
             // Retrieving the data from server: updating players color to all clients.
             socket.on('updateActiveGameboardClient', (arg) => {
@@ -136,6 +143,24 @@ export default function renderCurrentGameboardUsed(currentGame) {
         })
             
     }, 1000);
+
+    socket.on('gameResult', (result, activeGame, currentGame) => {
+        // Do a call to a function in another module here and pass in result, activeGame, currentGame
+        // You can remove console logs, they are just there for reference
+        console.log(result);
+        console.log(activeGame);
+        console.log(currentGame);
+        gameSection.innerText = ''
+        if (result.score <= 10) {
+        resultScore.innerText = `Your score: ${result.score.toFixed(2)}/${result.maxScore} Van...let that brush GO!`
+    } else if (result.score >= 11 && result <=50) {
+        resultScore.innerText = `Your score: ${result.score.toFixed(2)}/${result.maxScore}  let's just say you're no Picasso`
+    }
+        gameSection.append(resultContainer)
+        resultContainer.append(resultScore, backToMainBtn)
+        socket.emit('roundFinished', roomId)
+
+    })
 
     gameSection.append(gameboardContainer);
 

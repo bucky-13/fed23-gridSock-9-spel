@@ -29,6 +29,19 @@ body {
 		// width: 100vw;
 		.gameSection {
 			width: 80vw;
+			margin: 10px;
+
+			.resultContainer {
+				text-align: center;
+				font-size: 1.5rem;
+				background-color: $navBgColor;
+				display: flex;
+				justify-content: space-evenly;
+				border-radius: 10px;
+				flex-direction: column;
+				height: 40vh;
+			}
+
 			.gameLobbyContainer {
 				display: flex;
 				flex-direction: column;
@@ -110,6 +123,12 @@ body {
 			margin: 30px;
 			background-color: $chatBgColor;
 
+			.chatRoomHeader {
+				text-align: center;
+				text-transform: capitalize;
+				font-size: 1.5rem;
+				font-weight: 700;
+			}
 
 			.activeUserLoggedIn {
 				font-weight: 700;
@@ -118,13 +137,12 @@ body {
 			.chatInputContainer {
 				display: flex;
 				align-items: center;
+				margin-top: 20px;
 
 				.sendMessageInput {
-					margin-top: 20px;
-					margin-left: 39px;
-					width: 65%;
-					margin-right: 15px;
-					margin-bottom: 15px;
+					margin: 0;
+					width: 150px;
+
 					border: 1px solid $borderColor;
 					border-radius: 5px;
 					padding: 5px;
@@ -249,6 +267,20 @@ li {
 	align-items: center;
 	
 	gap: 1px 1px;
+}
+
+.gameboardContainer {
+	position: relative;
+	.hintContainer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		width: calc(100% - 50px);
+		height: 100%; 
+	}
 }
 
 .cell {

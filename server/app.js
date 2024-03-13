@@ -45,6 +45,8 @@ const sendCurrentGameboardUsed = require('./game/sendCurrentGameboardUsed.js');
 const generateActiveGame = require('./game/generateActiveGame.js');
 const updateActiveGameboardServer = require('./game/updateActiveGameboardServer.js');
 const calculateScore = require('./game/calculateScore.js');
+const roundFinish = require('./game/roundFinish.js');
+
 
 const { users, rooms, currentGameboardsUsed, activeGames } = require('./lib/serverDatabase.js');
 
@@ -74,6 +76,7 @@ const onConnection = (socket) => {
 	generateActiveGame(io, socket, users, rooms, currentGameboardsUsed, activeGames);
 	updateActiveGameboardServer(io, socket, users, rooms, currentGameboardsUsed, activeGames);
 	calculateScore(io, socket, users, rooms, currentGameboardsUsed, activeGames);
+	roundFinish(io, socket, users, rooms, currentGameboardsUsed, activeGames);
 };
 
 // INITIATING THE CONNECTION FUNCTION
