@@ -42,24 +42,13 @@ router.get('/finishGame/:roomId', (req, res, next) => {
             let sqlFindGame = `SELECT * from finishedGames WHERE gameId="${finishedGameId}"`
 
             req.app.locals.con.query(sqlFindGame, function (err, result) {
+
                 res.json(result)
 
-             })
-
-
- 
+             }) 
         });
     });
 });
-
-// function filterQuotes(text) {
-//     let array = []
-//     for (let i = 0; i < text.length; i++) {
-        
-//         let newText = text[i].replace(/"/g, '""');
-//     }
-//   return newText;
-// }
 
 router.get('/:roomId', (req, res, next) => {
 
