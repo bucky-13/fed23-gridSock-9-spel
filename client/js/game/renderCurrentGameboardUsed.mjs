@@ -7,6 +7,7 @@ let gameSection = document.getElementById('gameSection');
 
 export default function renderCurrentGameboardUsed(currentGame) { 
     let roomId = localStorage.getItem('roomId')
+    let userId = localStorage.getItem('userId')
     let color = localStorage.getItem('gameboardColor')
     let gameboardContainer = document.createElement('div');
     gameboardContainer.id = 'gameboardContainer';
@@ -37,7 +38,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
     setTimeout(function () {
             
 
-        socket.emit('generateActiveGame', roomId)
+        socket.emit('generateActiveGame', roomId, userId)
         socket.on('recieveActiveGame', (arg) => { 
 
             
@@ -55,22 +56,8 @@ export default function renderCurrentGameboardUsed(currentGame) {
             });
         })
             
-        // DETTA ÄR TESTKOD FÖR EVENTLISTENER, TA BORT DET HÄRIFRÅN ELLER KOMMENTERA UT, ANVÄND SAMMA NAMN I SOCKET FÖR ATT KALLA PÅ BACKEND
-        // test.addEventListener('click', () => {
-        // socket.emit('updateActiveGameboardServer', roomId, 4, 6, color)
-        // })
-
-        // socket.on('updateActiveGameboardClient', (arg) => { 
-        // console.log('updateActiveGameboardClient');
-        //     console.log(arg);
-        //     test.style.color = arg[2]
-        // LÅT ALLT UNDER DENNA KOMMENTAREN LIGGA KVAR SÅLÄNGE :)
-        //})
     }, 1000);
 
-    // DETTA SKA BORT SÅ SMÅNINGOM, JAG ANVÄNDER DET BARA FÖR ATT TESTA SAKER JUST NU :)
-    let test = createElement('p')
-    test.textContent = `I appear after 5 seconds because I am 5 seconds big :D My name is ${currentGame.description}`
-    gameSection.append(test, gameboardContainer);
-    console.log(currentGame);
+    gameSection.append(gameboardContainer);
+
 }
