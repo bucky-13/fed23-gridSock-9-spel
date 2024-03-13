@@ -40,10 +40,11 @@ const handlePlayerUnReady = require('./game/playersUnReady.js');
 const handleJoinRoom = require('./game/joinRoom.js');
 const handleLeaveRoom = require('./game/leaveRoom.js');
 const handleGetRooms = require('./game/getRooms.js');
-const assignColors = require('./game/assignColors.js')
-const sendCurrentGameboardUsed = require('./game/sendCurrentGameboardUsed.js')
-const generateActiveGame = require('./game/generateActiveGame.js')
-const updateActiveGameboardServer = require('./game/updateActiveGameboardServer.js')
+const assignColors = require('./game/assignColors.js');
+const sendCurrentGameboardUsed = require('./game/sendCurrentGameboardUsed.js');
+const generateActiveGame = require('./game/generateActiveGame.js');
+const updateActiveGameboardServer = require('./game/updateActiveGameboardServer.js');
+const calculateScore = require('./game/calculateScore.js');
 
 const { users, rooms, currentGameboardsUsed, activeGames } = require('./lib/serverDatabase.js');
 
@@ -72,6 +73,7 @@ const onConnection = (socket) => {
 	sendCurrentGameboardUsed(io, socket, users, rooms, currentGameboardsUsed);
 	generateActiveGame(io, socket, users, rooms, currentGameboardsUsed, activeGames);
 	updateActiveGameboardServer(io, socket, users, rooms, currentGameboardsUsed, activeGames);
+	calculateScore(io, socket, users, rooms, currentGameboardsUsed, activeGames);
 };
 
 // INITIATING THE CONNECTION FUNCTION
