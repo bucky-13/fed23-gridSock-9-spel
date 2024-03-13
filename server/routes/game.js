@@ -1,7 +1,13 @@
 let express = require('express');
 let router = express.Router();
 
-const { users, rooms, currentGameboardsUsed } = require('../lib/serverDatabase');
+const { users, rooms, currentGameboardsUsed, activeGames } = require('../lib/serverDatabase');
+
+let activeGamesSchema = {
+    animals: {},
+    fruits: {},
+    random: {}
+}
 
 router.get('/:roomId', (req, res, next) => {
 
@@ -34,7 +40,8 @@ router.get('/:roomId', (req, res, next) => {
                     console.log(err);
                 }
                       // Converts to normal arrays, use on colors and players
-        let colors = result[0].colors.split(',')
+                let colors = result[0].colors.split(',')
+                console.log(typeof colors);
 
         // First conversion of 2 dimensional array into one long array with strings
         let grid1dString = result[0].grid.split(',')
@@ -71,7 +78,35 @@ router.get('/:roomId', (req, res, next) => {
         
         // Add logic here to make game room be the same as the game room the user sends the request from
       
-        currentGameboardsUsed[roomId] = currentGameboard
+                currentGameboardsUsed[roomId] = currentGameboard
+
+                let gridCols = result[0].gridColumns
+                let gridLength = currentGameboard.grid.length
+           
+                activeGamesSchema[roomId].grid = []
+                // let gridColumns2 = []
+                // for (let i = 0; i < gridCols; i++) {
+                //     gridColumns2.push(5)
+                // }
+                for (let j = 0; j < gridLength; j++) {
+                    let gridColumns2 = []
+
+                    for (let i = 0; i < gridCols; i++) {
+                    gridColumns2.push(5)
+                    }
+
+                    activeGamesSchema[roomId].grid.push(gridColumns2)
+                }
+                
+                activeGames[roomId].boardId = result[0].boardId
+                activeGames[roomId].colors = colors;
+                activeGames[roomId].gridColumns = result[0].gridColumns;
+                activeGames[roomId].description = result[0].description;
+                activeGames[roomId].grid = activeGamesSchema[roomId].grid;
+
+                // resets local variables 
+                delete activeGamesSchema[roomId].grid
+
 
             res.json(currentGameboard);
             });  
