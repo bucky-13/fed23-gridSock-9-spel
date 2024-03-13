@@ -2,11 +2,14 @@
 import createElement from "../../lib/createElement.mjs";
 import socket from "../../lib/socket.mjs";
 import joinRoom from "./joinRoom.mjs";
+import chatRender from "../Chat/chatRender.mjs";
 
 let gameSection = document.getElementById('gameSection');
 
 export default function renderGameLobbies() {
     gameSection.innerText= ''
+    let currentRoom = 'general';
+    chatRender(currentRoom)
 
     let gameLobbyContainer = createElement('section', 'gameLobbyContainer', 'gameLobbyContainer', '');
     gameSection.appendChild(gameLobbyContainer);
@@ -24,7 +27,7 @@ export default function renderGameLobbies() {
             const joinRoomBtn = createElement('button', `${room}`, 'joinRoomBtn', `Join ${room}`);
             const leaveRoomBtn = createElement('button', `leaveRoomBtn${room}`, 'leaveRoomBtn', `Leave ${room}`);
 
-            if (rooms[room].length >= 2) {
+            if (rooms[room].length >= 2) { //CHANGE TO 4 @@@
                 joinRoomBtn.setAttribute('disabled', '')
                 joinRoomBtn.innerText = 'Lobby is full'
             }
@@ -34,19 +37,20 @@ export default function renderGameLobbies() {
             gameLobbyContainer.appendChild(roomArticle);
 
             joinRoomBtn.addEventListener('click', () => {
-                roomArticleHeader.innerText =  `stan - (${room.length}/4 in lobby)`
+              currentRoom = room;
                 joinRoom(room, leaveRoomBtn, roomArticleHeader);
-                localStorage.setItem('roomId', room)
-                console.log(room);
 
-                if (rooms[room].length >= 2) {
+                localStorage.setItem('roomId', room)
+                
+                if (rooms[room].length >= 2) { //CHANGE TO 4 @@@
                     joinRoomBtn.setAttribute('disabled', '')
                     joinRoomBtn.innerText = 'Lobby is full'
                 }
-
-
+                chatRender(currentRoom)
             });
-            leaveRoomBtn.addEventListener('click', () => userLeavesRoom(room));
+            leaveRoomBtn.addEventListener('click', () => {
+                userLeavesRoom(room)
+            });
 
             
         });
@@ -55,10 +59,8 @@ export default function renderGameLobbies() {
 }
 
 function userLeavesRoom(room) {
-    console.log(room.length);
     let username = localStorage.getItem('username')
     let roomId = room; 
-    localStorage.removeItem('roomId')
     socket.emit('leaveRoom', { username, roomId });
     renderGameLobbies()
 }

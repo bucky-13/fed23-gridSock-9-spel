@@ -7,7 +7,7 @@ module.exports = (io, socket, users, rooms) => {
 			}
 		});
 		io.emit('updateRooms', rooms);
-		io.emit('chat', { message: `${arg} har loggat ut`, user: 'Server' });
+		io.emit('chatGeneral', { message: `${arg} har loggat ut`, user: 'Server' });
 		io.emit('updateUserList', Object.values(users));
 		delete users[socket.id];
 	});

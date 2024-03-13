@@ -1,21 +1,22 @@
 import createElement from '../../lib/createElement.mjs';
 
 export default function updateChat(chat, chatBox, userActivity) {
-    let topChat = document.querySelector('.newMessage');
-    let newMessage = createElement('li', 'newMessage', 'newMessage', `${chat.user}: ${chat.message}`)
-    if (chat.user === localStorage.getItem('username')) {
-        newMessage.classList.add('leftMessage');
-      } else if (chat.user === 'Server') {
-        newMessage.classList.add('serverMessage');
-        // newMessage.classList.remove('newMessage')
-      } else {
-        newMessage.classList.add('rightMessage');
-      }
-      userActivity.innerText = ''
+    userActivity.innerText = '';
 
-    if (topChat) {
-        topChat.parentNode.insertBefore(newMessage, topChat)
+    const timestamp = new Date().toLocaleTimeString();
+    let chatUser = createElement('strong', 'chatUser', 'chatUser', ` ${chat.user}: `)
+
+    const newMessage = createElement('li', 'newMessage', 'newMessage', `[${timestamp}]`);
+    newMessage.append(chatUser, chat.message)
+
+    if (chat.user === localStorage.getItem('username')) {
+        newMessage.classList.add('rightMessage');
+    } else if (chat.user === 'Server') {
+        newMessage.classList.add('serverMessage');
     } else {
-        chatBox.append(newMessage)
+        newMessage.classList.add('leftMessage');
     }
+
+    chatBox.appendChild(newMessage);
 }
+
