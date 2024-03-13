@@ -40,6 +40,8 @@ export default function renderGameLobbies() {
               currentRoom = room;
                 joinRoom(room, leaveRoomBtn, roomArticleHeader);
 
+                localStorage.setItem('roomId', room)
+                
                 if (rooms[room].length >= 2) { //CHANGE TO 4 @@@
                     joinRoomBtn.setAttribute('disabled', '')
                     joinRoomBtn.innerText = 'Lobby is full'
