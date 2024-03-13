@@ -2,9 +2,9 @@ const { activeGames } = require("../lib/serverDatabase");
 
 function calculateScore(activeGame, currentGame, roomId) {
     let correctCount = 0;
-    const totalCells = activeGame.length * activeGame[0].length;
+    const totalCells = currentGame.length * currentGame.[0].length;
 
-    for (let i = 0; i < activeGame.length; i++) {
+    for (let i = 0; i < activeGame.grid.length; i++) {
         for (let j = 0; j < activeGame[i].length; j++) {
             if (activeGame[i][j] === currentGame[i][j]) {
                 correctCount++;
@@ -13,7 +13,7 @@ function calculateScore(activeGame, currentGame, roomId) {
     }
 
     const score = (correctCount / totalCells) * 100;
-    return {roomId, score };
+    return {roomId, score, maxScore: totalCells };
 }
 
 function handleGameFinished(io, socket, users, rooms, currentGameboardsUsed, activeGames) {
