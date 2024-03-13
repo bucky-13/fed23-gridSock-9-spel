@@ -114,13 +114,6 @@ router.get('/:roomId', (req, res, next) => {
     });
 });
 
-// function bajs(roomId, result) {
-    
-    
-    // Creating active game
-                
-// }
-
 // POST request for leter use (SAVE GAME)!
 
 /*
