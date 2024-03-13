@@ -10,7 +10,7 @@ module.exports = (io, socket, users, usersReady) => {
                 }
             }
         } else {
-            if (Object.values(usersReady).length < 2) {
+            if (Object.values(usersReady).length < 2) { //CHANGE TO 4 WHEN PROD
                 usersReady[socket.id] = username;
                 console.log(`Added ${username} to usersReady`);
             } else {

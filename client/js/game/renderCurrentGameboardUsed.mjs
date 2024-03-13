@@ -52,7 +52,40 @@ export default function renderCurrentGameboardUsed(currentGame) {
             gameSection.append(finishGameBtn)
 
             finishGameBtn.addEventListener('click', () => {
-                // make a call to a fetch request here instead, and add the socket emit on the next line after you've recieved a response from the fetch request
+
+                const gameData = {
+                    boardId: currentGame.boardId,
+                    userId1: currentGame.userId1,
+                    userId2: currentGame.userId2,
+                    userId3: 13, // CHANGE/remove?
+                    userId4: 4, // CHANGE/remove?
+                    gridColumns: currentGame.gridColumns,
+                    description: currentGame.description,
+                    colors: currentGame.colors,
+                    grid: currentGame.grid
+                };
+
+                // CHANGE TO CORRECT URL
+                fetch(`http://localhost:3001/randomGame/finishGame/${roomId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(gameData)
+
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
                 socket.emit('gameFinished', roomId)
             })
 

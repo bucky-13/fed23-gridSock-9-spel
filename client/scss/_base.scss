@@ -217,15 +217,15 @@ li {
 	grid-template-rows: repeat(var(--grid-rows), 15px);
 	justify-content: center;
 	align-items: center;
-
-	gap: 0 0;
+	
+	gap: 1px 1px;
 }
 
 .cell {
 
 	width: 15px;
 	height: 15px;
-	border: 1px solid black;
+	border: 1px solid rgba(0, 0, 0, 0.432);
 }
 
 
