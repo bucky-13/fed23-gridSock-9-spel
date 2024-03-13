@@ -40,7 +40,8 @@ router.get('/:roomId', (req, res, next) => {
                     console.log(err);
                 }
                       // Converts to normal arrays, use on colors and players
-        let colors = result[0].colors.split(',')
+                let colors = result[0].colors.split(',')
+                console.log(typeof colors);
 
         // First conversion of 2 dimensional array into one long array with strings
         let grid1dString = result[0].grid.split(',')
@@ -81,20 +82,24 @@ router.get('/:roomId', (req, res, next) => {
 
                 let gridCols = result[0].gridColumns
                 let gridLength = currentGameboard.grid.length
-
-                console.log(gridCols);
-                console.log(gridLength);
-            
+           
                 activeGamesSchema[roomId].grid = []
-                let gridColumns2 = []
-                for (let i = 0; i < gridCols; i++) {
-                    gridColumns2.push(5)
-                }
+                // let gridColumns2 = []
+                // for (let i = 0; i < gridCols; i++) {
+                //     gridColumns2.push(5)
+                // }
                 for (let j = 0; j < gridLength; j++) {
+                    let gridColumns2 = []
+
+                    for (let i = 0; i < gridCols; i++) {
+                    gridColumns2.push(5)
+                    }
+
                     activeGamesSchema[roomId].grid.push(gridColumns2)
                 }
                 
-                activeGames[roomId].colors = result[0].colors;
+                activeGames[roomId].boardId = result[0].boardId
+                activeGames[roomId].colors = colors;
                 activeGames[roomId].gridColumns = result[0].gridColumns;
                 activeGames[roomId].description = result[0].description;
                 activeGames[roomId].grid = activeGamesSchema[roomId].grid;
@@ -108,13 +113,6 @@ router.get('/:roomId', (req, res, next) => {
         });
     });
 });
-
-// function bajs(roomId, result) {
-    
-    
-    // Creating active game
-                
-// }
 
 // POST request for leter use (SAVE GAME)!
 

@@ -15,7 +15,8 @@ export default function loginUser(userNameInput, loginContainer) {
         .then((res) => res.json()).then((data) => {
         if (data.userName) {
             socket.connect();
-            localStorage.setItem('username', inputUsername);
+          localStorage.setItem('username', inputUsername);
+          localStorage.setItem('userId', data.userId)
             let username = inputUsername;
             socket.emit('login', username);
             if (loginContainer) {
