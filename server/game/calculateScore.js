@@ -13,16 +13,15 @@ function calculateScore(activeGame, currentGame, roomId) {
     }
 
     const score = (correctCount / totalCells) * 100;
-    return {roomId, score, maxScore: totalCells };
+    return { score, maxScore: totalCells };
 }
 
-function handleGameFinished(io, socket, users, rooms, currentGameboardsUsed, activeGames) {
+module.exports = (io, socket, users, rooms, currentGameboardsUsed, activeGames) => {
     socket.on('gameFinished', (roomId) => {
         const activeGame = activeGames[roomId];
         const currentGame = currentGameboardsUsed[roomId];
-        const result = calculateScore(activeGame.grid, currentGame, roomId);
-        io.to(roomId).emit('gameResult', result);
+        const result = calculateScore(activeGame, currentGame, roomId);
+        io.to(roomId).emit('gameResult', result, activeGame, currentGame);
     })
 }
 
-module.exports = { calculateScore, handleGameFinished };
