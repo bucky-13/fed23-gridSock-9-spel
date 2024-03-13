@@ -16,7 +16,8 @@ export default function renderCurrentGameboardUsed(currentGame) {
     document.documentElement.style.setProperty('--grid-columns', currentGame.gridColumns);
     document.documentElement.style.setProperty('--grid-rows', currentGame.gridRows);
 
-
+    // TEST FOR PEAK/HINT
+    let hintContainer = createElement('div', 'hintContainer', 'hintContainer')
     for (let i = 0; i < currentGame.grid.length; i++) {
         for (let j = 0; j < currentGame.gridColumns; j++) {
             // console.log('Number of columns:', currentGame.gridColumns);
@@ -48,9 +49,37 @@ export default function renderCurrentGameboardUsed(currentGame) {
             renderEmptyGameboardColorClick(socket, color, roomId, currentGame);
 
             // Just so I had a button for testing backend, feel free to change name, class etc on this one
-            const finishGameBtn = createElement('button', 'endGameBtn', 'endGameBtn', 'End game')
-            gameSection.append(finishGameBtn)
+            const finishGameBtn = createElement('button', 'endGameBtn', 'endGameBtn', 'End round')
+            const hintBtn = createElement('button', 'hintBtn', 'hintBtn', 'Take a peak')
+            gameSection.append(finishGameBtn, hintBtn)
 
+            hintBtn.addEventListener('click', () => {
+                hintContainer.innerText = '';
+                for (let i = 0; i < currentGame.grid.length; i++) {
+                    for (let j = 0; j < currentGame.gridColumns; j++) {
+                        // console.log('Number of columns:', currentGame.gridColumns);
+                        let cell = document.createElement('div');
+                        cell.classList.add('cell'); 
+                        cell.id = `cell-(${i},${j})`;
+                        // Added: dataset-attribute, used to store custom data in HTML-elements. 
+                        cell.dataset.x = i;
+                        cell.dataset.y = j;
+                        let cellNumber = currentGame.grid[i][j];
+                        let cellColor = currentGame.colors[cellNumber];
+                        cell.style.backgroundColor = cellColor;
+            
+                    
+                        hintContainer.appendChild(cell);
+                    }
+                }
+            
+                gameSection.appendChild(hintContainer)
+
+                setTimeout( function() {
+                    hintContainer.remove()
+                }, 5000);
+
+            })
             finishGameBtn.addEventListener('click', () => {
 
                 const gameData = {
