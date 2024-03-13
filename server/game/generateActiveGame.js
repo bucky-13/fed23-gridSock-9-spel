@@ -5,8 +5,12 @@ let playersReady = {
 };
 
 module.exports = (io, socket, users, rooms, currentGameboardsUsed, activeGames) => {
-    socket.on('generateActiveGame', (roomId) => {             
+    socket.on('generateActiveGame', (roomId, userId) => {             
         playersReady[roomId]++;
+
+        // Saves each players userId to active game object
+        let player = `userId${playersReady[roomId]}`
+        activeGames[roomId][player] = Number(userId);
            
             
         // CHANGE 2 INTO 4 WHEN DEPLOYING ------------IMPORTANT!

@@ -6,6 +6,7 @@ let gameSection = document.getElementById('gameSection');
 
 export default function renderCurrentGameboardUsed(currentGame) { 
     let roomId = localStorage.getItem('roomId')
+    let userId = localStorage.getItem('userId')
     let color = localStorage.getItem('gameboardColor')
     let gameboardContainer = document.createElement('div');
     gameboardContainer.id = 'gameboardContainer';
@@ -33,7 +34,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
     setTimeout(function () {
             
 
-        socket.emit('generateActiveGame', roomId)
+        socket.emit('generateActiveGame', roomId, userId)
         socket.on('recieveActiveGame', (arg) => { 
 
             // LÄGG IN FUNKTIONEN NI VILL KALLA PÅ HÄR

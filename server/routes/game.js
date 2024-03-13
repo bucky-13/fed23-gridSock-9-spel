@@ -98,6 +98,7 @@ router.get('/:roomId', (req, res, next) => {
                     activeGamesSchema[roomId].grid.push(gridColumns2)
                 }
                 
+                activeGames[roomId].boardId = result[0].boardId
                 activeGames[roomId].colors = colors;
                 activeGames[roomId].gridColumns = result[0].gridColumns;
                 activeGames[roomId].description = result[0].description;
