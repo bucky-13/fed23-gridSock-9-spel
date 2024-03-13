@@ -106,7 +106,7 @@ router.get('/:roomId', (req, res, next) => {
                 grid.push(gridColumns);
                 gridColumns = [];
             }
-      }
+        }
 
         let currentGameboard = {
             boardId: result[0].boardId,
@@ -117,7 +117,7 @@ router.get('/:roomId', (req, res, next) => {
             grid: grid
                 };
         
-        // Add logic here to make game room be the same as the game room the user sends the request from
+            // Add logic here to make game room be the same as the game room the user sends the request from
       
                 currentGameboardsUsed[roomId] = currentGameboard
 
@@ -155,42 +155,65 @@ router.get('/:roomId', (req, res, next) => {
     });
 });
 
-// POST request for leter use (SAVE GAME)!
+router.get('/playedGames/:userId', (req, res, next) => {
 
-/*
-router.post('/', (req, res, next) => {
+    let userId = req.params.userId;
+
     req.app.locals.con.connect(function (err) {
         if (err) {
             console.log(err);
         }
-        let userName = req.body.userName;
-        let firstSql = `SELECT * FROM users WHERE userName="${userName}"`
-        // THIS CHECK IF USER ALREADY EXISTS, IF YES, SENDS BACK INFORMATION ABOU TUSER
-        req.app.locals.con.query(firstSql, function (err, user) {
+
+        let sqlFindGame = `SELECT * FROM finishedGames WHERE userId1="${userId}" OR userId2="${userId}" OR userId3="${userId}" OR userId4="${userId}"`
+
+        req.app.locals.con.query(sqlFindGame, function (err, result) {
             if (err) {
                 console.log(err);
             }
-            if (user[0]) {
-                res.json(user[0])
-            } else {
-                // IF USER DOESN'T EXIST, CREATES USER AND SENDS BACK CREATED USER INFORMATION
-                let secondSql = `INSERT INTO users (userName) VALUES ("${userName}")`;
-                req.app.locals.con.query(secondSql, function (err, result) {
-                    if (err) {
-                        console.log(err);
-                    }
 
-                    req.app.locals.con.query(firstSql, function (err, result) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        res.json(result[0])
-                    })
+            let allPlayedGameboards = [];
+
+            for (let x = 0; x < result.length; x++) {
+
+                let colors = result[x].colors.split(',')
+                console.log(typeof colors);
+
+                // First conversion of 2 dimensional array into one long array with strings
+                let grid1dString = result[x].grid.split(',')
+                // Changes the strings in the 2d array into numbers (int)
+                let grid1dInt = grid1dString.map(function (str) {
+                    return parseInt(str);
                 })
+
+                // This is the final version of the 2 dimensional array
+                let grid = [];
+                // This is each row that gets inserted
+                let gridColumns = [];
+
+                for (let i = 0; i < grid1dInt.length; i++) {
+            
+                gridColumns.push(grid1dInt[i])
+
+                // When each row have X amount of entries, it gets pushed to grid and empties so a new row can be created
+                if (gridColumns.length >= result[x].gridColumns) {
+                grid.push(gridColumns);
+                gridColumns = [];
+                }
+                }
+                let currentGameboard = {
+                boardId: result[x].boardId,
+                gridColumns: result[x].gridColumns,
+                name: result[x].name,
+                description: result[x].description,
+                colors: colors,
+                grid: grid
+                };
+
+                allPlayedGameboards.push(currentGameboard)  
             }
-        })
-    })
-})
-*/
+            res.json(allPlayedGameboards);
+        });
+    });
+});
 
 module.exports = router;
