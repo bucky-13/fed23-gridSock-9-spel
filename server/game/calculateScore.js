@@ -11,13 +11,12 @@ function calculateScore(activeGame, currentGame, roomId) {
     }
 
     const score = (correctCount / totalCells) * 100;
-    console.log(score);
     return { score, maxScore: 100 };
 }
 
 module.exports = (io, socket, users, rooms, currentGameboardsUsed, activeGames) => {
     socket.on('gameFinished', (roomId) => {
-        console.log('i happen');
+
         const activeGame = activeGames[roomId];
         const currentGame = currentGameboardsUsed[roomId];
         const result = calculateScore(activeGame, currentGame, roomId);
