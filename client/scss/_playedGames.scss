@@ -8,31 +8,40 @@
     display: flex;
     flex-direction: column;
     padding: 1rem 1rem 0 1rem;
+    margin-top: 10px;
 }
 
 .closeBtn {
     align-self: self-end;
-    background-color: $primaryBtn;
+    background-color: $logOutBtn;
+    color: $chatBoxBgColor;
     padding: 0.3rem 1rem;
     font-size: 1.5rem;
     font-family: sans-serif;
     font-weight: 700;
     border: none;
     border-radius: 8px;
+    margin-right: 5px;
 }
 
 .closeBtn:hover {
     background-color: $primaryBtnHover;
 }
 .playedGamesBtn {
-    background-color: $primaryBtn;
-    color: white;
+    background-color: $gameBoard;
+    color: $chatBoxBgColor;
     border: none;
     border-radius: 8px;
+    margin-bottom: 5px;
+    margin-top: 3px;
+    margin-right: 15px;
+    text-transform: capitalize;
+    cursor: pointer;
+    letter-spacing: 0.01rem;
 }
 
 .playedGamesBtn:hover {
-background-color: $primaryBtnHover;
+background-color: $gameLobby;
 }
 
 .playedGamesH2 {
@@ -49,7 +58,6 @@ background-color: $primaryBtnHover;
 
 .playedGameContainer {
     display: grid;
-    
     gap: 0;
     margin: 0;
 }
