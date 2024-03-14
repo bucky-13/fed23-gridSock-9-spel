@@ -55,9 +55,14 @@ export default function chatRender(currentRoom) {
 	// TO-DO OM TID FINNS: Göra så att det står "users" om flera skriver
 	let clearActivity;
 
-	sendMessageInput.addEventListener('keypress', () => {
+	sendMessageInput.addEventListener('keypress', (e) => {
 		if (currentRoom !== 'general') {
 			socket.emit('activity', user, currentRoom);
+		}
+
+		if(e.key === 'Enter') {
+			e.preventDefault();
+			sendMsg(user, currentRoom)
 		}
 	});
 
@@ -83,24 +88,7 @@ export default function chatRender(currentRoom) {
 
 	//Event listener for sending a new message
 	sendMessageBtn.addEventListener('click', () => {
-		if (sendMessageInput.value.trim() !== '') {
-			if (currentRoom) {
-				console.log('det här är current', currentRoom);
-				socket.emit('chat', {
-					user,
-					message: sendMessageInput.value,
-					room: currentRoom,
-				});
-			} else {
-				console.log('det här är INTE current');
-
-				socket.emit('chat', { user, message: sendMessageInput.value });
-			}
-			sendMessageInput.value = '';
-		} else {
-			errorMsg(chatContainer, 'The message cannot be empty!');
-			console.log('The input field cannot be empty!');
-		}
+		sendMsg(user, currentRoom)
 	});
 	if (currentRoom != 'general') {
 		socket.on('chatRoom', (arg) => {
@@ -116,4 +104,26 @@ export default function chatRender(currentRoom) {
 		});
 	}
 	chatContainer.append(chatRoomHeader, userList, chatBox, chatInputContainer);
+}
+
+function sendMsg(user, currentRoom) {
+	if (sendMessageInput.value.trim() !== '') {
+		if (currentRoom) {
+			console.log('det här är current', currentRoom);
+			socket.emit('chat', {
+				user,
+				message: sendMessageInput.value,
+				room: currentRoom,
+			});
+		} else {
+			console.log('det här är INTE current');
+
+			socket.emit('chat', { user, message: sendMessageInput.value });
+		}
+		sendMessageInput.value = '';
+	} else {
+		errorMsg(chatContainer, 'The message cannot be empty!');
+		console.log('The input field cannot be empty!');
+	}
+
 }
