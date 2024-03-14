@@ -9,6 +9,47 @@ let activeGamesSchema = {
     random: {}
 }
 
+router.get('/finishGame/:roomId', (req, res, next) => {
+
+    let roomId = req.params.roomId;
+
+    let userTemp3 = 13;
+    let userTemp4 = 4;
+    console.log(roomId);
+
+    let game = activeGames[roomId]
+    // let colors = filterQuotes(activeGames[roomId].colors)
+
+    console.log(game);
+
+    req.app.locals.con.connect(function (err) {
+        if (err) {
+            console.log(err);
+        }
+        let sqlInsert = `INSERT INTO finishedGames (boardId, userId1, userId2, userId3, userId4, gridColumns, description, colors, grid) VALUES (${game.boardId}, ${game.userId1}, ${game.userId2}, ${userTemp3}, ${userTemp4}, ${game.gridColumns}, "${game.description}", "${game.colors}", "${game.grid}")`
+
+        // res.send(finishedGame)
+
+        // let sqlCount = `SELECT COUNT(*) as count FROM gameboards`;
+
+        req.app.locals.con.query(sqlInsert, function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+
+            let finishedGameId = result.insertId
+
+            let sqlFindGame = `SELECT * from finishedGames WHERE gameId="${finishedGameId}"`
+
+            req.app.locals.con.query(sqlFindGame, function (err, result) {
+
+                res.json(result)
+
+             }) 
+        });
+    });
+});
+
 router.get('/:roomId', (req, res, next) => {
 
     let roomId = req.params.roomId;
