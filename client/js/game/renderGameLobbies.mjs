@@ -32,6 +32,16 @@ export default function renderGameLobbies() {
                 joinRoomBtn.innerText = 'Lobby is full'
             }
 
+            socket.emit('isGameInProgress', room)
+            socket.on('isRoomAvailable', (arg, playersInGame, roomId) => {
+
+                if (room === roomId) {
+                    if (arg === 'no') {  
+                        joinRoomBtn.setAttribute('disabled', '')
+                        joinRoomBtn.innerText = 'Game still in progress'
+                    } 
+                }
+            })
 
             roomArticle.append(roomArticleHeader, joinRoomBtn);
             gameLobbyContainer.appendChild(roomArticle);

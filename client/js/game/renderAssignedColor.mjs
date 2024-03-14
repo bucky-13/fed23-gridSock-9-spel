@@ -19,8 +19,6 @@ export default function renderAssignedColor() {
     containerDiv.append(h2, colorDiv)
     gameSection.append(containerDiv)
 
-    console.log(`Your color is ${chosenColor} `);
-
     setTimeout(function () {
         socket.emit('sendCurrentGameboardUsed', roomId)
         socket.once('recieveCurrentGameboardUsed', (arg) => { 

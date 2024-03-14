@@ -8,7 +8,6 @@ export default function displayPlayedGames(data) {
     let userName = localStorage.getItem('username')
 
     let games = data
-    console.log(games.length);
 
     if (isActive === false) {
         let playedGamesContainer = createElement('div', 'playedGamesContainer', 'playedGamesContainer')
@@ -18,9 +17,7 @@ export default function displayPlayedGames(data) {
 
         topDiv.append(test, closeBtn)
         playedGamesContainer.append(topDiv)
-        console.log(isActive);
         gameSection.append(playedGamesContainer)
-        console.log('test');
         isActive = true;
 
         closeBtn.addEventListener('click', () => {
@@ -41,7 +38,6 @@ export default function displayPlayedGames(data) {
 
             for (let i = 0; i < games[x].grid.length; i++) {
                 for (let j = 0; j < games[x].gridColumns; j++) {
-                    // console.log('Number of columns:', currentGame.gridColumns);
                     let cell = document.createElement('div');
                     cell.classList.add('cell'); 
                     cell.id = `cell-(${i},${j})`;

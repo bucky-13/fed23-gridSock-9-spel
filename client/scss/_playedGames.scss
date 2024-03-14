@@ -1,5 +1,5 @@
 .playedGamesContainer {
-    background-color: $primaryBgColor;
+    background-color: $gameLobby;
     position: absolute;
     left: 0;
     top: 90px;
@@ -8,11 +8,11 @@
     display: flex;
     flex-direction: column;
     padding: 1rem 1rem 0 1rem;
-    margin-top: 10px;
+    color: white;
 }
 
 .closeBtn {
-    align-self: self-end;
+    align-self: center;
     background-color: $logOutBtn;
     color: $chatBoxBgColor;
     padding: 0.3rem 1rem;
@@ -21,11 +21,11 @@
     font-weight: 700;
     border: none;
     border-radius: 8px;
-    margin-right: 5px;
+    margin-left: 4rem;
 }
 
 .closeBtn:hover {
-    background-color: $primaryBtnHover;
+    background-color: $logOutHoverBtn;
 }
 .playedGamesBtn {
     background-color: $gameBoard;
@@ -44,32 +44,36 @@
 background-color: $gameLobby;
 }
 
-.playedGamesH2 {
-    align-self: center;
-    margin-bottom: 1rem;
-}
-
 .topDivPlayedGames {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 2rem;
 }
 
 .playedGameContainer {
     display: grid;
+    background-color: $primaryBgColor;
     gap: 0;
     margin: 0;
+    padding: 1rem;
+    border: 2px solid white;
 }
 
 .gamesListContainer {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .playedGameGridContainer {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

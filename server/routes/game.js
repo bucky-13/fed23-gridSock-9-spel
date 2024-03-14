@@ -13,11 +13,7 @@ let activeGamesSchema = {
 router.get('/finishGame/:roomId', (req, res, next) => {
 
     let roomId = req.params.roomId;
-
     let game = activeGames[roomId]
-    // let colors = filterQuotes(activeGames[roomId].colors)
-
-    console.log(game);
 
     req.app.locals.con.connect(function (err) {
         if (err) {
@@ -55,7 +51,6 @@ router.get('/:roomId', (req, res, next) => {
 
     let roomId = req.params.roomId;
 
-    console.log(roomId);
     req.app.locals.con.connect(function (err) {
         if (err) {
             console.log(err);
@@ -69,7 +64,6 @@ router.get('/:roomId', (req, res, next) => {
             }
 
             const count = result[0].count;
-            // console.log(typeof result[0].count);
 
             // Generera ett slumpmässigt id
             let randomId = Math.floor(Math.random() * count) + 1;
@@ -83,7 +77,6 @@ router.get('/:roomId', (req, res, next) => {
                 }
                       // Converts to normal arrays, use on colors and players
                 let colors = result[0].colors.split(',')
-                console.log(typeof colors);
 
         // First conversion of 2 dimensional array into one long array with strings
         let grid1dString = result[0].grid.split(',')
@@ -177,7 +170,6 @@ router.get('/playedGames/:userId', (req, res, next) => {
             for (let x = 0; x < result.length; x++) {
 
                 let colors = result[x].colors.split(',')
-                console.log(typeof colors);
 
                 // First conversion of 2 dimensional array into one long array with strings
                 let grid1dString = result[x].grid.split(',')

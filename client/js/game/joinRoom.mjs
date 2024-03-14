@@ -83,7 +83,7 @@ export default function joinRoom(room, leaveRoomBtn) {
 		});
 	});
 
-	createNewGameSocket();
+	createNewGameSocket(false);
 	startGameBtn.addEventListener('click', () => {
 		createNewGameFetch();
 	});

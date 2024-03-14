@@ -1,12 +1,22 @@
 import socket from "../../lib/socket.mjs";
 import renderAssignedColor from "./renderAssignedColor.mjs";
 
-export default function createNewGameSocket() { 
+let runFunction = true;
+
+export default function createNewGameSocket(reset) { 
     
-    socket.once('newGameStart', (arg) => {
-        //Stores color player is using in local storage
-        localStorage.setItem('gameboardColor', arg);
-        renderAssignedColor();
-    })
+    if (runFunction) {
+
+        socket.once('newGameStart', (arg) => {
+            //Stores color player is using in local storage
+            localStorage.setItem('gameboardColor', arg);
+            renderAssignedColor();
+        })
+        runFunction = false;
+    }
+
+    if (reset) {
+        runFunction = true;
+    }
     
 }
