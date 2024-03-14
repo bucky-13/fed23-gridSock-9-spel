@@ -24,10 +24,6 @@ router.get('/finishGame/:roomId', (req, res, next) => {
         }
         let sqlInsert = `INSERT INTO finishedGames (boardId, userId1, userId2, userId3, userId4, gridColumns, description, colors, grid) VALUES (${game.boardId}, ${game.userId1}, ${game.userId2}, ${game.userId3}, ${game.userId4}, ${game.gridColumns}, "${game.description}", "${game.colors}", "${game.grid}")`
 
-        // res.send(finishedGame)
-
-        // let sqlCount = `SELECT COUNT(*) as count FROM gameboards`;
-
         req.app.locals.con.query(sqlInsert, function (err, result) {
             if (err) {
                 console.log(err);
