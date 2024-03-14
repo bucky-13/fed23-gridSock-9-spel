@@ -23,7 +23,15 @@ router.get('/finishGame/:roomId', (req, res, next) => {
         if (err) {
             console.log(err);
         }
-        let sqlInsert = `INSERT INTO finishedGames (boardId, userId1, userId2, userId3, userId4, gridColumns, description, colors, grid) VALUES (${game.boardId}, ${game.userId1}, ${game.userId2}, ${game.userId3}, ${game.userId4}, ${game.gridColumns}, "${game.description}", "${game.colors}", "${game.grid}")`
+        let user3 = 69;
+        let user4 = 77;
+        if (game.userId3 !== undefined) {
+            user3 = game.userId3;
+        }
+        if (game.userId4 !== undefined) {
+            user4 = game.userId4;
+        }
+        let sqlInsert = `INSERT INTO finishedGames (boardId, userId1, userId2, userId3, userId4, gridColumns, description, colors, grid) VALUES (${game.boardId}, ${game.userId1}, ${game.userId2}, ${user3}, ${user4}, ${game.gridColumns}, "${game.description}", "${game.colors}", "${game.grid}")`
 
         req.app.locals.con.query(sqlInsert, function (err, result) {
             if (err) {
