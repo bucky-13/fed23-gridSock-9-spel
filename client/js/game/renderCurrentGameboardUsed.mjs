@@ -87,14 +87,14 @@ export default function renderCurrentGameboardUsed(currentGame) {
 
                 setTimeout( function() {
                     hintContainer.remove()
-                }, 5000);
+                }, 2000);
 
             })
 
             finishGameBtn.addEventListener('click', () => {
 
                 // CHANGE TO CORRECT URL
-                fetch(`http://localhost:3001/randomGame/finishGame/${roomId}`, {
+                fetch(`https://game-99blu.ondigitalocean.app/randomGame/finishGame/${roomId}`, {
                     method: 'GET'
                 })
                 .then(response => {
@@ -128,7 +128,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
             });
         })
             
-    }, 1000);
+    }, 10000);
 
     socket.on('gameResult', (result, activeGame, currentGame) => {
         // Do a call to a function in another module here and pass in result, activeGame, currentGame
@@ -139,8 +139,10 @@ export default function renderCurrentGameboardUsed(currentGame) {
         gameSection.innerText = ''
         if (result.score <= 10) {
         resultScore.innerText = `Your score: ${result.score.toFixed(2)}/${result.maxScore} Van...let that brush GO!`
-    } else if (result.score >= 11 && result <=50) {
+        } else if (result.score > 10 && result.score <= 50) {
         resultScore.innerText = `Your score: ${result.score.toFixed(2)}/${result.maxScore}  let's just say you're no Picasso`
+        } else {
+            resultScore.innerText = `Your score: ${result.score.toFixed(2)}/${result.maxScore}  let's just say you're Picasso :)`
     }
         gameSection.append(resultContainer)
         resultContainer.append(resultScore, backToMainBtn)

@@ -14,7 +14,7 @@ module.exports = (io, socket, users, rooms, currentGameboardsUsed, activeGames) 
                  
             // CHANGE 2 INTO 4 WHEN DEPLOYING ------------IMPORTANT!
                 // This if statement makes sure that the emit to frontend from the timer only happens after it's recieved a call from all 4 players. (2 currently so we only have to test with 2 players)
-                if (playersReady[roomId] >= 2) {
+                if (playersReady[roomId] >= 4) {
                     io.to(roomId).emit('recieveActiveGame', activeGames[roomId])
                     playersReady[roomId] = 0
             }
