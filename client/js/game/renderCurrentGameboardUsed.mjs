@@ -60,28 +60,36 @@ export default function renderCurrentGameboardUsed(currentGame) {
 
             // Just so I had a button for testing backend, feel free to change name, class etc on this one
             const finishGameBtn = createElement('button', 'endGameBtn', 'endGameBtn', 'End round')
-            const hintBtn = createElement('button', 'hintBtn', 'hintBtn', 'Take a peak')
+            let hintsLeft = 3;
+            const hintBtn = createElement('button', 'hintBtn', 'hintBtn', `I need a hint (${hintsLeft} left)`)
             gameSection.append(finishGameBtn, hintBtn)
 
             hintBtn.addEventListener('click', () => {
                 hintContainer.innerText = '';
-                for (let i = 0; i < currentGame.grid.length; i++) {
-                    for (let j = 0; j < currentGame.gridColumns; j++) {
-                        // console.log('Number of columns:', currentGame.gridColumns);
-                        let cell = document.createElement('div');
-                        cell.classList.add('cell'); 
-                        cell.id = `cell-(${i},${j})`;
-                        // Added: dataset-attribute, used to store custom data in HTML-elements. 
-                        cell.dataset.x = i;
-                        cell.dataset.y = j;
-                        let cellNumber = currentGame.grid[i][j];
-                        let cellColor = currentGame.colors[cellNumber];
-                        cell.style.backgroundColor = cellColor;
-            
-                    
-                        hintContainer.appendChild(cell);
+                if (hintsLeft >= 1) {
+                    for (let i = 0; i < currentGame.grid.length; i++) {
+                        for (let j = 0; j < currentGame.gridColumns; j++) {
+                            // console.log('Number of columns:', currentGame.gridColumns);
+                            let cell = document.createElement('div');
+                            cell.classList.add('cell'); 
+                            cell.id = `cell-(${i},${j})`;
+                            // Added: dataset-attribute, used to store custom data in HTML-elements. 
+                            cell.dataset.x = i;
+                            cell.dataset.y = j;
+                            let cellNumber = currentGame.grid[i][j];
+                            let cellColor = currentGame.colors[cellNumber];
+                            cell.style.backgroundColor = cellColor;
+
+                            hintContainer.appendChild(cell);
+                        }
                     }
-                }
+                    hintsLeft -= 1; 
+                    hintBtn.innerText = `I need a hint (${hintsLeft} left)`
+                    console.log(hintsLeft);
+                    if (hintsLeft === 0) {
+                        hintBtn.setAttribute('disabled', '')
+                    }
+                } 
             
                 gameboardContainer.appendChild(hintContainer)
 
