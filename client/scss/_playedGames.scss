@@ -2,17 +2,21 @@
     background-color: $gameLobby;
     position: absolute;
     left: 0;
-    top: 90px;
+    top: 97px;
     width: 100%;
-    min-height: calc(100% - 90px);
+    min-height: 120%;
     display: flex;
     flex-direction: column;
     padding: 1rem 1rem 0 1rem;
     color: white;
 }
 
+.playedGamesH2 {
+    margin-left: 40vw;
+}
+
 .closeBtn {
-    align-self: center;
+    align-self: self-end;
     background-color: $logOutBtn;
     color: $chatBoxBgColor;
     padding: 0.3rem 1rem;
@@ -21,7 +25,8 @@
     font-weight: 700;
     border: none;
     border-radius: 8px;
-    margin-left: 4rem;
+    cursor: pointer;
+    margin-right: 5px;
 }
 
 .closeBtn:hover {
@@ -47,16 +52,17 @@ background-color: $gameLobby;
 .topDivPlayedGames {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
 }
 
 .playedGameContainer {
     display: grid;
+
     background-color: $primaryBgColor;
     gap: 0;
-    margin: 0;
+    margin: 10px 0 0 0;
     padding: 1rem;
     border: 2px solid white;
 }

@@ -85,7 +85,14 @@ body {
 							letter-spacing: 0.03rem;
 							padding-top: 10px;
 							padding-bottom: 10px;
+							cursor: pointer;
 							
+					}
+
+					.joinRoomBtn:hover {
+						background-color: $primaryBtnHover;
+						color: $chatBoxBgColor;
+						cursor: pointer;
 					}
 					
 				}
@@ -136,11 +143,14 @@ body {
 						height: 25%;
 						text-transform: capitalize;
 						letter-spacing: 0.02rem;
+						cursor: pointer;
 					}
 
 					.startGameBtn:hover {
-						background-color: rgb(195, 230, 143);
+						background-color: $primaryBtnHover;
+						color: $chatBoxBgColor;
 						border: none;
+						
 					}
 					.leaveRoomBtn:hover {
 						background-color: $logOutBtn;
@@ -288,6 +298,7 @@ body {
 	
 	.userNameInput:focus {
 		outline-color: $gameBoard;
+		
 
 	}
 
@@ -295,7 +306,8 @@ body {
 		margin-bottom: 15px;
 		border-radius: 8px;
 		border: none;
-		
+		width: 203px;
+		padding: 0.5rem 0.5rem;
 	}
 
 	.loginBtn {
@@ -305,6 +317,12 @@ body {
 		letter-spacing: 0.03rem;
 		background-color: $gameBoard;
 		color: $chatBoxBgColor;
+		cursor: pointer;
+		padding: 0.5rem 0;
+	}
+
+	.loginBtn:hover {
+		background-color: $gameLobby;
 	}
 }
 
@@ -378,6 +396,7 @@ li {
 	color: $chatBoxBgColor;
 	letter-spacing: 0.02rem;
 	text-transform: capitalize;
+	cursor: pointer;
 	
 }
 
@@ -387,7 +406,9 @@ li {
 	border-radius: 8px;
 	border: none;
 	padding: 10px 15px;
-	background-color: rgb(195, 230, 143);
+	background-color: $primaryBtnHover;
+	color: $chatBoxBgColor;
+	cursor: pointer;
 	margin-top: 8px;
 	letter-spacing: 0.02rem;
 	text-transform: capitalize;
