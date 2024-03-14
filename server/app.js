@@ -43,9 +43,10 @@ const sendCurrentGameboardUsed = require('./game/sendCurrentGameboardUsed.js')
 const generateActiveGame = require('./game/generateActiveGame.js')
 const updateActiveGameboardServer = require('./game/updateActiveGameboardServer.js')
 const calculateScore = require('./game/calculateScore.js');
+const isGameInProgress = require('./game/isGameInProgress.js');
 
 
-const { users, rooms, currentGameboardsUsed, activeGames } = require('./lib/serverDatabase.js');
+const { users, rooms, currentGameboardsUsed, activeGames, playersInGame } = require('./lib/serverDatabase.js');
 
 app.use(cors());
 app.use(express.json());
@@ -61,7 +62,7 @@ const onConnection = (socket) => {
 	handleLogout(io, socket, users, rooms);
 	handleChat(io, socket, users, rooms);
 	handleActivity(io, socket, users, rooms);
-	handleDisconnect(io, socket, users, rooms);
+	handleDisconnect(io, socket, users, rooms, playersInGame);
 	handleGetRooms(io, socket, rooms);
 	handleJoinRoom(io, socket, users, rooms);
 	handleLeaveRoom(io, socket, users, rooms);
@@ -71,6 +72,7 @@ const onConnection = (socket) => {
 	generateActiveGame(io, socket, users, rooms, currentGameboardsUsed, activeGames);
 	updateActiveGameboardServer(io, socket, users, rooms, currentGameboardsUsed, activeGames);
 	calculateScore(io, socket, users, rooms, currentGameboardsUsed, activeGames);
+	isGameInProgress(io, socket, users, rooms, currentGameboardsUsed, activeGames, playersInGame);
 
 };
 

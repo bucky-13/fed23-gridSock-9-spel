@@ -1,3 +1,5 @@
+import socket from "../../lib/socket.mjs";
+import createNewGameSocket from "./createNewGameSocket.mjs";
 import renderGameLobbies from "./renderGameLobbies.mjs";
 import { userLeavesRoom } from "./renderGameLobbies.mjs";
 export default function resetToMain() {
@@ -5,10 +7,14 @@ export default function resetToMain() {
     if (gameboardContainer) {
         gameboardContainer.remove()
     }
-    userLeavesRoom(localStorage.getItem('roomId'))
+    let roomId = localStorage.getItem('roomId')
+
+    userLeavesRoom(roomId)
+    socket.emit('endGameAndReturnToLobby', roomId)
     // renderGameLobbies()
     localStorage.removeItem('roomId')
     localStorage.removeItem('gameboardColor')
+    createNewGameSocket(true)
 
 
 }

@@ -11,5 +11,6 @@ export default function createNewGameFetch() {
             let roomId = localStorage.getItem('roomId')
             console.log(data);
             socket.emit('createNewGame', data, roomId)
+            socket.emit('gameHasStarted', roomId)
           })
 }

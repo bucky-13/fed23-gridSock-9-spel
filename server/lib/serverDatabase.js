@@ -19,4 +19,10 @@ const activeGames = {
     'random': {}
 }
 
-module.exports =  {users, rooms, currentGameboardsUsed, activeGames}
+const playersInGame = {
+    animals: 0,
+    fruits: 0,
+    random: 0
+};
+
+module.exports =  {users, rooms, currentGameboardsUsed, activeGames, playersInGame}
