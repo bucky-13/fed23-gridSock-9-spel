@@ -13,10 +13,6 @@ router.get('/finishGame/:roomId', (req, res, next) => {
 
     let roomId = req.params.roomId;
 
-    let userTemp3 = 13;
-    let userTemp4 = 4;
-    console.log(roomId);
-
     let game = activeGames[roomId]
     // let colors = filterQuotes(activeGames[roomId].colors)
 
@@ -26,7 +22,7 @@ router.get('/finishGame/:roomId', (req, res, next) => {
         if (err) {
             console.log(err);
         }
-        let sqlInsert = `INSERT INTO finishedGames (boardId, userId1, userId2, userId3, userId4, gridColumns, description, colors, grid) VALUES (${game.boardId}, ${game.userId1}, ${game.userId2}, ${userTemp3}, ${userTemp4}, ${game.gridColumns}, "${game.description}", "${game.colors}", "${game.grid}")`
+        let sqlInsert = `INSERT INTO finishedGames (boardId, userId1, userId2, userId3, userId4, gridColumns, description, colors, grid) VALUES (${game.boardId}, ${game.userId1}, ${game.userId2}, ${game.userId3}, ${game.userId4}, ${game.gridColumns}, "${game.description}", "${game.colors}", "${game.grid}")`
 
         // res.send(finishedGame)
 
