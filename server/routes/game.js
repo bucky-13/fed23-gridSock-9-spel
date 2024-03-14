@@ -10,95 +10,46 @@ let activeGamesSchema = {
 }
 
 
-router.post('/finishGame/:roomId', (req, res, next) => {
+router.get('/finishGame/:roomId', (req, res, next) => {
+
     let roomId = req.params.roomId;
+
     let userTemp3 = 13;
     let userTemp4 = 4;
+    console.log(roomId);
 
-    let game = activeGames[roomId];
+    let game = activeGames[roomId]
+    // let colors = filterQuotes(activeGames[roomId].colors)
+
+    console.log(game);
 
     req.app.locals.con.connect(function (err) {
         if (err) {
             console.log(err);
-            return res.status(500).json({ error: "Something went wrong" });
         }
+        let sqlInsert = `INSERT INTO finishedGames (boardId, userId1, userId2, userId3, userId4, gridColumns, description, colors, grid) VALUES (${game.boardId}, ${game.userId1}, ${game.userId2}, ${userTemp3}, ${userTemp4}, ${game.gridColumns}, "${game.description}", "${game.colors}", "${game.grid}")`
 
-        let gameData = {
-            boardId: game.boardId,
-            userId1: game.userId1,
-            userId2: game.userId2,
-            userId3: userTemp3, // CHANGE/remove?
-            userId4: userTemp4, // CHANGE/remove?
-            gridColumns: game.gridColumns,
-            description: game.description,
-            colors: JSON.stringify(game.colors), 
-            grid: JSON.stringify(game.grid) 
-        };
-        console.log(gameData); // REMOVE
+        // res.send(finishedGame)
 
-        let sqlInsert = `INSERT INTO finishedGames (boardId, userId1, userId2, userId3, userId4, gridColumns, description, colors, grid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-        req.app.locals.con.query(sqlInsert, Object.values(gameData), function (err, result) {
+        // let sqlCount = `SELECT COUNT(*) as count FROM gameboards`;
+
+        req.app.locals.con.query(sqlInsert, function (err, result) {
             if (err) {
                 console.log(err);
-                return res.status(500).json({ error: "something went wrong inserting game" });
             }
 
-            let finishedGameId = result.insertId;
+            let finishedGameId = result.insertId
 
-            let sqlFindGame = `SELECT * from finishedGames WHERE gameId = ?`;
-            req.app.locals.con.query(sqlFindGame, finishedGameId, function (err, result) {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({ error: "Error retreving game" });
-                }
+            let sqlFindGame = `SELECT * from finishedGames WHERE gameId="${finishedGameId}"`
 
-                res.json(result);
-                console.log(result);
-            });
+            req.app.locals.con.query(sqlFindGame, function (err, result) {
+
+                res.json(result)
+
+             }) 
         });
     });
 });
-
-// router.get('/finishGame/:roomId', (req, res, next) => {
-
-//     let roomId = req.params.roomId;
-
-//     let userTemp3 = 13;
-//     let userTemp4 = 4;
-//     console.log(roomId);
-
-//     let game = activeGames[roomId]
-//     // let colors = filterQuotes(activeGames[roomId].colors)
-
-//     console.log(game);
-
-//     req.app.locals.con.connect(function (err) {
-//         if (err) {
-//             console.log(err);
-//         }
-//         let sqlInsert = `INSERT INTO finishedGames (boardId, userId1, userId2, userId3, userId4, gridColumns, description, colors, grid) VALUES (${game.boardId}, ${game.userId1}, ${game.userId2}, ${userTemp3}, ${userTemp4}, ${game.gridColumns}, "${game.description}", "${game.colors}", "${game.grid}")`
-
-//         // res.send(finishedGame)
-
-//         // let sqlCount = `SELECT COUNT(*) as count FROM gameboards`;
-
-//         req.app.locals.con.query(sqlInsert, function (err, result) {
-//             if (err) {
-//                 console.log(err);
-//             }
-
-//             let finishedGameId = result.insertId
-
-//             let sqlFindGame = `SELECT * from finishedGames WHERE gameId="${finishedGameId}"`
-
-//             req.app.locals.con.query(sqlFindGame, function (err, result) {
-
-//                 res.json(result)
-
-//              }) 
-//         });
-//     });
-// });
 
 router.get('/:roomId', (req, res, next) => {
 

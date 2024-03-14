@@ -3,7 +3,7 @@ import renderAssignedColor from "./renderAssignedColor.mjs";
 
 export default function createNewGameSocket() { 
     
-    socket.on('newGameStart', (arg) => {
+    socket.once('newGameStart', (arg) => {
         //Stores color player is using in local storage
         localStorage.setItem('gameboardColor', arg);
         renderAssignedColor();

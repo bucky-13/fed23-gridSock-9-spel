@@ -13,6 +13,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
     let gameboardContainer = document.createElement('div');
     gameboardContainer.id = 'gameboardContainer';
     gameboardContainer.classList.add('gameboardContainer');
+    gameboardContainer.innerText = ''
 
     document.documentElement.style.setProperty('--grid-columns', currentGame.gridColumns);
     document.documentElement.style.setProperty('--grid-rows', currentGame.gridRows);
@@ -25,6 +26,8 @@ export default function renderCurrentGameboardUsed(currentGame) {
     let backToMainBtn = createElement('button', 'backToMainBtn', 'backToMainBtn', 'Back to menu')
 
     backToMainBtn.addEventListener('click', resetToMain)
+
+
     for (let i = 0; i < currentGame.grid.length; i++) {
         for (let j = 0; j < currentGame.gridColumns; j++) {
             // console.log('Number of columns:', currentGame.gridColumns);
@@ -47,7 +50,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
             
 
         socket.emit('generateActiveGame', roomId, userId)
-        socket.on('recieveActiveGame', (arg) => { 
+        socket.once('recieveActiveGame', (arg) => { 
 
             
             console.log(arg);
@@ -90,26 +93,9 @@ export default function renderCurrentGameboardUsed(currentGame) {
 
             finishGameBtn.addEventListener('click', () => {
 
-                const gameData = {
-                    boardId: currentGame.boardId,
-                    userId1: currentGame.userId1,
-                    userId2: currentGame.userId2,
-                    userId3: 13, // CHANGE/remove?
-                    userId4: 4, // CHANGE/remove?
-                    gridColumns: currentGame.gridColumns,
-                    description: currentGame.description,
-                    colors: currentGame.colors,
-                    grid: currentGame.grid
-                };
-
                 // CHANGE TO CORRECT URL
                 fetch(`http://localhost:3001/randomGame/finishGame/${roomId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(gameData)
-
+                    method: 'GET'
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -119,14 +105,14 @@ export default function renderCurrentGameboardUsed(currentGame) {
                 })
                 .then(data => {
                     console.log(data);
+                    socket.emit('gameFinished', roomId)
+                    socket.emit('gameResult')
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
                 });
-                socket.emit('gameFinished', roomId)
-                socket.emit('gameResult')
 
-
+                console.log('Hiiii');
 
 
             })
@@ -158,7 +144,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
     }
         gameSection.append(resultContainer)
         resultContainer.append(resultScore, backToMainBtn)
-        socket.emit('roundFinished', roomId)
+        // socket.emit('roundFinished', roomId)
 
     })
 
