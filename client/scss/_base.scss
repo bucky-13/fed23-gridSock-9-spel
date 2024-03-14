@@ -29,10 +29,24 @@ body {
 		// width: 100vw;
 		.gameSection {
 			width: 80vw;
+			margin: 10px;
+
+			.resultContainer {
+				text-align: center;
+				font-size: 1.5rem;
+				background-color: $navBgColor;
+				display: flex;
+				justify-content: space-evenly;
+				border-radius: 10px;
+				flex-direction: column;
+				height: 40vh;
+			}
+
 			.gameLobbyContainer {
 				display: flex;
+				flex-direction: column;
 				justify-content: space-around;
-				height: 70%;
+				height: 70vh;
 				width: 100%;
 				background-color: $gameLobby;
 				border-radius: 10px;
@@ -40,6 +54,12 @@ body {
 				.roomArticle {
 					display: flex;
 					flex-direction: column;
+					justify-content: space-between;
+					height: 100px;
+					.roomArticleHeader {
+						text-align: center;
+						text-transform: capitalize;
+					}
 						.joinRoomBtn {
 							border-radius: 10px;
 							border: none;
@@ -52,20 +72,43 @@ body {
 			.gameBoard {
 				margin-top: 30px;
 				// width: 100vw;
-				height: 80vh;
+				height: 70vh;
 				background-color: $gameBoard;
 				border: none;
 				border-radius: 10px;
-
+				.gameLobbyHeader {
+					text-align: center;
+					text-transform: uppercase;
+					font-size: 3rem;
+				}
 
 				.gameLobby {
 					display: flex;
 					flex-direction: column;
-					height: 70%;
+					justify-content: space-between;
+					height: 300px;
 					width: 100%;
 					background-color: $gameLobby;
-					border-radius: 10px;
+					// border-radius: 10px;
 
+					.playersList {
+						// text-align: center;
+
+						.playersInLobby {
+							font-size: 1.5rem;
+						}
+					}
+					.startGameBtn, .leaveRoomBtn {
+						height: 25%;
+					}
+					.startGameBtn:hover {
+						background-color: rgb(195, 230, 143);
+						border: none;
+					}
+					.leaveRoomBtn:hover {
+						background-color: rgb(241, 98, 54);
+						border: none;
+					}
 				}
 			}
 		}
@@ -80,6 +123,12 @@ body {
 			margin: 30px;
 			background-color: $chatBgColor;
 
+			.chatRoomHeader {
+				text-align: center;
+				text-transform: capitalize;
+				font-size: 1.5rem;
+				font-weight: 700;
+			}
 
 			.activeUserLoggedIn {
 				font-weight: 700;
@@ -88,13 +137,12 @@ body {
 			.chatInputContainer {
 				display: flex;
 				align-items: center;
+				margin-top: 20px;
 
 				.sendMessageInput {
-					margin-top: 20px;
-					margin-left: 39px;
-					width: 65%;
-					margin-right: 15px;
-					margin-bottom: 15px;
+					margin: 0;
+					width: 150px;
+
 					border: 1px solid $borderColor;
 					border-radius: 5px;
 					padding: 5px;
@@ -123,7 +171,7 @@ body {
 				display: flex;
 				flex-direction: column;
 				overflow: auto;
-				height: 70vh;
+				height: 61vh;
 				background-color: $chatBoxBgColor;
 
 				.userActivity {
@@ -207,7 +255,7 @@ li {
 	color: #530053;
 }
 
-.gameboardContainer {
+.gameboardContainer, .hintContainer {
 
 	margin: 10px;
 	padding: 15px;
@@ -217,15 +265,29 @@ li {
 	grid-template-rows: repeat(var(--grid-rows), 15px);
 	justify-content: center;
 	align-items: center;
+	
+	gap: 1px 1px;
+}
 
-	gap: 0 0;
+.gameboardContainer {
+	position: relative;
+	.hintContainer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		width: calc(100% - 50px);
+		height: 100%; 
+	}
 }
 
 .cell {
 
 	width: 15px;
 	height: 15px;
-	border: 1px solid black;
+	border: 1px solid rgba(0, 0, 0, 0.432);
 }
 
 
