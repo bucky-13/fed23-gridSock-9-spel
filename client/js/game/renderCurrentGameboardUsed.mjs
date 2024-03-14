@@ -112,9 +112,6 @@ export default function renderCurrentGameboardUsed(currentGame) {
                     console.error('There was a problem with the fetch operation:', error);
                 });
 
-                console.log('Hiiii');
-
-
             })
 
 
@@ -132,10 +129,6 @@ export default function renderCurrentGameboardUsed(currentGame) {
 
     socket.on('gameResult', (result, activeGame, currentGame) => {
         // Do a call to a function in another module here and pass in result, activeGame, currentGame
-        // You can remove console logs, they are just there for reference
-        console.log(result);
-        console.log(activeGame);
-        console.log(currentGame);
         gameSection.innerText = ''
         if (result.score <= 10) {
         resultScore.innerText = `Your score: ${result.score.toFixed(2)}/${result.maxScore} Van...let that brush GO!`
@@ -146,8 +139,6 @@ export default function renderCurrentGameboardUsed(currentGame) {
     }
         gameSection.append(resultContainer)
         resultContainer.append(resultScore, backToMainBtn)
-        // socket.emit('roundFinished', roomId)
-
     })
 
     gameSection.append(gameboardContainer);
