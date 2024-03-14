@@ -41,7 +41,7 @@ export default function joinRoom(room, leaveRoomBtn) {
 
 		gameLobby.appendChild(leaveRoomBtn);
 
-		if (updatedRoom[room].length >= 2) {
+		if (updatedRoom[room].length >= 4) {
 			// CHANGE TO 4 @@@
 			startGameBtn.setAttribute('disabled', '');
 			if (updatedRoom[room].includes(localStorage.getItem('username'))) {

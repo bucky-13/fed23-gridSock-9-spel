@@ -27,7 +27,7 @@ export default function renderGameLobbies() {
             const joinRoomBtn = createElement('button', `${room}`, 'joinRoomBtn', `Join ${room}`);
             const leaveRoomBtn = createElement('button', `leaveRoomBtn${room}`, 'leaveRoomBtn', `Leave ${room}`);
 
-            if (rooms[room].length >= 2) { //CHANGE TO 4 @@@
+            if (rooms[room].length >= 4) { //CHANGE TO 4 @@@
                 joinRoomBtn.setAttribute('disabled', '')
                 joinRoomBtn.innerText = 'Lobby is full'
             }
@@ -42,7 +42,7 @@ export default function renderGameLobbies() {
 
                 localStorage.setItem('roomId', room)
                 
-                if (rooms[room].length >= 2) { //CHANGE TO 4 @@@
+                if (rooms[room].length >= 4) { //CHANGE TO 4 @@@
                     joinRoomBtn.setAttribute('disabled', '')
                     joinRoomBtn.innerText = 'Lobby is full'
                 }

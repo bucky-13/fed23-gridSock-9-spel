@@ -87,14 +87,14 @@ export default function renderCurrentGameboardUsed(currentGame) {
 
                 setTimeout( function() {
                     hintContainer.remove()
-                }, 5000);
+                }, 2000);
 
             })
 
             finishGameBtn.addEventListener('click', () => {
 
                 // CHANGE TO CORRECT URL
-                fetch(`http://localhost:3001/randomGame/finishGame/${roomId}`, {
+                fetch(`hhttps://game-99blu.ondigitalocean.app/randomGame/finishGame/${roomId}`, {
                     method: 'GET'
                 })
                 .then(response => {
@@ -128,7 +128,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
             });
         })
             
-    }, 1000);
+    }, 10000);
 
     socket.on('gameResult', (result, activeGame, currentGame) => {
         // Do a call to a function in another module here and pass in result, activeGame, currentGame
