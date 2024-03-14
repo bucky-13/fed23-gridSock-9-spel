@@ -24,5 +24,5 @@ export default function renderAssignedColor() {
         socket.once('recieveCurrentGameboardUsed', (arg) => { 
             renderCurrentGameboardUsed(arg)
         })
-    }, 5000);
+    }, 1000);
 }
