@@ -94,7 +94,7 @@ export default function renderCurrentGameboardUsed(currentGame) {
             finishGameBtn.addEventListener('click', () => {
 
                 // CHANGE TO CORRECT URL
-                fetch(`hhttps://game-99blu.ondigitalocean.app/randomGame/finishGame/${roomId}`, {
+                fetch(`https://game-99blu.ondigitalocean.app/randomGame/finishGame/${roomId}`, {
                     method: 'GET'
                 })
                 .then(response => {
