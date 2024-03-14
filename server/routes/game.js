@@ -9,6 +9,7 @@ let activeGamesSchema = {
     random: {}
 }
 
+
 router.get('/finishGame/:roomId', (req, res, next) => {
 
     let roomId = req.params.roomId;

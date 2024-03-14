@@ -35,8 +35,6 @@ const handleDisconnect = require('./userConnections/disconnect');
 const handleActivity = require('./userConnections/activity');
 const handleActiveUsers = require('./userConnections/activeUsers.js');
 const handleChat = require('./chat/chat');
-const handlePlayerReady = require('./game/playerReady.js');
-const handlePlayerUnReady = require('./game/playersUnReady.js');
 const handleJoinRoom = require('./game/joinRoom.js');
 const handleLeaveRoom = require('./game/leaveRoom.js');
 const handleGetRooms = require('./game/getRooms.js');
@@ -45,6 +43,7 @@ const sendCurrentGameboardUsed = require('./game/sendCurrentGameboardUsed.js')
 const generateActiveGame = require('./game/generateActiveGame.js')
 const updateActiveGameboardServer = require('./game/updateActiveGameboardServer.js')
 const calculateScore = require('./game/calculateScore.js');
+
 
 const { users, rooms, currentGameboardsUsed, activeGames } = require('./lib/serverDatabase.js');
 
@@ -63,8 +62,6 @@ const onConnection = (socket) => {
 	handleChat(io, socket, users, rooms);
 	handleActivity(io, socket, users, rooms);
 	handleDisconnect(io, socket, users, rooms);
-	handlePlayerReady(io, socket, users, rooms);
-	handlePlayerUnReady(io, socket, users, rooms);
 	handleGetRooms(io, socket, rooms);
 	handleJoinRoom(io, socket, users, rooms);
 	handleLeaveRoom(io, socket, users, rooms);

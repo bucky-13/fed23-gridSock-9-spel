@@ -23,7 +23,7 @@ export default function renderAssignedColor() {
 
     setTimeout(function () {
         socket.emit('sendCurrentGameboardUsed', roomId)
-        socket.on('recieveCurrentGameboardUsed', (arg) => { 
+        socket.once('recieveCurrentGameboardUsed', (arg) => { 
             renderCurrentGameboardUsed(arg)
         })
     }, 5000);

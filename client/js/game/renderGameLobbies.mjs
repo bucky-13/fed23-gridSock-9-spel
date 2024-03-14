@@ -58,7 +58,7 @@ export default function renderGameLobbies() {
 
 }
 
-function userLeavesRoom(room) {
+export function userLeavesRoom(room) {
     let username = localStorage.getItem('username')
     let roomId = room; 
     socket.emit('leaveRoom', { username, roomId });
